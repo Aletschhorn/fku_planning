@@ -1,0 +1,452 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<f:comment> Form to select date range </f:comment>
+<div class="row">
+	<div class="col-md-7 col-sm-12 col-12">
+		<f:form action="list" pluginName="Serviceplan" class="form-inline">
+            <label for="lowLimit">Datumsbereich von</label>
+            <f:form.select class="form-control mx-2" name="lowLimit" options="{daterange.options}" value="{daterange.low}" />
+            <label for="highLimit">bis</label>
+            <f:form.select class="form-control mx-2" name="highLimit" options="{daterange.options}" value="{daterange.high}" />
+			<f:form.submit value="Zeigen" class="btn btn-primary" /> &nbsp;
+            <span class="d-block d-md-none">
+                <span class="float-right">
+                    <f:link.action action="listMonth" class="btn btn-default">
+	                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-92-contrast.svg#glyphicons-basic"/></svg>
+                        Monatsansicht
+                    </f:link.action>
+                </span>
+            </span>
+		</f:form>
+	</div>
+	<div class="d-none d-md-block col-md-5">
+		<div class="float-right">
+			<f:link.action action="listMonth">
+                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-92-contrast.svg#glyphicons-basic"/></svg>
+                Monatsansicht
+             </f:link.action>
+             &nbsp; &nbsp;
+
+			<f:if condition="{section}=='kids'">
+				<f:security.ifHasRole role="{settings.usergroupKidstreff}">
+					<f:link.page pageUid="{settings.PidDashboardKids}">
+	                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-157-thumbnails.svg#glyphicons-basic"/></svg>
+                        KT-Übersicht
+                    </f:link.page>
+					&nbsp; &nbsp;
+				</f:security.ifHasRole>
+			</f:if>
+
+			<f:link.page pageUid="{settings.PidDashboardService}">
+                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-157-thumbnails.svg#glyphicons-basic"/></svg>
+                GD-Übersicht
+            </f:link.page>
+
+			<f:security.ifHasRole role="{settings.usergroupGeneral}">
+				&nbsp; &nbsp;
+				<f:link.action action="new" additionalAttributes="{title:'Neuen Gottesdienst hinzufügen'}">
+                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-371-plus.svg#glyphicons-basic"/></svg>
+                    GD
+                </f:link.action>
+			</f:security.ifHasRole>
+		</div>
+	</div>
+</div>
+
+<f:comment> Navigation for sections </f:comment>
+<br />
+<f:render partial="Master/NavigationSections" arguments="{_all}" />
+
+<f:comment> Show content </f:comment>
+<f:if condition="{myMasters}">
+	<f:then>
+		<f:render section="personal" arguments="{_all}" />
+	</f:then>
+	<f:else>
+		<p class="lead">Keine Einträge in diesem Datumsbereich.</p>
+	</f:else>
+</f:if>
+
+</f:section>
+
+
+<f:section name="personal">
+<div class="d-none d-sm-block">
+    <table class="table table-bordered table-sm" >
+        <thead>
+            <tr>
+                <th width="10%">Datum</th>
+                <th width="20%">Mein Dienst</th>
+                <th width="70%">Information</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <f:for each="{myMasters}" as="myMaster" iteration="iter">
+                <f:for each="{myMaster.roles}" as="role" iteration="it">
+                    <tr>
+                        <f:if condition="{it.isFirst}">
+                            <td rowspan="{myMaster.roles->f:count()}"><f:render partial="Master/DateTimeHolidays" arguments="{master:myMaster.master,settings:settings}" /></td>
+                        </f:if>
+                        <f:switch expression="{role}">
+                            <f:case value="servicePreacher">
+                                <td>Prediger</td>
+                                <td>
+                                    Thema: {myMaster.master.serviceTopic} <f:if condition="{myMaster.master.serviceBible}">({myMaster.master.serviceBible})</f:if><br />
+                                    GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                                    Liederauswahl: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceMusicSelect}" />
+                                    <f:if condition="{myMaster.reporting}">
+                                        <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                                    </f:if>
+                                </td>
+                            </f:case>
+                            <f:case value="serviceModerator">
+                                <td>Gottesdienst-Leitung</td>
+                                <td>
+                                    Thema: {myMaster.master.serviceTopic} <f:if condition="{myMaster.master.serviceBible}">({myMaster.master.serviceBible})</f:if><br />
+                                    Prediger: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.servicePreacher}" /><br />
+                                    Liederauswahl: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceMusicSelect}" />
+                                    <f:if condition="{myMaster.reporting}">
+                                        <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                                    </f:if>
+                                </td>
+                            </f:case>
+                            <f:case value="serviceMusicSelect">
+                                <td>Liederauswahl</td>
+                                <td>
+                                    Thema: {myMaster.master.serviceTopic} <f:if condition="{myMaster.master.serviceBible}">({myMaster.master.serviceBible})</f:if><br />
+                                    Prediger: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.servicePreacher}" /><br />
+                                    GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                                    Musikteam: <f:if condition="{myMaster.master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicRehearse,append:' (P)'}" />, </f:if><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicBand}" /><br />
+                                    <f:link.page pageUid="{settings.PidSongSearch}">
+			                        	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                                        Lieder-Repertoire
+                                    </f:link.page>
+                                    <f:if condition="{myMaster.reporting}">
+                                        <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                                    </f:if>
+                                </td>
+                            </f:case>
+                            <f:case value="serviceMusicRehearse">
+                                <td>Musikprobe organisieren</td>
+                                <td>
+                                    Musiker: <f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicBand}" />
+                                    <f:if condition="{myMaster.reporting}">
+                                        <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                                    </f:if>
+                                </td>
+                            </f:case>
+                            <f:case value="serviceMusicBand">
+                                <td>Musikteam</td>
+                                <td>
+                                    Verantwortlich für Probe: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceMusicRehearse}" /><br />
+                                    Ganzes Musikteam: <f:if condition="{myMaster.master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicRehearse}" />, </f:if><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicBand}" />
+                                    <f:if condition="{myMaster.reporting}">
+                                        <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                                    </f:if>
+                                </td>
+                            </f:case>
+                            <f:case value="serviceMusicOrgan">
+                                <td>Organist</td>
+                                <td>
+                                    Liederauswahl: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceMusicSelect}" />
+                                    <f:if condition="{myMaster.reporting}">
+                                        <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                                    </f:if>
+                                </td>
+                            </f:case>
+                            <f:case value="serviceBeamer">
+                                <td>Beamer</td>
+                                <td>
+                                    GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                                    Prediger: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.servicePreacher}" /><br />
+                                    <f:link.action pageUid="{settings.PidBeamer}" action="beamer" arguments="{master:myMaster.master}">
+			                        	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                                    	Beamer-Angaben
+                                    </f:link.action>
+                                </td>
+                            </f:case>
+                            <f:case value="serviceConsole">
+                                <td>Mischpult</td>
+                                <td>
+                                    GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                                    Musikteam: <f:if condition="{myMaster.master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicRehearse,append:' (P)'}" />, </f:if><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicBand}" /><br />
+                                    Livestream-Schnitt: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceFilmeditor}" />
+                                </td>
+                            </f:case>
+                            <f:case value="serviceCamera">
+                                <td>Kamera</td>
+                                <td>
+                                    GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                                    Livestream-Schnitt: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceFilmeditor}" />
+                                </td>
+                            </f:case>
+                            <f:case value="serviceFilmeditor">
+                                <td>Livestream-Schnitt</td>
+                                <td>
+                                    GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                                    Mischpult: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceConsole}" /><br />
+                                    Beamer: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceBeamer}" /><br />
+                                    Kamera: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceCamera}" />
+                                </td>
+                            </f:case>
+                            <f:case value="serviceSexton">
+                                <td>Sigrist</td>
+                                <td>GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /></td>
+                            </f:case>
+                            <f:case value="serviceWelcome">
+                                <td>Türbegrüssung</td>
+                                <td> </td>
+                            </f:case>
+                            <f:case value="serviceMissionary">
+                                <td>Fürbitte für die weltweite Kirche</td>
+                                <td>GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /></td>
+                            </f:case>
+                            <f:case value="serviceSupperPeople">
+                                <td>Abendmahl</td>
+                                <td>GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /></td>
+                            </f:case>
+                            <f:case value="childrenPeople">
+                                <td>Kinderhüeti</td>
+                                <td><f:if condition="{myMaster.master.serviceSupper}">Abendmahl im Gottesdienst</f:if></td>
+                            </f:case>
+                            <f:case value="kidsPlaying">
+                                <td>Spielstrasse</td>
+                                <td>Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}<br /></f:if><f:if condition="{master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" /></f:if><br />Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /></td>
+                            </f:case>
+                            <f:case value="kidsSinging">
+                                <td>Singen im Kids Treff</td>
+                                <td>Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" /></f:if><br />Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /></td>
+                            </f:case>
+                            <f:case value="kidsPlenum">
+                                <td>Plenum im Kids Treff</td>
+                                <td>Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{myMaster.master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" /></f:if><br />Ganzes Plenum-Team: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /><br />Kleingruppen-Leiter: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup1}" /><f:if condition="{myMaster.master.kidsGroup1}">, </f:if><f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup2}" /></td>
+                            </f:case>
+                            <f:case value="kidsGroup1">
+                                <td>Kleingruppe Habakuk</td>
+                                <td>Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{myMaster.master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" /></f:if><br />Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /></td>
+                            </f:case>
+                            <f:case value="kidsGroup2">
+                                <td>Kleingruppe Karibu</td>
+                                <td>Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{myMaster.master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" /></f:if><br />Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /></td>
+                            </f:case>
+                            <f:case value="kidsGroup3">
+                                <td>Zundhölzli</td>
+                                <td>Zundhölzli-Programm: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup3Program}" /></td>
+                            </f:case>
+                            <f:case value="kidsGroup3Program">
+                                <td>Zundhölzli-Programm</td>
+                                <td>Zundhölzli-Leiter: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup3}" /></td>
+                            </f:case>
+                            <f:case value="kidsYoung">
+                                <td>Summervögeli</td>
+                                <td>Singen im Kids Treff: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsSinging}" /></td>
+                            </f:case>
+                            <f:case value="teensPeople1">
+                                <td>Teens Treff 1./2. Jahr</td>
+                                <td>Thema: {myMaster.master.teensTopic1}<f:if condition="{myMaster.master.teensNotes1}"><br />{myMaster.master.teensNotes1->f:format.nl2br()}</f:if></td>
+                            </f:case>
+                            <f:case value="teensPeople2">
+                                <td>Teens Treff 3. Jahr</td>
+                                <td>Thema: {myMaster.master.teensTopic2}<f:if condition="{myMaster.master.teensNotes2}"><br />{myMaster.master.teensNotes2->f:format.nl2br()}</f:if></td>
+                            </f:case>
+                            <f:case value="coffeePeople">
+                                <td>Chilekafi</td>
+                                <td>{myMaster.master.coffeeNotes}</td>
+                            </f:case>
+                            <f:case value="coffeeSpecial">
+                                <td>Kaffeemaschine</td>
+                                <td> </td>
+                            </f:case>
+                            <f:case value="drivingPeople">
+                                <td>Fahrdienst</td>
+                                <td> </td>
+                            </f:case>
+                            <f:case value="prayerPeople">
+                                <td>Gebet nach Gottesdienst</td>
+                                <td> </td>
+                            </f:case>
+                            <f:case value="serviceWinter">
+                                <td>Winterdienst</td>
+                                <td>Einsatz in gesamter Woche (Montag bis Sonntag)</td>
+                            </f:case>
+                        </f:switch>
+                    </tr>
+                </f:for>
+            </f:for>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-block d-sm-none">
+	<f:for each="{myMasters}" as="myMaster" iteration="iter">
+    	<f:for each="{myMaster.roles}" as="role" iteration="it">
+            <f:if condition="{it.isFirst}">
+                <hr />
+                <f:render partial="Master/DateTimeHolidaysXS" arguments="{master:myMaster.master,settings:settings}" />
+            </f:if>
+            <p>
+                <f:switch expression="{role}">
+                    <f:case value="servicePreacher">
+                        <b>Prediger</b><br />
+                        Thema: {myMaster.master.serviceTopic} <f:if condition="{myMaster.master.serviceBible}">({myMaster.master.serviceBible})</f:if><br />
+                        GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                        Liederauswahl: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceMusicSelect}" />
+                        <f:if condition="{myMaster.reporting}">
+                            <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                        </f:if>
+                    </f:case>
+                    <f:case value="serviceModerator">
+                        <b>Gottesdienst-Leitung</b><br />
+                        Thema: {myMaster.master.serviceTopic} <f:if condition="{myMaster.master.serviceBible}">({myMaster.master.serviceBible})</f:if><br />
+                        Prediger: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.servicePreacher}" /><br />
+                        Liederauswahl: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceMusicSelect}" />
+                        <f:if condition="{myMaster.reporting}">
+                            <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                        </f:if>
+                    </f:case>
+                    <f:case value="serviceMusicSelect">
+                        <b>Liederauswahl</b><br />
+                        Thema: {myMaster.master.serviceTopic} <f:if condition="{myMaster.master.serviceBible}">({myMaster.master.serviceBible})</f:if><br />
+                        Prediger: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.servicePreacher}" /><br />
+                        GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                        Musikteam: <f:if condition="{myMaster.master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicRehearse,append:' (P)'}" />, </f:if><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicBand}" /><br />
+                        <f:link.page pageUid="{settings.PidSongSearch}">
+                        	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                            Lieder-Repertoire
+                        </f:link.page>
+                        <f:if condition="{myMaster.reporting}">
+                            <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                        </f:if>
+                    </f:case>
+                    <f:case value="serviceMusicRehearse">
+                        <b>Musikprobe organisieren</b><br />
+                        Musiker: <f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicBand}" />
+                        <f:if condition="{myMaster.reporting}">
+                            <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                        </f:if>
+                    </f:case>
+                    <f:case value="serviceMusicBand">
+                        <b>Musikteam</b><br />
+                        Verantwortlich für Probe: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceMusicRehearse}" /><br />
+                        Ganzes Musikteam: <f:if condition="{myMaster.master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicRehearse}" />, </f:if><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicBand}" />
+                        <f:if condition="{myMaster.reporting}">
+                            <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                        </f:if>
+                    </f:case>
+                    <f:case value="serviceMusicOrgan">
+                        <b>Organist</b><br />
+                        Liederauswahl: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceMusicSelect}" />
+                        <f:if condition="{myMaster.reporting}">
+                            <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:myMaster.master,settings:settings}" />
+                        </f:if>
+                    </f:case>
+                    <f:case value="serviceBeamer">
+                        <b>Beamer</b><br />
+                        GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                        Prediger: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.servicePreacher}" /><br />
+                        <f:link.action pageUid="{settings.PidBeamer}" action="beamer" arguments="{master:myMaster.master}">
+                        	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                            Beamer-Angaben
+                        </f:link.action>
+                    </f:case>
+                    <f:case value="serviceConsole">
+                        <b>Mischpult</b><br />
+                        GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" /><br />
+                        Musikteam: <f:if condition="{myMaster.master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicRehearse,append:' (P)'}" />, </f:if><f:render partial="Master/PersonlistShort" arguments="{list:myMaster.master.serviceMusicBand}" />
+                    </f:case>
+                    <f:case value="serviceSexton">
+                        <b>Sigrist</b><br />
+                        GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" />
+                    </f:case>
+                    <f:case value="serviceWelcome">
+                        <b>Türbegrüssung</b>
+                    </f:case>
+                    <f:case value="serviceMissionary">
+                        <b>Fürbitte für die weltweite Kirche</b><br />
+                        GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" />
+                    </f:case>
+                    <f:case value="serviceSupperPeople">
+                        <b>Abendmahl</b><br />
+                        GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.serviceModerator}" />
+                    </f:case>
+                    <f:case value="childrenPeople">
+                        <b>Kinderhüeti</b>
+                        <f:if condition="{myMaster.master.serviceSupper}"><br />Abendmahl im Gottesdienst</f:if>
+                    </f:case>
+                    <f:case value="kidsPlaying">
+                        <b>Spielstrasse</b><br />
+                        Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}<br /></f:if><f:if condition="{master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{folder:master.kidsTopicLink,pid:settings.PidKidsDownloads}" /></f:if><br />
+                        Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" />
+                    </f:case>
+                    <f:case value="kidsSinging">
+                        <b>Singen im Kids Treff</b><br />
+                        Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{folder:master.kidsTopicLink,pid:settings.PidKidsDownloads}" /></f:if><br />
+                        Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" />
+                    </f:case>
+                    <f:case value="kidsPlenum">
+                        <b>Plenum im Kids Treff</b><br />
+                        Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{myMaster.master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{folder:myMaster.master.kidsTopicLink,pid:settings.PidKidsDownloads}" /></f:if>
+                        <br />Ganzes Plenum-Team: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /><br />Kleingruppen-Leiter: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup1}" /><f:if condition="{myMaster.master.kidsGroup1}">, </f:if><f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup2}" />
+                    </f:case>
+                    <f:case value="kidsGroup1">
+                        <b>Kleingruppe Habakuk</b><br />
+                        Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{myMaster.master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{folder:myMaster.master.kidsTopicLink,pid:settings.PidKidsDownloads}" /></f:if><br />
+                        Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" />
+                    </f:case>
+                    <f:case value="kidsGroup2">
+                        <b>Kleingruppe Karibu</b><br />
+                        Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{myMaster.master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{folder:myMaster.master.kidsTopicLink,pid:settings.PidKidsDownloads}" /></f:if><br />
+                        Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" />
+                    </f:case>
+                    <f:case value="kidsGroup3">
+                        <b>Zundhölzli</b><br />
+                        Zundhölzli-Programm: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup3Program}" />
+                    </f:case>
+                    <f:case value="kidsGroup3Program">
+                        <b>Zundhölzli-Programm</b><br />
+                        Zundhölzli-Leiter: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup3}" />
+                    </f:case>
+                    <f:case value="kidsYoung">
+                        <b>Summervögeli</b><br />
+                        Singen im Kids Treff: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsSinging}" />
+                    </f:case>
+                    <f:case value="teensPeople1">
+                        <b>Teens Treff 1./2. Jahr</b><br />
+                        Thema: {myMaster.master.teensTopic1}
+                        <f:if condition="{myMaster.master.teensNotes1}"><br />{myMaster.master.teensNotes1->f:format.nl2br()}</f:if>
+                    </f:case>
+                    <f:case value="teensPeople2">
+                        <b>Teens Treff 3. Jahr</b><br />
+                        Thema: {myMaster.master.teensTopic2}
+                        <f:if condition="{myMaster.master.teensNotes2}"><br />{myMaster.master.teensNotes2->f:format.nl2br()}</f:if>
+                    </f:case>
+                    <f:case value="coffeePeople">
+                        <b>Chilekafi</b>
+                        <f:if condition="{myMaster.master.coffeeNotes}"><br />{myMaster.master.coffeeNotes}</f:if>
+                    </f:case>
+                    <f:case value="coffeeSpecial">
+                        <b>Kaffeemaschine</b>
+                    </f:case>
+                    <f:case value="drivingPeople">
+                        <b>Fahrdienst</b>
+                    </f:case>
+                    <f:case value="prayerPeople">
+                        <b>Gebet nach Gottesdienst</b>
+                    </f:case>
+                    <f:case value="serviceWinter">
+                        <b>Winterdienst</b><br />
+                        Einsatz in gesamter Woche (Montag bis Sonntag)
+                    </f:case>
+                </f:switch>
+            </p>
+        </f:for>
+    </f:for>
+</div>
+
+</f:section>

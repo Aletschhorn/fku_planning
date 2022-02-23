@@ -1,0 +1,66 @@
+
+plugin.tx_fkuplanning {
+	view {
+		templateRootPaths.0 = {$plugin.tx_fkuplanning.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_fkuplanning.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_fkuplanning.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_fkuplanning.persistence.storagePid}
+	}
+	settings {
+		pdfPageType = {$plugin.tx_fkuplanning.settings.pdfPageType}
+		usergroupGeneral = {$plugin.tx_fkuplanning.settings.usergroupGeneral}
+		usergroupService = {$plugin.tx_fkuplanning.settings.usergroupService}
+		usergroupChildren = {$plugin.tx_fkuplanning.settings.usergroupChildren}
+		usergroupKids = {$plugin.tx_fkuplanning.settings.usergroupKids}
+		usergroupTeens = {$plugin.tx_fkuplanning.settings.usergroupTeens}
+		usergroupOthers = {$plugin.tx_fkuplanning.settings.usergroupOthers}
+		usergroupMission = {$plugin.tx_fkuplanning.settings.usergroupMission}
+		usergroupAgenda = {$plugin.tx_fkuplanning.settings.usergroupAgenda}
+		usergroupMusic = {$plugin.tx_fkuplanning.settings.usergroupMusic}
+		usergroupSermon = {$plugin.tx_fkuplanning.settings.usergroupSermon}
+		usergroupKidstreff = {$plugin.tx_fkuplanning.settings.usergroupKidstreff}
+		defaultStartTime = {$plugin.tx_fkuplanning.settings.defaultStartTime}
+		PidPlanning = {$plugin.tx_fkuplanning.settings.PidPlanning}
+		PidBeamer = {$plugin.tx_fkuplanning.settings.PidBeamer}
+		PidAgendaEdit = {$plugin.tx_fkuplanning.settings.PidAgendaEdit}
+		PidSongReporting = {$plugin.tx_fkuplanning.settings.PidSongReporting}
+		PidSongSearch = {$plugin.tx_fkuplanning.settings.PidSongSearch}
+		PidDashboardService = {$plugin.tx_fkuplanning.settings.PidDashboardService}
+		PidDashboardKids = {$plugin.tx_fkuplanning.settings.PidDashboardKids}
+		PidKidsDownloads = {$plugin.tx_fkuplanning.settings.PidKidsDownloads}
+		PidServiceDownloads = {$plugin.tx_fkuplanning.settings.PidServiceDownloads}
+		PidNotifications = {$plugin.tx_fkuplanning.settings.PidNotifications}
+		PidSermon = {$plugin.tx_fkuplanning.settings.PidSermon}
+		PidLivestream = {$plugin.tx_fkuplanning.settings.PidLivestream}
+		PidMissionary = {$plugin.tx_fkuplanning.settings.PidMissionary}
+		IcalFilePathAndName = {$plugin.tx_fkuplanning.settings.IcalFilePathAndName}
+		IcalVisible = {$plugin.tx_fkuplanning.settings.IcalVisible}
+		IcalUpdateIntervalHours = {$plugin.tx_fkuplanning.settings.IcalUpdateIntervalHours}
+		losungenRootPath = {$plugin.tx_fkuplanning.settings.losungenRootPath}
+		fileStorageUid = {$plugin.tx_fkuplanning.settings.fileStorageUid}
+	}
+	parseFunc_RTE_onlyLink {
+		makelinks = 1
+		makelinks.http.keep = path
+		makelinks.http.extTarget = _blank
+	}
+}
+
+module.tx_fkuplanning.settings < plugin.tx_fkuplanning.settings
+
+
+page_planning_pdf = PAGE
+page_planning_pdf {
+  typeNum = {$plugin.tx_fkuplanning.settings.pdfPageType}
+  10 = USER
+  10 < tt_content.list.20.fkuplanning_serviceplan
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:application/pdf
+    xhtml_cleaning = 0
+    admPanel = 0
+	debug = 0
+  }
+}

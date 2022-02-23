@@ -1,0 +1,21 @@
+{namespace fpdf=CodingMs\FluidFpdf\ViewHelpers}
+
+<fpdf:setXY x="{xStart}" y="{yPosition}" />
+<fpdf:multiCell width="{columnWidth.1}" height="{lineHeight}" text="{master.date->f:format.date(format:'%e. %b')}{f:if(condition:'{master.date->f:format.date(format:\'n\')}!=5',then:'.')}" />
+<fpdf:setFont family="Calibri" size="{fontSizeSmall}" style="" />
+<f:if condition="{master.date->f:format.date(format:'H.i')}!={settings.defaultStartTime}">
+    <f:variable name="yCurrentPosition" value="{fpdf:getY()}" />
+	<fpdf:setXY x="{xStart}" y="{yCurrentPosition + paragraph}" />
+	<fpdf:multiCell width="{columnWidth.1}" height="{lineHeightSmall}" text="{master.date->f:format.date(format:'G.i')} Uhr" />
+</f:if>
+<f:if condition="{master.notes}">
+    <f:variable name="yCurrentPosition" value="{fpdf:getY()}" />
+	<fpdf:setXY x="{xStart}" y="{yCurrentPosition + paragraph}" />
+	<fpdf:multiCell width="{columnWidth.1}" height="{lineHeightSmall}" text="{master.notes}" />
+</f:if>
+<f:if condition="{master.holidays}">
+    <f:variable name="yCurrentPosition" value="{fpdf:getY()}" />
+	<fpdf:setXY x="{xStart}" y="{yCurrentPosition + paragraph}" />
+	<fpdf:multiCell width="{columnWidth.1}" height="{lineHeightSmall}" text="Schulferien" />
+</f:if>
+<fpdf:setFont family="Calibri" size="{fontSize}" style="" />

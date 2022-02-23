@@ -1,0 +1,47 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:ce="http://typo3.org/ns/TYPO3/CMS/FluidStyledContent/ViewHelpers"
+      data-namespace-typo3-fluid="true"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      v:schemaLocation="https://fluidtypo3.org/schemas/vhs-master.xsd">
+
+<div class="col-4">
+	<f:form.hidden property="{name}" id="{name}" value="{f:if(condition:it.total,then:'{p.name},')->f:for(each:'{property}',as:'p',iteration:'it')}" />
+	<f:form.hidden name="old[{name}]" value="{f:if(condition:it.total,then:'{p.name},')->f:for(each:'{property}',as:'p',iteration:'it')}" />
+	<f:form.select size="{v:math.maximum(a:'3',b:'{property->f:count()}')}" options="{property}" name="{name}_list" id="{name}_list" optionLabelField="name" class="form-control" />
+</div>
+<div class="col-4">
+	<f:form.textfield name="{name}_filter" id="{name}_filter" value="" class="form-control mb-2" />
+
+    <button type="button" name="{name}_delete" id="{name}_delete" value="del" class="btn btn-outline-secondary btn-sm" title="Links ausgewählte Person löschen">
+        <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-372-minus.svg#glyphicons-basic"/></svg>
+    </button>
+    <button type="button" name="{name}_deleteAll" id="{name}_deleteAll" value="delAll" class="btn btn-outline-secondary btn-sm" title="Alle Personen löschen">
+        <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-17-bin.svg#glyphicons-basic"/></svg>
+    </button>
+</div>
+
+<f:widget.autocomplete for="{name}_filter" objects="{allPeople}" searchProperty="name" />
+<script type="text/javascript">
+	jQuery(function() {
+		$('#<f:format.raw value="{name}" />_filter').autocomplete({
+			select:function(event, ui) {
+				newEntry = new Option(ui.item.value);
+				this.form.<f:format.raw value="{name}" />_list.options[this.form.<f:format.raw value="{name}" />_list.length] = newEntry;
+				this.form.<f:format.raw value="{name}" />.value = this.form.<f:format.raw value="{name}" />.value + ui.item.value + ',';
+			}
+		});
+		$('#<f:format.raw value="{name}" />_delete').click(function() {
+			var el = this.form.<f:format.raw value="{name}" />_list;
+			var st = '';
+			el.options[el.selectedIndex] = null;
+			for (i=0;i<el.length;i++) {st = st + el.options[i].text + ',';}
+			this.form.<f:format.raw value="{name}" />.value = st;
+		});
+		$('#<f:format.raw value="{name}" />_deleteAll').click(function() {
+			this.form.<f:format.raw value="{name}" />_list.length = 0;
+			this.form.<f:format.raw value="{name}" />.value = '';
+		});
+	});
+</script>
+
+</html>

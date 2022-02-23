@@ -1,0 +1,49 @@
+{namespace ff=FKU\FkuPlanning\ViewHelpers}
+
+<f:layout name="Default" />
+<f:section name="main">
+
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<h2>&quot;{master.serviceTopic}"</h2>
+<p class="lead">Predigt vom <f:format.date format="j.n.Y">{master.date}</f:format.date><f:if condition="{master.serviceSerial}"> aus der Predigtreihe &quot;{master.serviceSerial.title}&quot;</f:if><f:if condition="{master.servicePreacher}">, gehalten von <f:render partial="Master/PersonlistPlain" arguments="{list:master.servicePreacher}" /></f:if>.</p>
+
+<f:if condition="{master.sermonPublic}==0">
+	<div class="alert alert-warning">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-637-circle-alert.svg#glyphicons-basic"/></svg>
+	    Diese Predigt ist versteckt.
+    </div>
+</f:if>
+
+<f:if condition="{master.serviceBible}">
+	<h3>Bibeltext: {master.serviceBible}</h3>
+	<p><f:format.nl2br>{master.sermonBibletext}</f:format.nl2br></p>
+</f:if>
+
+<f:if condition="{master.sermonConcept}">
+	<h3>Konzept</h3>
+	<p><f:format.nl2br><f:format.html parseFuncTSPath="plugin.tx_fkuplanning.parseFunc_RTE_onlyLink">{master.sermonConcept}</f:format.html></f:format.nl2br></p>
+</f:if>
+
+<f:if condition="{master.sermonRelatedFiles}">
+	<h3>Download</h3>
+	<p class="text-uppercase">
+		<f:for each="{master.sermonRelatedFiles}" as="file">
+			<a href="{file.originalResource.publicUrl}" target="_blank">
+				<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/{file.originalResource.originalFile.properties.mime_type->ff:fileIcon()}.svg#glyphicons-basic"/></svg>
+				{file.originalResource.originalFile.properties.extension}
+			</a>
+			<br />
+		</f:for>
+	</p>
+</f:if>
+<br />
+
+<f:link.action action="{sermonList}" arguments="{expression:expression,year:year,sorting:sorting}" class="btn btn-outline-dark">Zurück zur Liste</f:link.action>
+<f:security.ifHasRole role="{settings.usergroupSermon}">
+    &nbsp;<f:link.action action="sermonEdit" arguments="{master:master,back:'show'}" class="btn btn-outline-dark">Predigt ändern</f:link.action>
+</f:security.ifHasRole>
+
+</f:section>

@@ -1,0 +1,69 @@
+
+<div class="row">
+	<div class="col-sm-6 col-12">
+		<h3>Fahrdienst</h3>
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Grundsätzlich</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="drivingActive" value="1" checked="{master.drivingActive}==1" class="form-check-input" />
+                    <label for="drivingActive" class="form-check-label">Fahrdienst wird angeboten</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="drivingPeople" class="col-sm-3 col-4 col-form-label">Eingeteilt</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.drivingPeople,name:'drivingPeople',allPeople:allPeople}" />
+        </div>
+
+	    <h3 class="mt-4">Gebet</h3>
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Grundsätzlich</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="prayerActive" value="1" checked="{master.prayerActive}==1" class="form-check-input" />
+                    <label for="prayerActive" class="form-check-label">Gebet wird angeboten</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="prayerPeople" class="col-sm-3 col-4 col-form-label">Eingeteilt</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.prayerPeople,name:'prayerPeople',allPeople:allPeople}" />
+        </div>
+
+	    <h3 class="mt-4">Winterdienst</h3>
+        <div class="row form-group">
+            <label for="serviceWinter" class="col-sm-3 col-4 col-form-label">Eingeteilt</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceWinter,name:'serviceWinter',allPeople:allPeople}" />
+        </div>
+
+	</div>
+	<div class="col-sm-6 col-12">
+
+		<h3>Chilekafi</h3>
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Grundsätzlich</legend>
+            <div class="col-8">
+                <div class="form-check">
+                    <f:form.checkbox property="coffeeActive" value="1" checked="{master.coffeeActive}==1" class="form-check-input" />
+                    <label for="coffeeActive" class="form-check-label">Gebet wird angeboten</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="coffeeNotes" class="col-sm-3 col-4 col-form-label">Bemerkungen</label>
+            <div class="col-8">
+                <f:form.textarea property="coffeeNotes" rows="2" class="form-control" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="coffeePeople" class="col-sm-3 col-4 col-form-label">Verantwortlich</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.coffeePeople,name:'coffeePeople',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="coffeeSpecial" class="col-sm-3 col-4 col-form-label">Kaffeemaschine</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.coffeeSpecial,name:'coffeeSpecial',allPeople:allPeople}" />
+        </div>
+	
+	</div>
+</div>

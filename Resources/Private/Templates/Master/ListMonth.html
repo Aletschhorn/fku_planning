@@ -1,0 +1,87 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<f:comment> Navigation for month </f:comment>
+<div class="d-none d-md-block">
+    <div class="row">
+        <div class="col-12 col-lg-9 col-xl-7">
+            <ul class="pagination">
+                <f:for each="{pagination.month}" as="link">
+                    <li class="{link.class}">
+                        <f:link.action action="listMonth" arguments="{link.arguments}" class="page-link">{link.label}</f:link.action>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+        <div class="col-6 col-lg-3 col-xl-2">
+            <ul class="pagination">
+                <f:for each="{pagination.year}" as="link">
+                    <li class="{link.class}">
+                        <f:link.action action="listMonth" arguments="{link.arguments}" class="page-link">{link.label}</f:link.action>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+        <div class="col-6 col-xl-3">
+            <ul class="pagination">
+                <li>
+                    <f:link.action action="list" pluginName="Serviceplan">
+                        <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-92-contrast.svg#glyphicons-basic"/></svg>
+                        Datumsbereich
+                    </f:link.action>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="d-block d-md-none clearfix">
+    <div class="row">
+    	<div class="col-4">
+            <ul class="pagination">
+                <f:for each="{pagination.minimonth}" as="link">
+                    <li class="{link.class}">
+                        <f:link.action action="listMonth" arguments="{link.arguments}" class="page-link">{link.label}</f:link.action>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+        <div class="col-4">
+            <ul class="pagination">
+                <f:for each="{pagination.year}" as="link">
+                    <li class="{link.class}">
+                        <f:link.action action="listMonth" arguments="{link.arguments}" class="page-link">{link.label}</f:link.action>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+        <div class="col-4">
+        	<ul class="pagination">
+				<li>
+                	<f:link.action action="list" pluginName="Serviceplan">
+                    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-92-contrast.svg#glyphicons-basic"/></svg>
+                        Datumsbereich
+                    </f:link.action>
+                </li>
+            </ul>
+		</div>
+	</div>
+</div>
+
+<f:comment> Navigation for sections </f:comment>
+<f:render partial="Master/NavigationSections" arguments="{_all}" />
+
+<f:comment> Show content </f:comment>
+<f:if condition="{masters}">
+	<f:then>
+		<f:render partial="Master/Section/{section->f:format.case(mode:'capital')}" arguments="{_all}" />
+	</f:then>
+	<f:else>
+		<p class="lead">Keine Einträge in diesem Datumsbereich.</p>
+	</f:else>
+</f:if>
+
+</f:section>

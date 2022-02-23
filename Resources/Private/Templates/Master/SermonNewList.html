@@ -1,0 +1,60 @@
+<f:layout name="Default" />
+<f:section name="main">
+
+<h2>Neue Predigt erstellen</h2>
+
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<div class="my-3">
+	<f:link.action action="sermonList">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-223-chevron-left.svg#glyphicons-basic"/></svg>
+        Zurück zur Predigt-Liste
+    </f:link.action>
+</div>
+
+<f:security.ifHasRole role="{settings.usergroupSermon}">
+	<div class="my-2 text-center">
+		<f:link.action action="sermonNewList" arguments="{limit:filter.limit,start:filter.start.older}">
+	    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-222-chevron-up.svg#glyphicons-basic"/></svg>
+            Ältere Gottesdienste
+        </f:link.action>
+    </div>
+    
+    <f:if condition="{masters}">
+        <f:then>
+            <table class="table">
+                <tr>
+                    <th>Datum</th>
+                    <th>Prediger</th>
+                    <th>Thema</th>
+                    <th>Bibelstelle</th>
+                </tr>
+                <f:for each="{masters}" as="master">
+                	<tr>
+                    	<td><f:link.action action="sermonEdit" arguments="{master:master,back:'list'}"><f:format.date format="d.m.Y">{master.date}</f:format.date></f:link.action></td>
+                        <td><f:render partial="Master/PersonlistPlain" arguments="{list:master.servicePreacher}" /></td>
+	                    <td>{master.serviceTopic}</td>
+                        <td>{master.serviceBible}</td>
+                    </tr>
+                </f:for>
+            </table>
+        </f:then>
+        <f:else>
+            <div class="alert alert-info">
+            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-636-circle-info.svg#glyphicons-basic"/></svg>
+                Keine Gottesdienste ohne Predigten gefunden.
+            </div>
+        </f:else>
+    </f:if>
+
+	<div class="my-2 text-center">
+		<f:link.action action="sermonNewList" arguments="{limit:filter.limit,start:filter.start.newer}">
+	    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-221-chevron-down.svg#glyphicons-basic"/></svg>
+            Neuere Gottesdienste
+        </f:link.action>
+    </div>
+</f:security.ifHasRole>	
+
+</f:section>

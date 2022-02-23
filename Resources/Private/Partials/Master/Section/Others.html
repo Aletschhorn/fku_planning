@@ -1,0 +1,117 @@
+<div class="d-none d-md-block">
+    <p class="d-none d-lg-block"><f:link.action action="export" target="_blank" arguments="{section:'others',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-200-save-as.svg#glyphicons-basic"/></svg>
+        Tabelle als PDF herunterladen und drucken
+    </f:link.action></p>
+    
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th width="5%">Datum</th>
+                <th width="16%">Fahrdienst</th>
+                <th width="16%">Gebet</th>
+                <th width="31%">Chilekafi</th>
+                <th width="16%">Kaffeemaschine</th>
+                <th width="16%">Winterdienst</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <f:for each="{masters}" as="master">
+                <tr>
+                    <td>
+                        <f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'others',settings:settings}" />
+                    </td>
+        
+                    <f:if condition="{master.drivingActive}">
+                        <f:then>
+                            <td>
+                                <f:render partial="Master/Personlist" arguments="{list:master.drivingPeople,me:me}" />
+                            </td>
+                        </f:then>
+                        <f:else>
+                            <td>Kein Fahrdienst</td>
+                        </f:else>
+                    </f:if>
+        
+                    <f:if condition="{master.prayerActive}">
+                        <f:then>
+                            <td>
+                                <f:render partial="Master/Personlist" arguments="{list:master.prayerPeople,me:me}" />
+                            </td>
+                        </f:then>
+                        <f:else>
+                            <td>Kein Gebet</td>
+                        </f:else>
+                    </f:if>
+        
+                    <td>
+                        <f:if condition="{master.coffeeActive}">
+                            <f:then>
+                                <p><f:render partial="Master/Personlist" arguments="{list:master.coffeePeople,me:me}" /></p>
+                                <p><small>{master.coffeeNotes}</small></p>
+                            </f:then>
+                            <f:else>
+                                Kein Chilekafi<f:if condition="{master.coffeeNotes}">: {master.coffeeNotes}</f:if>
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:render partial="Master/Personlist" arguments="{list:master.coffeeSpecial,me:me}" />
+                    </td>
+                    
+                    <td>
+                        <f:render partial="Master/Personlist" arguments="{list:master.serviceWinter,me:me}" />
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-block d-md-none">
+	<f:for each="{masters}" as="master">
+        <hr />
+        <f:render partial="Master/DateTimeHolidaysXS" arguments="{master:master,section:'others',settings:settings}" />
+        <f:if condition="{master.drivingActive}">
+            <f:then>
+                <p>Fahrdienst: <f:render partial="Master/Personlist" arguments="{list:master.drivingPeople,me:me}" /></p>
+            </f:then>
+            <f:else>
+                <p>Kein Fahrdienst</p>
+            </f:else>
+        </f:if>
+
+        <f:if condition="{master.prayerActive}">
+            <f:then>
+                <p>Gebet: <f:render partial="Master/Personlist" arguments="{list:master.prayerPeople,me:me}" /></p>
+            </f:then>
+            <f:else>
+                <p>Kein Gebet</p>
+            </f:else>
+        </f:if>
+
+        <f:if condition="{master.coffeeActive}">
+            <f:then>
+                <p>
+                	Chilekafi: <f:render partial="Master/Personlist" arguments="{list:master.coffeePeople,me:me}" /><br />
+                    Kaffeemaschine: <f:render partial="Master/Personlist" arguments="{list:master.coffeeSpecial,me:me}" />
+                	<f:if condition="{master.coffeeNotes}">
+                    	<br /><small>{master.coffeeNotes}</small>
+                    </f:if>
+                </p>
+            </f:then>
+            <f:else>
+            	<p>
+	                Kein Chilekafi<f:if condition="{master.coffeeNotes}">: {master.coffeeNotes}</f:if>
+                    <f:if condition="{master.coffeeSpecial}">
+	                    <br />Kaffeemaschine: <f:render partial="Master/Personlist" arguments="{list:master.coffeeSpecial,me:me}" />
+                    </f:if>
+                </p>
+            </f:else>
+        </f:if>
+        <f:if condition="{master.serviceWinter}">
+            <p>Winterdienst: <f:render partial="Master/Personlist" arguments="{list:master.serviceWinter,me:me}" /></p>
+        </f:if>
+    </f:for>
+</div>

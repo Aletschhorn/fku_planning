@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-04T12:15:10Z" product-name="planning">
+		<header/>
+		<body>
+			<trans-unit id="tx_fkuplanning_domain_model_master">
+				<source>Master</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.date">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.holidays">
+				<source>Holidays</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.notes">
+				<source>Notes</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.visibility">
+				<source>Visibility</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.agenda">
+				<source>Agenda</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.event">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_active">
+				<source>Service Active</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_topic">
+				<source>Service Topic</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_serial">
+				<source>Service Serial</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_bible">
+				<source>Service Bible</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_preacher">
+				<source>Service Preacher</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_notes">
+				<source>Service Notes</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_moderator">
+				<source>Service Moderator</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_music_select">
+				<source>Service Music Select</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_music_rehearse">
+				<source>Service Music Rehearse</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_music_band">
+				<source>Service Music Band</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_music_organ">
+				<source>Service Music Organ</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_beamer">
+				<source>Service Beamer</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_console">
+				<source>Service Console</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_camera">
+				<source>Service Camera</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_filmeditor">
+				<source>Service Film Editor</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_sexton">
+				<source>Service Sexton</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_welcome">
+				<source>Service Welcome</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_winter">
+				<source>Service Winter</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_mission">
+				<source>Service Mission</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_mission_notes">
+				<source>Service Mission Notes</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_mission_content">
+				<source>Service Mission Content</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_missionary">
+				<source>Service Missionary</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_supper">
+				<source>Service Supper</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_supper_people">
+				<source>Service Supper People</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_collection">
+				<source>Service Collection</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_livestreamlink">
+				<source>YouTube ID</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.children_active">
+				<source>Children Active</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.children_people">
+				<source>Children People</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_program">
+				<source>Kids Program</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_topic">
+				<source>Kids Topic</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_topic_link">
+				<source>Kids Topic Link</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_notes">
+				<source>Kids Notes</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_playing">
+				<source>Kids Playing</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_singing">
+				<source>Kids Singing</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_plenum">
+				<source>Kids Plenum</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_group1">
+				<source>Kids Group1</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_group2">
+				<source>Kids Group2</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_group3">
+				<source>Kids Group3</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_group3_program">
+				<source>Kids Group3 Program</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_yonung_active">
+				<source>Kids Young Active</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.kids_young">
+				<source>Kids Young</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.teens_program1">
+				<source>Teens Program 1st and 2nd year</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.teens_topic1">
+				<source>Teens Topic 1st and 2nd year</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.teens_notes1">
+				<source>Teens Notes 1st and 2nd year</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.teens_people1">
+				<source>Teens People 1st and 2nd year</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.teens_program2">
+				<source>Teens Program 3rd year</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.teens_topic2">
+				<source>Teens Topic 3rd year</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.teens_notes2">
+				<source>Teens Notes 3rd year</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.teens_people2">
+				<source>Teens People 3rd year</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.coffee_active">
+				<source>Coffee Active</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.coffee_notes">
+				<source>Coffee Notes</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.coffee_people">
+				<source>Coffee People</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.coffee_special">
+				<source>Coffee Special</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.prayer_active">
+				<source>Prayer Active</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.prayer_people">
+				<source>Prayer People</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.driving_active">
+				<source>Driving Active</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.driving_people">
+				<source>Driving People</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.sermon_bibletext">
+				<source>Bible Text</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.sermon_concept">
+				<source>Sermon Concept</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.sermon_related_files">
+				<source>Sermon Related Files</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.sermon_public">
+				<source>Sermon is public</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.sermon_exist">
+				<source>Sermon exists</source>
+			</trans-unit>
+
+			<trans-unit id="tx_fkuplanning_domain_model_visibility">
+				<source>Visibility</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_visibility.title">
+				<source>Title</source>
+			</trans-unit>
+
+			<trans-unit id="tx_fkuplanning_domain_model_serial">
+				<source>Serial</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_serial.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_serial.recent">
+				<source>Recent</source>
+			</trans-unit>
+
+			<trans-unit id="tx_fkuplanning_domain_model_tracking">
+				<source>Tracking</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_tracking.moment">
+				<source>Moment</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_tracking.user">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_tracking.master">
+				<source>Master</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_tracking.field">
+				<source>Field</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_tracking.old">
+				<source>Old value</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_tracking.new">
+				<source>New value</source>
+			</trans-unit>
+
+			<trans-unit id="tx_fkuplanning_domain_model_missionary">
+				<source>Missionary</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_missionary.title">
+				<source>Title</source>
+			</trans-unit>
+
+			<trans-unit id="date">
+				<source>Service date</source>
+			</trans-unit>
+			<trans-unit id="holidays">
+				<source>Service in holidays</source>
+			</trans-unit>
+			<trans-unit id="notes">
+				<source>Notes</source>
+			</trans-unit>
+			<trans-unit id="visibility">
+				<source>Visibility</source>
+			</trans-unit>
+			<trans-unit id="agenda">
+				<source>Agenda entry</source>
+			</trans-unit>
+			<trans-unit id="event">
+				<source>Event created</source>
+			</trans-unit>
+			<trans-unit id="serviceActive">
+				<source>Service Active</source>
+			</trans-unit>
+			<trans-unit id="serviceTopic">
+				<source>Service Topic</source>
+			</trans-unit>
+			<trans-unit id="serviceBible">
+				<source>Service Bible text</source>
+			</trans-unit>
+			<trans-unit id="servicePreacher">
+				<source>Service preacher</source>
+			</trans-unit>
+			<trans-unit id="serviceNotes">
+				<source>Service Notes</source>
+			</trans-unit>
+			<trans-unit id="serviceModerator">
+				<source>Service Moderator</source>
+			</trans-unit>
+			<trans-unit id="serviceMusicSelect">
+				<source>Service songs selector</source>
+			</trans-unit>
+			<trans-unit id="serviceMusicRehearse">
+				<source>Service music rehearse responsible</source>
+			</trans-unit>
+			<trans-unit id="serviceMusicBand">
+				<source>Service music team</source>
+			</trans-unit>
+			<trans-unit id="serviceMusicOrgan">
+				<source>Service organist</source>
+			</trans-unit>
+			<trans-unit id="serviceBeamer">
+				<source>Service beamer</source>
+			</trans-unit>
+			<trans-unit id="serviceConsole">
+				<source>Service console</source>
+			</trans-unit>
+			<trans-unit id="serviceSexton">
+				<source>Service sexton</source>
+			</trans-unit>
+			<trans-unit id="serviceWelcome">
+				<source>Service welcome</source>
+			</trans-unit>
+			<trans-unit id="serviceWinter">
+				<source>Winter service</source>
+			</trans-unit>
+			<trans-unit id="serviceMission">
+				<source>Missions news</source>
+			</trans-unit>
+			<trans-unit id="serviceMissionary">
+				<source>Mission news person</source>
+			</trans-unit>
+			<trans-unit id="serviceSupper">
+				<source>Lord's supper</source>
+			</trans-unit>
+			<trans-unit id="childrenActive">
+				<source>Babysitting active</source>
+			</trans-unit>
+			<trans-unit id="childrenPeople">
+				<source>Babysitting people</source>
+			</trans-unit>
+			<trans-unit id="kidsProgram">
+				<source>Kids program type</source>
+			</trans-unit>
+			<trans-unit id="kidsTopic">
+				<source>Kids topic</source>
+			</trans-unit>
+			<trans-unit id="kidsTopicLink">
+				<source>Kids topic docu link</source>
+			</trans-unit>
+			<trans-unit id="kidsNotes">
+				<source>Kids notes</source>
+			</trans-unit>
+			<trans-unit id="kidsPlaying">
+				<source>Kids playing</source>
+			</trans-unit>
+			<trans-unit id="kidsSinging">
+				<source>Kids singing</source>
+			</trans-unit>
+			<trans-unit id="kidsPlenum">
+				<source>Kids plenum</source>
+			</trans-unit>
+			<trans-unit id="kidsGroup1">
+				<source>Kids Habakuk</source>
+			</trans-unit>
+			<trans-unit id="kidsGroup2">
+				<source>Kids Karibu</source>
+			</trans-unit>
+			<trans-unit id="kidsGroup3">
+				<source>Kids young team</source>
+			</trans-unit>
+			<trans-unit id="kidsGroup3Program">
+				<source>Kids young team program</source>
+			</trans-unit>
+			<trans-unit id="kidsYoung">
+				<source>Kids youngest</source>
+			</trans-unit>
+			<trans-unit id="teensProgram1">
+				<source>Teens program 1st and 2nd year</source>
+			</trans-unit>
+			<trans-unit id="teensTopic1">
+				<source>Teens topic 1st and 2nd year</source>
+			</trans-unit>
+			<trans-unit id="teensNotes1">
+				<source>Teens notes 1st and 2nd year</source>
+			</trans-unit>
+			<trans-unit id="teensPeople1">
+				<source>Teens people 1st and 2nd year</source>
+			</trans-unit>
+			<trans-unit id="teensProgram2">
+				<source>Teens program 3rd year</source>
+			</trans-unit>
+			<trans-unit id="teensTopic2">
+				<source>Teens topic 3rd year</source>
+			</trans-unit>
+			<trans-unit id="teensNotes2">
+				<source>Teens notes 3rd year</source>
+			</trans-unit>
+			<trans-unit id="teensPeople2">
+				<source>Teens people 3rd year</source>
+			</trans-unit>
+			<trans-unit id="coffeeActive">
+				<source>Coffee active</source>
+			</trans-unit>
+			<trans-unit id="coffeeNotes">
+				<source>Coffee notes</source>
+			</trans-unit>
+			<trans-unit id="coffeePeople">
+				<source>Coffee people</source>
+			</trans-unit>
+			<trans-unit id="coffeeSpecial">
+				<source>Coffee machine</source>
+			</trans-unit>
+			<trans-unit id="prayerActive">
+				<source>Prayer active</source>
+			</trans-unit>
+			<trans-unit id="prayerPeople">
+				<source>Prayer people</source>
+			</trans-unit>
+			<trans-unit id="drivingActive">
+				<source>Driving service active</source>
+			</trans-unit>
+			<trans-unit id="drivingPeople">
+				<source>Driving people</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

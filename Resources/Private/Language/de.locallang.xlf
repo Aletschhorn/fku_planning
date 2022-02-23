@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-10-04T12:15:10Z" product-name="planning">
+		<header/>
+		<body>
+			<trans-unit id="date">
+				<source>Service date</source>
+				<target>GD-Datum</target>
+			</trans-unit>
+			<trans-unit id="holidays">
+				<source>Service in holidays</source>
+				<target>GD während Ferien</target>
+			</trans-unit>
+			<trans-unit id="notes">
+				<source>Notes</source>
+				<target>GD-Bemerkungen</target>
+			</trans-unit>
+			<trans-unit id="visibility">
+				<source>Visibility</source>
+				<target>GD-Sichtbarkeit</target>
+			</trans-unit>
+			<trans-unit id="agenda">
+				<source>Agenda entry</source>
+				<target>Agenda-Eintrag</target>
+			</trans-unit>
+			<trans-unit id="event">
+				<source>Event created</source>
+				<target>Agenda-Eintrag erstellt</target>
+			</trans-unit>
+			<trans-unit id="serviceActive">
+				<source>Service Active</source>
+				<target>GD findet statt</target>
+			</trans-unit>
+			<trans-unit id="serviceTopic">
+				<source>Service Topic</source>
+				<target>Predigtthema</target>
+			</trans-unit>
+			<trans-unit id="serviceSerial">
+				<source>Service Serial</source>
+				<target>Predigtreihe</target>
+			</trans-unit>
+			<trans-unit id="serviceBible">
+				<source>Service Bible text</source>
+				<target>Bibelstelle</target>
+			</trans-unit>
+			<trans-unit id="servicePreacher">
+				<source>Service preacher</source>
+				<target>Prediger</target>
+			</trans-unit>
+			<trans-unit id="serviceNotes">
+				<source>Service Notes</source>
+				<target>Bemerkungen</target>
+			</trans-unit>
+			<trans-unit id="serviceModerator">
+				<source>Service Moderator</source>
+				<target>GD-Leitung</target>
+			</trans-unit>
+			<trans-unit id="serviceMusicSelect">
+				<source>Service songs selector</source>
+				<target>Liederauswahl</target>
+			</trans-unit>
+			<trans-unit id="serviceMusicSelectAll">
+				<source>Songs selector chooses all songs</source>
+				<target>Liederauswahl aller Lieder</target>
+			</trans-unit>
+			<trans-unit id="serviceMusicRehearse">
+				<source>Service music rehearse responsible</source>
+				<target>Probeverantwortlich</target>
+			</trans-unit>
+			<trans-unit id="serviceMusicBand">
+				<source>Service music team</source>
+				<target>Musikteam</target>
+			</trans-unit>
+			<trans-unit id="serviceMusicOrgan">
+				<source>Service organist</source>
+				<target>Organist</target>
+			</trans-unit>
+			<trans-unit id="serviceBeamer">
+				<source>Service beamer</source>
+				<target>Beamer</target>
+			</trans-unit>
+			<trans-unit id="serviceConsole">
+				<source>Service console</source>
+				<target>Mischpult</target>
+			</trans-unit>
+			<trans-unit id="serviceCamera">
+				<source>Service camera</source>
+				<target>Kamera</target>
+			</trans-unit>
+			<trans-unit id="serviceFilmeditor">
+				<source>Service flim editor</source>
+				<target>Livestream-Schnitt</target>
+			</trans-unit>
+			<trans-unit id="serviceSexton">
+				<source>Service sexton</source>
+				<target>Sigrist</target>
+			</trans-unit>
+			<trans-unit id="serviceWelcome">
+				<source>Service welcome</source>
+				<target>Türbegrüssung</target>
+			</trans-unit>
+			<trans-unit id="serviceWinter">
+				<source>Service Winter</source>
+				<target>Winterdienst</target>
+			</trans-unit>
+			<trans-unit id="serviceMission">
+				<source>Service Mission</source>
+				<target>Missionsfenster</target>
+			</trans-unit>
+			<trans-unit id="serviceMissionNotes">
+				<source>Service Mission Notes</source>
+				<target>Missionsfenster-Infos</target>
+			</trans-unit>
+			<trans-unit id="serviceMissionContent">
+				<source>Service Mission Content</source>
+				<target>Missionsfenster-Inhalt</target>
+			</trans-unit>
+			<trans-unit id="serviceMissionary">
+				<source>Service Mission person</source>
+				<target>Missionsfenster-Person</target>
+			</trans-unit>
+			<trans-unit id="serviceSupper">
+				<source>Lord's supper</source>
+				<target>Abendmahl</target>
+			</trans-unit>
+			<trans-unit id="serviceSupperPeople">
+				<source>Lord's supper people</source>
+				<target>Abendmahl-Verantwortlich</target>
+			</trans-unit>
+			<trans-unit id="serviceCollection">
+				<source>Collection</source>
+				<target>Kollekte</target>
+			</trans-unit>
+			<trans-unit id="serviceLivestreamlink">
+				<source>YouTube ID</source>
+				<target>YouTube-ID</target>
+			</trans-unit>
+			<trans-unit id="childrenActive">
+				<source>Babysitting active</source>
+				<target>Kinderhüeti</target>
+			</trans-unit>
+			<trans-unit id="childrenPeople">
+				<source>Babysitting people</source>
+				<target>Kinderhüeti-Personen</target>
+			</trans-unit>
+			<trans-unit id="kidsProgram">
+				<source>Kids program type</source>
+				<target>Kids Treff: Programmart</target>
+			</trans-unit>
+			<trans-unit id="kidsTopic">
+				<source>Kids topic</source>
+				<target>Kids Treff: Thema</target>
+			</trans-unit>
+			<trans-unit id="kidsTopicLink">
+				<source>Kids topic docu link</source>
+				<target>Kids Treff: Dokumentelink</target>
+			</trans-unit>
+			<trans-unit id="kidsNotes">
+				<source>Kids notes</source>
+				<target>Kids Treff: Notizen</target>
+			</trans-unit>
+			<trans-unit id="kidsPlaying">
+				<source>Kids playing</source>
+				<target>Kids Treff: Spielstrasse</target>
+			</trans-unit>
+			<trans-unit id="kidsSinging">
+				<source>Kids singing</source>
+				<target>Kids Treff: Singen</target>
+			</trans-unit>
+			<trans-unit id="kidsPlenum">
+				<source>Kids plenum</source>
+				<target>Kids Treff: Plenum</target>
+			</trans-unit>
+			<trans-unit id="kidsGroup1">
+				<source>Kids Habakuk</source>
+				<target>Kids Treff: Habakuk</target>
+			</trans-unit>
+			<trans-unit id="kidsGroup2">
+				<source>Kids Karibu</source>
+				<target>Kids Treff: Karibu</target>
+			</trans-unit>
+			<trans-unit id="kidsGroup3">
+				<source>Kids young team</source>
+				<target>Kids Treff: Zundhölzli</target>
+			</trans-unit>
+			<trans-unit id="kidsGroup3Program">
+				<source>Kids young team program</source>
+				<target>Kids Treff: Zundhölzli-Programm</target>
+			</trans-unit>
+			<trans-unit id="kidsYoungActive">
+				<source>Kids youngest active</source>
+				<target>Summervögeli</target>
+			</trans-unit>
+			<trans-unit id="kidsYoung">
+				<source>Kids youngest</source>
+				<target>Summervögeli-Personen</target>
+			</trans-unit>
+			<trans-unit id="teensProgram1">
+				<source>Teens program 1st and 2nd year</source>
+				<target>Teens Treff 1./2. Jahr: Programm</target>
+			</trans-unit>
+			<trans-unit id="teensTopic1">
+				<source>Teens topic 1st and 2nd year</source>
+				<target>Teens Treff 1./2. Jahr: Thema</target>
+			</trans-unit>
+			<trans-unit id="teensNotes1">
+				<source>Teens notes 1st and 2nd year</source>
+				<target>Teens Treff 1./2. Jahr: Notizen</target>
+			</trans-unit>
+			<trans-unit id="teensPeople1">
+				<source>Teens people 1st and 2nd year</source>
+				<target>Teens Treff 1./2. Jahr: Verantwortlich</target>
+			</trans-unit>
+			<trans-unit id="teensProgram2">
+				<source>Teens program 3rd year</source>
+				<target>Teens Treff 3. Jahr: Programm</target>
+			</trans-unit>
+			<trans-unit id="teensTopic2">
+				<source>Teens topic 3rd year</source>
+				<target>Teens Treff 3. Jahr: Thema</target>
+			</trans-unit>
+			<trans-unit id="teensNotes2">
+				<source>Teens notes 3rd year</source>
+				<target>Teens Treff 3. Jahr: Notizen</target>
+			</trans-unit>
+			<trans-unit id="teensPeople2">
+				<source>Teens people 3rd year</source>
+				<target>Teens Treff 3. Jahr: Verantwortlich</target>
+			</trans-unit>
+			<trans-unit id="coffeeActive">
+				<source>Coffee active</source>
+				<target>Chilekafi</target>
+			</trans-unit>
+			<trans-unit id="coffeeNotes">
+				<source>Coffee notes</source>
+				<target>Chilekafi-Notizen</target>
+			</trans-unit>
+			<trans-unit id="coffeePeople">
+				<source>Coffee people</source>
+				<target>Chilekafi-Personen</target>
+			</trans-unit>
+			<trans-unit id="coffeeSpecial">
+				<source>Coffee machine</source>
+				<target>Kaffeemaschine</target>
+			</trans-unit>
+			<trans-unit id="prayerActive">
+				<source>Prayer active</source>
+				<target>Gebet</target>
+			</trans-unit>
+			<trans-unit id="prayerPeople">
+				<source>Prayer people</source>
+				<target>Gebet-Personen</target>
+			</trans-unit>
+			<trans-unit id="drivingActive">
+				<source>Driving service active</source>
+				<target>Fahrdienst</target>
+			</trans-unit>
+			<trans-unit id="drivingPeople">
+				<source>Driving people</source>
+				<target>Fahrdienst-Personen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

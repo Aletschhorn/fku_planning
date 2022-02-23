@@ -1,0 +1,29 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<f:comment> Form to select date range </f:comment>
+<f:form action="missionary" class="form-inline mb-4">
+    <label for="lowLimit">Datumsbereich von</label>
+    <f:form.select class="form-control mx-2" name="lowLimit" options="{daterange.options}" value="{daterange.low}" />
+    <label for="highLimit">bis</label>
+    <f:form.select class="form-control mx-2" name="highLimit" options="{daterange.options}" value="{daterange.high}" />
+    <f:form.submit value="Zeigen" class="btn btn-primary" />
+</f:form>
+
+<f:comment> Show content </f:comment>
+<f:if condition="{masters}">
+	<f:then>
+    	<f:variable name="missionBack" value="missionary" />
+        <f:render partial="Master/Section/Mission" arguments="{_all}" />
+	</f:then>
+	<f:else>
+		<p class="lead">Keine Einträge in diesem Datumsbereich.</p>
+	</f:else>
+</f:if>
+
+</f:section>
+

@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-md-6 col-12">
+        <div class="row form-group">
+            <label for="date" class="col-sm-3 col-12 col-form-label">Datum, Zeit</label>
+            <div class="col-sm-4 col-6">
+                <f:form.textfield property="dateDate" value="{master.date->f:format.date(format:'d.m.Y')}" class="form-control" errorClass="has-error" placeholder="TT.MM.JJJJ" />
+                <f:form.hidden name="old[dateDate]" value="{master.date->f:format.date(format:'d.m.Y')}" />
+            </div>
+            <div class="col-sm-4 col-6">
+                <f:form.textfield property="dateTime" value="{master.date->f:format.date(format:'H.i')}" class="form-control" placeholder="HH.MM" />
+                <f:form.hidden name="old[dateTime]" value="{master.date->f:format.date(format:'H.i')}" />
+            </div>
+        </div>
+    
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Schulferien</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="holidays" value="1" checked="{master.holidays}==1" class="form-check-input" />
+                    <label for="holidays" class="form-check-label">Gottesdienst während Schulferien</label>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row form-group">
+            <label for="notes" class="col-sm-3 col-4 col-form-label">Information</label>
+            <div class="col-8">
+                <f:form.textfield property="notes" class="form-control" placeholder="Feiertag, Zeitumstellung, ..." />
+            </div>
+        </div>
+    
+        <div class="row form-group">
+            <label for="visibility" class="col-sm-3 col-4 col-form-label">Sichtbarkeit</label>
+            <div class="col-8">
+                <f:form.select property="visibility" options="{visibilities}" optionLabelField="title" class="form-control" />
+                <f:form.hidden name="old[visibility]" value="{master.visibility}" />
+            </div>
+        </div>
+        
+        <f:comment>
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Agenda</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="agenda" value="1" checked="{master.agenda}==1" class="form-check-input" />
+                    <label for="agenda" class="form-check-label">Automatisch in Agenda zeigen</label>
+                </div>
+            </div>
+        </div>
+        </f:comment>
+		
+	</div>
+</div>

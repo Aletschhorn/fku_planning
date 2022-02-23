@@ -1,0 +1,73 @@
+
+<div class="row">
+	<div class="col-sm-6 col-12">
+
+		<h3>Generell</h3>
+        <div class="row form-group">
+            <label for="kidsProgram" class="col-sm-3 col-4 col-form-label">Durchführung</label>
+            <div class="col-8">
+                <f:form.select property="kidsProgram" options="{kidsProgramOptions}" class="form-control" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="kidsTopic" class="col-sm-3 col-4 col-form-label">Thema</label>
+            <div class="col-8">
+                <f:form.textfield property="kidsTopic" class="form-control" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="kidsTopicLink" class="col-sm-3 col-4 col-form-label">Download-Link</label>
+            <div class="col-8">
+                <f:form.textfield property="kidsTopicLink" class="form-control" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="kidsNotes" class="col-sm-3 col-4 col-form-label">Bemerkungen</label>
+            <div class="col-8">
+                <f:form.textarea property="kidsNotes" rows="2" class="form-control" />
+            </div>
+        </div>
+
+        <h3 class="mt-4">Sommervögeli</h3>
+        <div class="row form-group">
+            <label for="kidsYoung" class="col-sm-3 col-4 col-form-label">Leiter</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsYoung,name:'kidsYoung',allPeople:allPeople}" />
+        </div>
+
+	</div>
+	<div class="col-sm-6 col-12">
+
+        <h3>Gemeinsamer Teil</h3>
+        <div class="row form-group">
+            <label for="kidsPlaying" class="col-sm-3 col-4 col-form-label">Spielstrasse</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsPlaying,name:'kidsPlaying',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="kidsSinging" class="col-sm-3 col-4 col-form-label">Singen</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsSinging,name:'kidsSinging',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="kidsPlenum" class="col-sm-3 col-4 col-form-label">Plenum</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsPlenum,name:'kidsPlenum',allPeople:allPeople}" />
+        </div>
+    
+        <h3 class="mt-4">Kleingruppen</h3>
+        <div class="row form-group">
+            <label for="kidsGroup1" class="col-sm-3 col-4 col-form-label">Habakuk</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsGroup1,name:'kidsGroup1',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="kidsGroup2" class="col-sm-3 col-4 col-form-label">Karibu</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsGroup2,name:'kidsGroup2',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="kidsGroup3" class="col-sm-3 col-4 col-form-label">Zundhölzli</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsGroup3,name:'kidsGroup3',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="kidsGroup3Program" class="col-sm-3 col-4 col-form-label">Zundhölzli-Programm</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsGroup3Program,name:'kidsGroup3Program',allPeople:allPeople}" />
+        </div>
+
+	</div>
+</div>

@@ -1,0 +1,50 @@
+{namespace fpdf=CodingMs\FluidFpdf\ViewHelpers}
+
+<fpdf:setFont family="Calibri" size="{fontSizeLegend}" style="B" />
+<f:switch expression="{section}">
+	<f:case value="service">
+		<fpdf:cell width="{columnWidth.1}" height="{lineHeight}" border="1" fill="1" text="Datum" />
+		<fpdf:cell width="{columnWidth.2}" height="{lineHeight}" border="1" fill="1" text="Predigtthema/Text" />
+		<fpdf:cell width="{columnWidth.3}" height="{lineHeight}" border="1" fill="1" text="Prediger/Bemerkungen" />
+		<fpdf:cell width="{columnWidth.4}" height="{lineHeight}" align="C" border="1" fill="1" text="K" />
+		<fpdf:cell width="{columnWidth.5}" height="{lineHeight}" align="C" border="1" fill="1" text="T" />
+		<fpdf:cell width="{columnWidth.6}" height="{lineHeight}" border="1" fill="1" text="Leitung" />
+		<fpdf:cell width="{columnWidth.7}" height="{lineHeight}" border="1" fill="1" text="Musik" />
+		<fpdf:cell width="{columnWidth.8}" height="{lineHeight}" border="1" fill="1" text="Technik" />
+		<fpdf:cell width="{columnWidth.9}" height="{lineHeight}" border="1" fill="1" ln="1" text="Weitere" />
+	</f:case>
+	<f:case value="teens">
+		<fpdf:cell width="{columnWidth.1}" height="{lineHeight}" border="1" fill="1" text="Datum" />
+		<fpdf:cell width="{columnWidth.2}" height="{lineHeight}" border="1" fill="1" text="Thema 1./2. Jahr" />
+		<fpdf:cell width="{columnWidth.3}" height="{lineHeight}" border="1" fill="1" text="Leiter 1./2. Jahr" />
+		<fpdf:cell width="{columnWidth.4}" height="{lineHeight}" border="1" fill="1" text="Thema 3. Jahr" />
+		<fpdf:cell width="{columnWidth.5}" height="{lineHeight}" border="1" fill="1" ln="1" text="Leiter 3. Jahr" />
+	</f:case>
+	<f:case value="kids">
+		<fpdf:cell width="{columnWidth.1}" height="{lineHeight}" border="1" fill="1" text="Datum" />
+		<fpdf:cell width="{columnWidth.2}" height="{lineHeight}" border="1" fill="1" text="Thema" />
+		<fpdf:cell width="{columnWidth.3}" height="{lineHeight}" border="1" fill="1" text="Spielstrasse" />
+		<fpdf:cell width="{columnWidth.4}" height="{lineHeight}" border="1" fill="1" text="Singen" />
+		<fpdf:cell width="{columnWidth.5}" height="{lineHeight}" border="1" fill="1" text="Plenum" />
+		<fpdf:cell width="{columnWidth.6}" height="{lineHeight}" border="1" fill="1" text="Habakuk" />
+		<fpdf:cell width="{columnWidth.7}" height="{lineHeight}" border="1" fill="1" text="Karibu" />
+		<fpdf:cell width="{columnWidth.8}" height="{lineHeight}" border="1" fill="1" text="Zundhölzli" />
+		<fpdf:cell width="{columnWidth.9}" height="{lineHeight}" border="1" fill="1" ln="1" text="Summervögeli" />
+	</f:case>
+	<f:case value="children">
+		<fpdf:cell width="{columnWidth.1}" height="{lineHeight}" border="1" fill="1" text="Datum" />
+		<fpdf:cell width="{columnWidth.2}" height="{lineHeight}" border="1" fill="1" text="Kinderhüeti" />
+		<fpdf:cell width="{columnWidth.3}" height="{lineHeight}" border="1" fill="1" text="Summervögeli" />
+		<fpdf:cell width="{columnWidth.4}" height="{lineHeight}" border="1" fill="1" ln="1" text="Bemerkungen" />
+	</f:case>
+	<f:case value="others">
+		<fpdf:cell width="{columnWidth.1}" height="{lineHeight}" border="1" fill="1" text="Datum" />
+		<fpdf:cell width="{columnWidth.2}" height="{lineHeight}" border="1" fill="1" text="Fahrdienst" />
+		<fpdf:cell width="{columnWidth.3}" height="{lineHeight}" border="1" fill="1" text="Gebet" />
+		<fpdf:cell width="{columnWidth.4}" height="{lineHeight}" border="1" fill="1" text="Chilekafi" />
+		<fpdf:cell width="{columnWidth.5}" height="{lineHeight}" border="1" fill="1" text="Kaffeemaschine" />
+		<fpdf:cell width="{columnWidth.6}" height="{lineHeight}" border="1" fill="1" ln="1" text="Winterdienst" />
+	</f:case>
+
+</f:switch>
+<fpdf:setFont family="Calibri" size="{fontSize}" style="" />

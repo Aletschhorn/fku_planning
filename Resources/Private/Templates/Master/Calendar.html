@@ -1,0 +1,37 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<h2>Persönlicher Einsatz-Kalender</h2>
+<p>Sie können den einen Kalender mit Ihren Gottesdienst-Einsätzen in der FKU in Ihre Kalender-Anwendung einbinden, beispielsweise Microsoft Outlook, iCal auf Mac oder die Kalender-App Ihres Smartphones. Damit sind Sie jederzeit auf dem aktuellsten Stand Ihrer Einsätze für Gottesdienst, Kinderhüeti, Kids Treff, Teens Treff und so weiter.</p> 
+
+<f:if condition="{me.tx_fkupeople_planningcal}">
+	<f:then>
+		<p>Sie haben den Kalender aktiviert. Die Internet-Adresse (URL) zur Einbindung lautet</p>
+		<p class="lead"><a href="https://www.fku.ch/fileadmin/calendar/personal_{me.tx_fkupeople_planningcal}.ics" target="_blank">https://www.fku.ch/fileadmin/calendar/personal_{me.tx_fkupeople_planningcal}.ics</a></p>
+		<f:form class="form-inline" action="updateCalendar">
+			<div class="form-group">
+				<label for="alarm">Erinnerungsfunktion: </label>
+				<f:form.select name="alarm" value="{me.tx_fkupeople_planning_alarm}" options="{0:'Aus',1:'1 Tag vorher',2:'2 Tage vorher',3:'3 Tage vorher',4:'4 Tage vorher',5:'5 Tage vorher',6:'6 Tage vorher',7:'7 Tage vorher',8:'8 Tage vorher',9:'9 Tage vorher',10:'10 Tage vorher',14:'14 Tage vorher'}" class="form-control" additionalAttributes="{onChange:'document.getElementById(\'spinner\').className=\'show\';form.submit()'}" />
+			</div>
+			<div class="form-group">
+				<div class="hidden" id="spinner">&nbsp; <f:image src="EXT:fku_planning/Resources/Public/Icons/spinner.gif" /></div>
+			</div>
+		</f:form>
+		<br  />
+		<f:link.action action="removeCalendar" class="btn btn-danger">Kalender deaktivieren</f:link.action>
+		<br  /><br />
+		<p>Je nach Geräteart, Betriebssystem und Software läuft das Einrichten anders ab. Manchmal reicht es, den Link oben anzuklicken und die Verwendung als Internetkalender zu bestätigen. Bitte beachten Sie, dass es einen Unterschied macht, ob Sie den Kalender nur herunterladen (Snapshot) oder als Internetkalender abonnieren. Nur im zweiten Fall werden Änderungen auf der Homepage auch in Ihrem Kalender-Programm aktualisiert.</p>
+	</f:then>
+	<f:else>
+		<f:link.action action="createCalendar" class="btn btn-default">Kalender aktivieren</f:link.action>
+	</f:else>
+</f:if>
+
+<br /><br />
+<f:link.action action="personal" class="btn btn-primary">Zurück</f:link.action>
+
+</f:section>

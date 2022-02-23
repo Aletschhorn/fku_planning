@@ -1,0 +1,68 @@
+{namespace ff=FKU\FkuPlanning\ViewHelpers}
+{namespace vhs=FluidTYPO3\Vhs\ViewHelpers}
+
+<f:for each="{masters}" as="master">
+	<f:if condition="{master.sermonExist}">
+        <f:if condition="{master.sermonPublic}">
+            <f:then>
+                <tr>
+                    <td><f:format.date format="d.m.Y">{master.date}</f:format.date></td>
+                    <td><f:link.action action="sermonShow" arguments="{master:master,expression:filter.expression,year:filter.year,sorting:filter.sorting}">
+                    	<f:or content="{master.serviceTopic}" alternative="Kein Thema" />
+                    </f:link.action></td>
+                    <td>{master.serviceBible}</td>
+                    <td>
+                        <f:if condition="{master.sermonRelatedFiles}">
+                            <f:for each="{master.sermonRelatedFiles}" as="file">
+                                <a href="{file.originalResource.publicUrl}" target="_blank">
+                                	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/{file.originalResource.originalFile.properties.mime_type->ff:fileIcon()}.svg#glyphicons-basic"/></svg>
+                                </a>
+                            </f:for>
+                        </f:if>
+                    </td>
+                    <td class="text-right">
+                        <f:security.ifHasRole role="{settings.usergroupSermon}">
+                            <f:link.action action="sermonEdit" arguments="{master:master}">
+                                <span title="Predigt editieren">
+                                	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                                </span>
+                            </f:link.action>
+                        </f:security.ifHasRole>
+                    </td>
+                </tr>
+            </f:then>
+            <f:else>
+                <f:security.ifHasRole role="{settings.usergroupSermon}">
+                    <tr class="table-active">
+                        <td><f:format.date format="d.m.Y">{master.date}</f:format.date></td>
+                        <td><f:link.action action="sermonShow" arguments="{master:master,expression:filter.expression,year:filter.year,sorting:filter.sorting}">
+	                    	<f:or content="{master.serviceTopic}" alternative="Kein Thema" />
+                        </f:link.action></td>
+                        <td>{master.serviceBible}</td>
+                        <td>
+                            <f:if condition="{master.sermonRelatedFiles}">
+                                <f:for each="{master.sermonRelatedFiles}" as="file">
+                                    <a href="{file.originalResource.publicUrl}" target="_blank">
+	                                	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/{file.originalResource.originalFile.properties.mime_type->ff:fileIcon()}.svg#glyphicons-basic"/></svg>
+                                    </a>
+                                </f:for>
+                            </f:if>
+                        </td>
+                        <td class="text-right">
+                            <nobr>
+                                <span title="Predigt ist versteckt">
+                                	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-305-no-symbol.svg#glyphicons-basic"/></svg>
+                                </span>
+                                <f:link.action action="sermonEdit" arguments="{master:master,back:'list'}">
+                                    <span title="Predigt editieren">
+	                                	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                                    </span>
+                                </f:link.action>
+                            </nobr>
+                        </td>
+                    </tr>
+                </f:security.ifHasRole>
+            </f:else>
+        </f:if>
+	</f:if>
+</f:for>

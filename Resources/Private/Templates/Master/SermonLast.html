@@ -1,0 +1,58 @@
+{namespace ff=FKU\FkuSermon\ViewHelpers}
+
+<f:layout name="Default" />
+<f:section name="main">
+
+<f:if condition="{master.serviceTopic}">
+	<f:then>
+    	<h3>&quot;{master.serviceTopic}&quot;</h3>
+    </f:then>
+    <f:else>
+    	<h3>(Ohne Titel)</h3>
+    </f:else>
+</f:if>
+<p>Predigt vom <f:format.date format="%e. %B">{master.date}</f:format.date><f:if condition="{master.serviceSerial}"> aus der Predigtreihe &quot;{master.serviceSerial.title}&quot;</f:if><f:if condition="{master.servicePreacher}">, gehalten von <f:render partial="Master/PersonlistPlain" arguments="{list:master.servicePreacher}" /></f:if>.</p>
+
+<p>
+    <f:if condition="{master.serviceBible}">
+        Bibeltext: {master.serviceBible}<br />
+    </f:if>
+	<f:if condition="{master.sermonBibletext}">
+		<f:then>
+			<f:if condition="{master.sermonConcept}">
+				<f:then>
+					<f:link.action action="sermonShow" pageUid="{settings.PidSermon}" arguments="{master:master}">Bibeltext und Konzept lesen</f:link.action>
+				</f:then>
+				<f:else>
+					<f:link.action action="sermonShow" pageUid="{settings.PidSermon}" arguments="{master:master}">Bibeltext lesen</f:link.action>
+				</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			<f:if condition="{master.sermonConcept}">
+				<f:link.action action="sermonShow" pageUid="{settings.PidSermon}" arguments="{master:master}">Konzept lesen</f:link.action>
+			</f:if>
+		</f:else>
+	</f:if>
+</p>
+
+<f:if condition="{master.sermonRelatedFiles}">
+	<p class="text-uppercase">
+		<f:for each="{master.sermonRelatedFiles}" as="file">
+			<a href="{file.originalResource.publicUrl}" target="_blank">
+				<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/{file.originalResource.originalFile.properties.mime_type->ff:fileIcon()}.svg#glyphicons-basic"/></svg>
+				{file.originalResource.originalFile.properties.extension}
+			</a>
+			<br />
+		</f:for>
+	</p>
+</f:if>
+
+<div class="my-3">
+	<f:link.page pageUid="{settings.PidSermon}">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+        Ältere Predigten ansehen/anhören
+     </f:link.page>
+</div>
+
+</f:section>

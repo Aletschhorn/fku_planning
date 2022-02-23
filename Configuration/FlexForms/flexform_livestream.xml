@@ -1,0 +1,44 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>Settings</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.livestreamSelection>
+						<TCEforms>
+							<label>Livestream selection</label>
+							<config>
+								<type>check</type>
+								<items type="array">
+									<numIndex index="0">
+										<numIndex index="0">Previous instead of next service</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+								</items>								
+							</config>
+						</TCEforms>
+					</settings.livestreamSelection>
+					<settings.showVisibility>
+						<TCEforms>
+							<label>Master visibility type to be shown</label>
+							<config>
+								<type>select</type>
+								<renderType>selectCheckBox</renderType>
+								<foreign_table>tx_fkuplanning_domain_model_visibility</foreign_table>
+								<size>5</size>
+								<autoSizeMax>20</autoSizeMax>
+								<minitems>1</minitems>
+							</config>
+						</TCEforms>
+					</settings.showVisibility>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

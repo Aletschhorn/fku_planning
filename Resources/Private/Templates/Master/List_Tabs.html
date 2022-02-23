@@ -1,0 +1,440 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<div class="row">
+	<div class="col-md-6 col-sm-12">
+		<f:form action="list" pluginName="Serviceplan" class="form-inline">
+			<div class="form-group">
+				<label for="lowLimit">Datumsbereich von</label>
+				<f:form.select class="form-control" name="lowLimit" options="{daterange.options}" value="{daterange.low}" />
+			</div>
+			<div class="form-group">
+				<label for="highLimit">bis</label>
+				<f:form.select class="form-control" name="highLimit" options="{daterange.options}" value="{daterange.high}" />
+			</div>
+			<f:form.submit value="Zeigen" class="btn btn-primary" />
+		</f:form>
+	</div>
+	<div class="col-md-6 col-sm-12">
+		<div class="text-right">
+			<f:link.action action="new" class="btn btn-default">Gottesdienst hinzufügen</f:link.action>
+		</div>
+	</div>
+</div>
+
+<br />
+
+<f:if condition="{masters}">
+	<f:then>
+		<div role="tabpanel" id="planning">
+			<ul class="nav nav-tabs" role="tablist">
+				<f:for each="{sections}" as="sec" iteration="it" key="label">
+					<li role="presentation" class="{f:if(condition:'{label}=={section}',then:'active')}">
+						<a data-toggle="tab" role="tab" aria-controls="planning-{it.index}" href="home/test/#planning-{it.index}">
+							{sec.name}
+						</a>
+					</li>
+				</f:for>
+			</ul>
+		</div>
+		
+		<div class="tab-content">
+			<f:for each="{sections}" as="sec" iteration="it" key="label">
+				 <div role="tabpanel" class="tab-pane {f:if(condition:'{label}=={section}',then:'active')}" id="planning-{it.index}">
+					<f:render section="{label}" arguments="{_all}" />
+				</div>
+			</f:for>
+		</div>
+
+	</f:then>
+	<f:else>
+		<p class="lead">Keine Einträge in diesem Datumsbereich.</p>
+	</f:else>
+</f:if>
+
+</f:section>
+
+
+<f:section name="service">
+
+<p><f:link.action action="export" arguments="{section:'service',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}"><span class="glyphicon glyphicon-export"></span> Tabelle als PDF exportieren</f:link.action></p>
+
+<table class="table table-bordered" >
+	<thead>
+		<tr>
+			<th width="5%">Datum</th>
+			<th width="15%">Predigtthema / Bibeltext</th>
+			<th width="15%">Prediger / Bemerkungen</th>
+			<th width="2%">K</th>
+			<th width="2%">T</th>
+			<th width="12%">Leitung</th>
+			<th width="22%">Musik</th>
+			<th width="13%">Technik</th>
+			<th width="13%">Weitere</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<f:for each="{masters}" as="master">
+			<tr>
+				<td>
+					<f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'service',settings:settings}" />
+				</td>
+				<f:if condition="{master.serviceActive}">
+					<f:then>
+						<td>
+							<p>{master.serviceTopic}</p>
+							<p><small>{master.serviceBible}</small></p>
+						</td>
+						<td>
+							<f:if condition="{master.servicePreacher}">
+								<p>
+									<f:render partial="Master/Personlist" arguments="{list:master.servicePreacher,me:me}" />
+								</p>
+							</f:if>
+							<p>
+								<small>
+									<f:if condition="{master.serviceSupper}">mit Abendmahl<br /></f:if>
+									<f:if condition="{master.serviceMission}">
+										mit Fürbitte für die weltweite Kirche (<f:render partial="Master/Personlist" arguments="{list:master.serviceMissionary,me:me}" />)
+										<br />
+									</f:if>
+									<f:format.nl2br>{master.serviceNotes}</f:format.nl2br>
+								</small>
+							</p>
+						</td>
+						<td>
+							<f:switch expression="{master.serviceKids}">
+								<f:case value="0"><span title="Kinder nicht im GD" style="cursor:default">&nbsp;</span></f:case>
+								<f:case value="1"><span title="Kinder anfangs im GD" style="cursor:default">O</span></f:case>
+								<f:case value="2"><span title="Kinder ganzzeitig im GD" style="cursor:default">X</span></f:case>
+							</f:switch>
+						</td>
+						<td>
+							<f:switch expression="{master.serviceTeens}">
+								<f:case value="0"><span title="Teens nicht im GD" style="cursor:default">&nbsp;</span></f:case>
+								<f:case value="1"><span title="Teens des 1.+ 2. Jahr im GD" style="cursor:default">2</span></f:case>
+								<f:case value="2"><span title="Teens des 3. Jahr im GD" style="cursor:default">3</span></f:case>
+								<f:case value="3"><span title="Alle Teens im GD" style="cursor:default">X</span></f:case>
+								<f:case value="4"><span title="Teens-Schnuppereinsatz im GD" style="cursor:default">S</span></f:case>
+							</f:switch>
+						</td>
+						<td>
+							<f:render partial="Master/Personlist" arguments="{list:master.serviceModerator,me:me}" />
+						</td>
+						<td>
+							<p>
+								L:
+								<f:if condition="{master.serviceMusicSelect}">
+									<f:then>
+										<f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicSelect,me:me}" />
+									</f:then>
+									<f:else>--</f:else>
+								</f:if>
+							</p>
+							<p>
+								M:
+								<f:if condition="{master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicRehearse,append:' (P)',me:me}" />,</f:if>
+								<f:if condition="{master.serviceMusicBand}">
+									<f:then>
+										<f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicBand,me:me}" />
+									</f:then>
+									<f:else>--</f:else>
+								</f:if>
+							</p>
+							<p>
+								O:
+								<f:if condition="{master.serviceMusicOrgan}">
+									<f:then>
+										<f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicOrgan,me:me}" />
+									</f:then>
+									<f:else>--</f:else>
+								</f:if>
+							</p>
+						</td>
+						<td>
+							<p>
+								B:
+								<f:render partial="Master/Personlist" arguments="{list:master.serviceBeamer,me:me}" />
+							</p>
+							<p>
+								M:
+								<f:render partial="Master/Personlist" arguments="{list:master.serviceConsole,me:me}" />
+							</p>
+						</td>
+						<td>
+							<p>
+								S:
+								<f:render partial="Master/Personlist" arguments="{list:master.serviceSexton,me:me}" />
+							</p>
+							<p>
+								T:
+								<f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
+							</p>
+						</td>
+					</f:then>
+					<f:else>
+						<td colspan="8">Kein Gottesdienst<f:if condition="{master.serviceNotes}">: {master.serviceNotes}</f:if></td>
+					</f:else>
+				</f:if>
+			</tr>
+		</f:for>
+	</tbody>
+</table>
+
+</f:section>
+
+
+<f:section name="kids">
+
+<p><f:link.action action="export" arguments="{section:'kids',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}"><span class="glyphicon glyphicon-export"></span> Tabelle als PDF exportieren</f:link.action></p>
+
+<table class="table table-bordered" >
+	<thead>
+		<tr>
+			<th width="5%">Datum</th>
+			<th width="16%">Thema</th>
+			<th width="9%">Spielstrasse</th>
+			<th width="9%">Singen</th>
+			<th width="17%">Plenum</th>
+			<th width="9%">Habakuk</th>
+			<th width="9%">Karibu</th>
+			<th width="17%">Zundhölzli</th>
+			<th width="9%">Summervögeli</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<f:for each="{masters}" as="master">
+			<tr>
+				<td>
+					<f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'kids',settings:settings}" />
+				</td>
+				<f:if condition="{master.kidsActive}">
+					<f:then>
+						<td>
+							<p>{master.kidsTopic}</p>
+							<p>
+								<small>
+									<f:switch expression="{master.serviceKids}">
+										<f:case value="1">Kinder anfangs im GD<br /></f:case>
+										<f:case value="2">Kinder ganzzeitig im GD<br /></f:case>
+									</f:switch>
+									<f:if condition="{master.kidsNotes}">{master.kidsNotes}<br /></f:if>
+									<f:if condition="{master.serviceSupper}">Abendmahl im GD</f:if>
+								</small>
+							</p>
+						</td>
+						<td>
+							<f:render partial="Master/PersonlistShort" arguments="{list:master.kidsPlaying,me:me}" />
+						</td>
+						<td>
+							<f:render partial="Master/PersonlistShort" arguments="{list:master.kidsSinging,me:me}" />
+						</td>
+						<td>
+							<f:render partial="Master/PersonlistShort" arguments="{list:master.kidsPlenum,me:me}" />
+						</td>
+						<td>
+							<f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup1,me:me}" />
+						</td>
+						<td>
+							<f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup2,me:me}" />
+						</td>
+						<td>
+							<f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup3,me:me}" />
+						</td>
+						<td>
+							<f:render partial="Master/PersonlistShort" arguments="{list:master.kidsYoung,me:me}" />
+						</td>
+					
+					</f:then>
+					
+					<f:else>
+						<td colspan="8">Kein Kids Treff<f:if condition="{master.kidsNotes}">: {master.kidsNotes}</f:if></td>
+					</f:else>
+				</f:if>
+			</tr>
+		</f:for>
+	</tbody>
+</table>
+
+</f:section>
+
+
+<f:section name="children">
+
+<p><f:link.action action="export" arguments="{section:'children',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}"><span class="glyphicon glyphicon-export"></span> Tabelle als PDF exportieren</f:link.action></p>
+
+<table class="table table-bordered" >
+	<thead>
+		<tr>
+			<th width="5%">Datum</th>
+			<th width="95%">Personen</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<f:for each="{masters}" as="master">
+			<tr>
+				<td>
+					<f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'children',settings:settings}" />
+				</td>
+				<f:if condition="{master.childrenActive}">
+					<f:then>
+						<td>
+							<p><f:render partial="Master/Personlist" arguments="{list:master.childrenPeople,me:me}" /></p>
+							<f:if condition="{master.serviceSupper}">
+								<p><small>Abendmahl im GD</small></p>
+							</f:if>
+						</td>
+					</f:then>
+					<f:else>
+						<td>Keine Kinderhüeti</td>
+					</f:else>
+				</f:if>
+			</tr>
+		</f:for>
+	</tbody>
+</table>
+
+</f:section>
+
+<f:section name="teens">
+
+<table class="table table-bordered" >
+	<thead>
+		<tr>
+			<th width="5%">Datum</th>
+			<th width="25%">Thema 1./2. Jahr</th>
+			<th width="20%">Leiter 1./2. Jahr</th>
+			<th width="25%">Thema 3. Jahr</th>
+			<th width="25%">Leiter 3. Jahr</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<f:for each="{masters}" as="master">
+			<tr>
+				<td>
+					<f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'teens',settings:settings}" />
+				</td>
+				<f:if condition="{master.teensActive}">
+					<f:then>
+						<td>
+							<p>{master.teensTopic1}</p>
+							<p>
+								<small>
+									<f:switch expression="{master.serviceTeens}">
+										<f:case value="1">Teens des 1.+ 2. Jahr im GD</f:case>
+										<f:case value="3">Alle Teens im GD</f:case>
+									</f:switch>
+									{master.teensNotes1}
+								</small>
+							</p>
+						</td>
+						<td>
+							<f:render partial="Master/Personlist" arguments="{list:master.teensPeople1,me:me}" />
+						</td>
+						<td>
+							<p>{master.teensTopic2}</p>
+							<p>
+								<small>
+									<f:switch expression="{master.serviceTeens}">
+										<f:case value="2">Teens des 3. Jahr im GD</f:case>
+										<f:case value="3">Alle Teens im GD</f:case>
+										<f:case value="4">Teens-Schnuppereinsatz im GD</f:case>
+									</f:switch>
+									{master.teensNotes2}
+								</small>
+							</p>
+						</td>
+						<td>
+							<f:render partial="Master/Personlist" arguments="{list:master.teensPeople2,me:me}" />
+						</td>
+					</f:then>
+					<f:else>
+						<td colspan="4">Kein Teens Treff<f:if condition="{master.teensNotes1}">: {master.teensNotes1}</f:if></td>
+					</f:else>
+				</f:if>
+			</tr>
+		</f:for>
+	</tbody>
+</table>
+
+</f:section>
+
+<f:section name="others">
+
+<p><f:link.action action="export" arguments="{section:'others',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}"><span class="glyphicon glyphicon-export"></span> Tabelle als PDF exportieren</f:link.action></p>
+
+<table class="table table-bordered" >
+	<thead>
+		<tr>
+			<th width="5%">Datum</th>
+			<th width="16%">Fahrdienst</th>
+			<th width="16%">Gebet</th>
+			<th width="31%">Chilekafi</th>
+			<th width="16%">Kaffeemaschine</th>
+			<th width="16%">Winterdienst</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<f:for each="{masters}" as="master">
+			<tr>
+				<td>
+					<f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'others',settings:settings}" />
+				</td>
+	
+				<f:if condition="{master.drivingActive}">
+					<f:then>
+						<td>
+							<f:render partial="Master/Personlist" arguments="{list:master.drivingPeople,me:me}" />
+						</td>
+					</f:then>
+					<f:else>
+						<td>Kein Fahrdienst</td>
+					</f:else>
+				</f:if>
+	
+				<f:if condition="{master.prayerActive}">
+					<f:then>
+						<td>
+							<f:render partial="Master/Personlist" arguments="{list:master.prayerPeople,me:me}" />
+						</td>
+					</f:then>
+					<f:else>
+						<td>Kein Gebet</td>
+					</f:else>
+				</f:if>
+	
+				<f:if condition="{master.coffeeActive}">
+					<f:then>
+						<td>
+							<p><f:render partial="Master/Personlist" arguments="{list:master.coffeePeople,me:me}" /></p>
+							<p><small>{master.coffeeNotes}</small></p>
+						</td>
+						<td>
+							<f:render partial="Master/Personlist" arguments="{list:master.coffeeSpecial,me:me}" />
+						</td>
+					</f:then>
+					<f:else>
+						<td colspan="2">
+							Kein Chilekafi<f:if condition="{master.coffeeNotes}">: {master.coffeeNotes}</f:if>
+						</td>
+					</f:else>
+				</f:if>
+				
+				<td>
+					<f:render partial="Master/Personlist" arguments="{list:master.serviceWinter,me:me}" />
+				</td>
+			</tr>
+		</f:for>
+	</tbody>
+</table>
+
+</f:section>

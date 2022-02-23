@@ -1,0 +1,76 @@
+<div class="d-none d-lg-block">
+	<nav>
+        <ul class="pagination mt-3">
+            <f:for each="{sections}" as="sec" iteration="it" key="label">
+                <f:if condition="{sec.role}">
+                    <f:then>
+                        <f:security.ifHasRole role="{settings.{sec.role}}">
+                            <f:render section="navItem" arguments="{_all}" />
+                        </f:security.ifHasRole>
+                    </f:then>
+                    <f:else>
+                        <f:render section="navItem" arguments="{_all}" />
+                    </f:else>
+                </f:if>
+            </f:for>
+            <f:if condition="{section}=='personal'">
+                <f:then>
+                    <li class="page-item active">
+                    	<a href="#" class="page-link">
+                             <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-4-user.svg#glyphicons-basic"/></svg>
+                            Meine Einsätze
+                            <span class="sr-only">(ausgewählt)</span>
+                        </a>
+                    </li>
+                </f:then>
+                <f:else>
+                    <li class="page-item">
+                        <f:link.action action="personal" class="page-link">
+                             <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-4-user.svg#glyphicons-basic"/></svg>
+                            Meine Einsätze
+                        </f:link.action>
+                    </li>
+                </f:else>
+            </f:if>
+        </ul>
+    </nav>
+</div>
+
+<div class="d-block d-lg-none">
+    <ul class="nav nav-pills mb-3">
+        <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-498-more-vertical.svg#glyphicons-basic"/></svg>
+                Bereich
+            </a>
+            <div class="dropdown-menu">
+                <f:for each="{sections}" as="sec" iteration="it" key="label">
+                    <f:link.action action="list" pluginName="Serviceplan" arguments="{section:sec.key}" class="dropdown-item {f:if(condition:'{label}=={section}',then:'active')}">{sec.name}</f:link.action>
+                </f:for>
+                <f:link.action action="personal" class="dropdown-item {f:if(condition:'{section}==\'personal\'',then:'active')}">
+                    <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-4-user.svg#glyphicons-basic"/></svg>
+                    Meine Einsätze
+                </f:link.action>
+            </div>
+        </li>
+        <f:if condition="{masters}">
+            <li class="nav-item">
+                <f:link.action action="export" target="_blank" arguments="{section:section,lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}" class="nav-link">
+                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-200-save-as.svg#glyphicons-basic"/></svg>
+                    Herunterladen
+                </f:link.action>
+            </li>
+        </f:if>
+    </ul>
+</div>
+
+<f:section name="navItem">
+    <f:if condition="{label}=={section}">
+        <f:then>
+            <li class="page-item active"><a class="page-link" href="#">{sec.name}<span class="sr-only">(ausgewählt)</span></a></li>
+        </f:then>
+        <f:else>
+            <li class="page-item"><f:link.action action="list" pluginName="Serviceplan" arguments="{section:sec.key}" class="page-link">{sec.name}</f:link.action></li>
+        </f:else>
+    </f:if>
+</f:section>

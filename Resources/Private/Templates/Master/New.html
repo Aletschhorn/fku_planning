@@ -1,0 +1,21 @@
+
+<f:layout name="Default" />
+
+<f:section name="main">
+<h2>Neuen Gottesdienst hinzufügen</h2>
+<br />
+
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<f:render partial="FormErrors" arguments="{object:Master}" />
+
+<f:form action="create"  name="master" object="{master}" class="form-horizontal">
+	<f:render partial="Master/FormFields/General" arguments="{master:master,visibilities:visibilities}" />
+	<br />
+	<f:link.action action="list" pluginName="Serviceplan" class="btn btn-outline-dark">Abbrechen</f:link.action>&nbsp;
+	<f:form.submit value="Speichern" class="btn btn-primary" />
+</f:form>
+
+</f:section>

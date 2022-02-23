@@ -1,0 +1,1031 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<div class="row">
+	<div class="col-md-8">
+		<h2>Detail-Ansicht {master.date->f:format.date(format:'%e. %B %Y')}</h2>
+		<p class="lead">
+			Beginn Gottesdienst: {master.date->f:format.date(format:'G.i')} Uhr
+			<f:security.ifHasRole role="{settings.usergroupGeneral}">
+            	&nbsp; 
+            	<f:link.action action="edit" arguments="{master:master,section:'general',back:'show'}" additionalAttributes="{title:'Generelle Angaben ändern'}">
+                	<svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                </f:link.action>
+            </f:security.ifHasRole>
+			<br />
+			<f:if condition="{master.notes}">{master.notes}<br /></f:if>
+			<f:if condition="{master.holidays}">Schulferien</f:if>
+		</p>
+	</div>
+	<div class="d-none d-md-block col-md-4">
+		<f:if condition="{master.event}">
+			<p class="small" style="color:#666666;">
+				Agenda-Eintrag vom {master.event.EventStart->f:format.date(format:'d.m.y G.i')} Uhr: 
+                <f:security.ifHasRole role="{settings.usergroupAgenda}">
+                	&nbsp;
+                	<f:link.action action="edit" arguments="{event:master.event}" controller="Event" extensionName="fkuagenda" pluginName="view" pageUid="{settings.PidAgendaEdit}" additionalAttributes="{title:'Agenda-Eintrag ändern'}">
+                    <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                	</f:link.action>
+                </f:security.ifHasRole><br />
+				{master.event.description->f:format.nl2br()}
+			</p>
+			
+			<f:security.ifHasRole role="Developper">
+				<p class="small" style="color:#666666;">
+					<b>Automatisch generierter Agenda-Eintrag:</b><br />
+					<f:format.nl2br><f:render partial="Master/Agenda" arguments="{master:master}" /></f:format.nl2br>
+				</p>
+			</f:security.ifHasRole>
+		</f:if>
+	</div>
+</div>
+
+<div class="row mb-4">
+	<div class="col">
+        <f:if condition="{previousMaster}">
+            <f:then>
+                <f:link.action action="show" pluginName="Serviceplan" arguments="{master:previousMaster}" class="btn btn-outline-primary">
+                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-223-chevron-left.svg#glyphicons-basic"/></svg>
+                    Früher<span class="d-none d-sm-inline">: <f:format.htmlentities encoding="ISO-8859-1">{previousMaster.date->f:format.date(format:'%e. %B')}</f:format.htmlentities></span>
+                </f:link.action>
+            </f:then>
+            <f:else>
+            	<button type="button" class="btn btn-outline-primary" disabled>
+                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-223-chevron-left.svg#glyphicons-basic"/></svg>
+                    Früher
+                </button>
+            </f:else>
+        </f:if>
+    </div>
+    <div class="col text-center">
+        <f:link.action action="list" pluginName="Serviceplan" class="btn btn-outline-primary">
+            <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-115-list.svg#glyphicons-basic"/></svg>
+          	<span class="d-none d-sm-inline">Gesamte </span>Tabelle
+        </f:link.action>
+    </div>
+    <div class="col text-right">
+        <f:if condition="{nextMaster}">
+            <f:then>
+                <f:link.action action="show" pluginName="Serviceplan" arguments="{master:nextMaster}" class="btn btn-outline-primary">
+                	Später<span class="d-none d-sm-inline">: {nextMaster.date->f:format.date(format:'%e. %B')}</span>
+                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                </f:link.action>
+            </f:then>
+            <f:else>
+            	<button type="button" class="btn btn-outline-primary" disabled>
+                    Später
+                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                </button>
+            </f:else>
+        </f:if>
+    </div>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+
+		<div class="card">
+			<div class="card-header">
+            	<b>Gottesdienst</b>
+                <f:security.ifHasRole role="{settings.usergroupService}">
+                	<span class="float-right">
+                    	<f:link.action action="edit" arguments="{master:master,section:'service',back:'show'}" additionalAttributes="{title:'Gottesdienst-Angaben ändern'}">
+                        	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                        </f:link.action>
+                    </span>
+                </f:security.ifHasRole>
+            </div>
+            <div class="card-body">
+                <f:if condition="{master.serviceActive}==0">
+                    <f:then>
+                        Kein Gottesdienst<f:if condition="{master.serviceNotes}"><br />{master.serviceNotes}</f:if>
+                    </f:then>
+                    <f:else>
+                
+                        <dl>
+                            <dt>Predigtthema / Bibelstelle</dt>
+                            <dd>
+                                <f:if condition="{master.serviceTopic} || {master.serviceBible} || {master.serviceSerial}">
+                                    <f:then>
+                                        <f:if condition="{master.serviceTopic}">
+                                            {master.serviceTopic}<br />
+                                        </f:if>
+                                        <f:if condition="{master.serviceBible}">
+                                            {master.serviceBible}<br />
+                                        </f:if>
+                                        <f:if condition="{master.serviceSerial}">
+                                            Predigtreihe: {master.serviceSerial.title}
+                                        </f:if>
+                                    </f:then>
+                                    <f:else>
+                                        (keine)
+                                    </f:else>
+                                </f:if>
+                            </dd>
+                            <br />
+                            
+                            <dt>Prediger</dt>
+                            <dd>
+                                <f:if condition="{master.servicePreacher}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.servicePreacher,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        (offen)
+                                    </f:else>
+                                </f:if>
+                            </dd>
+                            <br />
+                            
+                            <dt>Bemerkungen</dt>
+                            <dd>
+                                <f:if condition="{master.serviceSupper}">
+                                    mit Abendmahl
+                                    <f:if condition="{master.serviceSupperPeople}">
+                                        (<f:render partial="Master/Personlist" arguments="{list:master.serviceSupperPeople,me:me}" />)
+                                    </f:if>
+                                    <br />
+                                </f:if>
+                                <f:if condition="{master.serviceMission}">
+                                    mit Fürbitte für die weltweite Kirche
+                                    <f:if condition="{master.serviceMissionary}">
+                                        (<f:render partial="Master/Personlist" arguments="{list:master.serviceMissionary,me:me}" />)
+                                    </f:if>
+                                    <br />
+                                </f:if>
+                                <f:if condition="{master.serviceNotes}">
+                                    <f:then>
+                                        <f:format.nl2br>{master.serviceNotes}</f:format.nl2br>
+                                    </f:then>
+                                    <f:else>
+                                        <f:if condition="{master.serviceSupper}==0">
+                                            <f:if condition="{master.serviceMission}==0">
+                                                --
+                                            </f:if>
+                                        </f:if>
+                                    </f:else>
+                                </f:if>
+                            </dd>
+                            <br />
+    
+                            <f:if condition="{master.serviceCollection}>0">
+                                <dt>Kollekte</dt>
+                                <dd>
+                                    <f:switch expression="{master.serviceCollection}">
+                                        <f:case value="1">Zur Hälfte für Missionswerk</f:case>
+                                        <f:case value="2">Ganz für Missionswerk</f:case>
+                                        <f:defaultCase>Normal</f:defaultCase>
+                                    </f:switch>
+                                </dd>
+                                <br />
+                            </f:if>
+                            
+                            <dt>Kinder / Teens</dt>
+                            <dd>
+                                <f:switch expression="{master.kidsProgram}">
+                                    <f:case value="2">Kinder anfangs im GD</f:case>
+                                    <f:case value="3">Kinder ganzzeitig im GD</f:case>
+                                    <f:defaultCase>Kinder nicht im GD</f:defaultCase>
+                                </f:switch>
+                                <br />
+    
+                                <f:if condition="{master.teensProgram1}==2">
+                                    <f:then>
+                                        <f:switch expression="{master.teensProgram2}">
+                                            <f:case value="2">Alle Teens im GD</f:case>
+                                            <f:case value="3">Alle Teens im GD, Schnuppereinsatz</f:case>
+                                            <f:defaultCase>Teens des 1.+ 2. Jahr im GD</f:defaultCase>
+                                        </f:switch>
+                                    </f:then>
+                                    <f:else>
+                                        <f:switch expression="{master.teensProgram2}">
+                                            <f:case value="2">Teens des 3. Jahr im GD</f:case>
+                                            <f:case value="3">Teens-Schnuppereinsatz im GD</f:case>
+                                            <f:defaultCase>Teens nicht im GD</f:defaultCase>
+                                        </f:switch>
+                                    </f:else>
+                                </f:if>
+                            </dd>
+                            <br />
+                            
+                            <dt>Leitung</dt>
+                            <dd>
+                                <f:if condition="{master.serviceModerator}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceModerator,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        (offen)
+                                    </f:else>
+                                </f:if>
+                            </dd>
+                            <br />
+                        
+                            <dt>Musik</dt>
+                            <dd>
+                                Liederauswahl:
+                                <f:if condition="{master.serviceMusicSelect}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceMusicSelect,me:me}" />
+                                        <f:if condition="{master.serviceMusicSelectAll}">(alle Lieder)</f:if>
+                                    </f:then>
+                                    <f:else>--</f:else>
+                                </f:if>
+                                <br />
+                                Musiker:
+                                <f:if condition="{master.serviceMusicRehearse}"><f:render partial="Master/Personlist" arguments="{list:master.serviceMusicRehearse,append:' (organisiert Probe)',me:me}" />,</f:if>
+                                <f:if condition="{master.serviceMusicBand}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceMusicBand,me:me}" />
+                                    </f:then>
+                                    <f:else>--</f:else>
+                                </f:if>
+                                <br />
+                                Orgel:
+                                <f:if condition="{master.serviceMusicOrgan}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceMusicOrgan,me:me}" />
+                                    </f:then>
+                                    <f:else>--</f:else>
+                                </f:if>
+                                <f:if condition="{reporting}">
+                                    <br /><f:render partial="Master/LinkSelectedSongs" arguments="{master:master,settings:settings}" />
+                                </f:if>
+                            </dd>
+                            <br />
+                        
+                            <dt>Technik</dt>
+                            <dd>
+                                Beamer:
+                                <f:if condition="{master.serviceBeamer}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceBeamer,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        (offen)
+                                    </f:else>
+                                </f:if>
+                                <br />
+                                Mischpult:
+                                <f:if condition="{master.serviceConsole}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceConsole,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        (offen)
+                                    </f:else>
+                                </f:if>
+                                <br />
+                                Kamera:
+                                <f:if condition="{master.serviceCamera}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceCamera,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        (offen)
+                                    </f:else>
+                                </f:if>
+                                <br />
+                                Livestream-Schnitt:
+                                <f:if condition="{master.serviceFilmeditor}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        (offen)
+                                    </f:else>
+                                </f:if>
+                                <br />
+                                Livestream-Link:
+                                <f:if condition="{master.serviceLivestreamlink}">
+                                    <f:then>
+                                        <f:link.external uri="https://youtu.be/{master.serviceLivestreamlink}" target="_blank">https://youtu.be/{master.serviceLivestreamlink}</f:link.external>
+                                    </f:then>
+                                    <f:else>
+                                        --
+                                    </f:else>
+                                </f:if>
+                            </dd>
+                            <br />
+                        
+                            <dt>Weitere</dt>
+                            <dd>
+                                Sigrist:
+                                <f:if condition="{master.serviceSexton}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceSexton,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        (offen)
+                                    </f:else>
+                                </f:if>
+                                <br />
+                                Türbegrüssung:
+                                <f:if condition="{master.serviceWelcome}">
+                                    <f:then>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        (offen)
+                                    </f:else>
+                                </f:if>
+                                <br />
+                            </dd>
+                        </dl>
+                        
+                        <f:if condition="{master.serviceMusicBand}">
+                            <f:if condition="{mailingMusic.excluded}">
+                                <f:then>
+                                    <f:link.email email="{mailingMusic.included}" class="btn btn-outline-primary" additionalAttributes="{onclick: 
+                        'return alert(\'Achtung!\nVon folgenden Personen ist keine Mailadresse bekannt: {mailingMusic.excluded}\')'}"><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-11-envelope.svg#glyphicons-basic"/></svg><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-18-music.svg#glyphicons-basic"/></svg> E-Mail ans Musikteam</f:link.email>
+                                </f:then>
+                                <f:else>
+                                    <f:link.email email="{mailingMusic.included}" class="btn btn-outline-primary"><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-11-envelope.svg#glyphicons-basic"/></svg><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-18-music.svg#glyphicons-basic"/></svg> E-Mail ans Musikteam</f:link.email>
+                                </f:else>
+                            </f:if>
+                            <br /><br />
+                        </f:if>
+                        <f:if condition="{mailingAll.excluded}">
+                            <f:then>
+                                <f:link.email email="{mailingAll.included}" class="btn btn-outline-primary" additionalAttributes="{onclick: 
+                    'return alert(\'Achtung!\nVon folgenden Personen ist keine Mailadresse bekannt: {mailingAll.excluded}\')'}"><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-11-envelope.svg#glyphicons-basic"/></svg> E-Mail an alle GD-Mitwirkenden</f:link.email>
+                            </f:then>
+                            <f:else>
+                                <f:link.email email="{mailingAll.included}" class="btn btn-outline-primary"><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-11-envelope.svg#glyphicons-basic"/></svg> E-Mail an alle GD-Mitwirkenden</f:link.email>
+                            </f:else>
+                        </f:if>
+        
+                    </f:else>
+                </f:if>
+            </div>
+	    </div>
+	    <br />
+
+	</div>
+	<div class="col-md-4">
+		
+		<div class="card">
+			<div class="card-header">
+            	<b>Kids Treff</b>
+                <f:security.ifHasRole role="{settings.usergroupKids}">
+                	<span class="float-right">
+                    	<f:link.action action="edit" arguments="{master:master,section:'kids',back:'show'}" additionalAttributes="{title:'Kids-Treff-Angaben ändern'}">
+                        	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                        </f:link.action>
+                    </span>
+                </f:security.ifHasRole>
+            </div>
+			<div class="card-body">
+			
+				<f:switch expression="{master.kidsProgram}">
+					<f:case value="0">
+						Kein Kids Treff
+						<f:if condition="{master.kidsNotes}">
+							<br />{master.kidsNotes->f:format.nl2br()}
+						</f:if>
+					</f:case>
+					<f:case value="1">
+						<dl>
+							<dt>Thema</dt>
+							<dd>
+								<f:if condition="{master.kidsTopic}">
+									<f:then>
+										{master.kidsTopic}
+									</f:then>
+									<f:else>
+										(offen)
+									</f:else>
+								</f:if>
+								<f:if condition="{master.kidsTopicLink}">
+									<br />
+									<f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" />
+								</f:if>
+							</dd>
+							<br />
+							
+							<f:if condition="{master.kidsNotes}">
+								<dt>Bemerkungen</dt>
+								<dd>{master.kidsNotes->f:format.nl2br()}</dd>
+								<br />
+							</f:if>
+							
+							<dt>Spielstrasse</dt>
+							<dd>
+								<f:if condition="{master.kidsPlaying}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsPlaying,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+							<br />
+						
+							<dt>Singen</dt>
+							<dd>
+								<f:if condition="{master.kidsSinging}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsSinging,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+							<br />
+						
+							<dt>Plenum</dt>
+							<dd>
+								<f:if condition="{master.kidsPlenum}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsPlenum,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+							<br />
+						
+							<dt>Kleingruppen</dt>
+							<dd>
+								Habakuk: 
+								<f:if condition="{master.kidsGroup1}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsGroup1,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+								<br />
+								Karibu: 
+								<f:if condition="{master.kidsGroup2}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsGroup2,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+								<br />
+								Zundhölzli: 
+								<f:if condition="{master.kidsGroup3}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsGroup3,me:me}" />
+										<f:if condition="{master.kidsGroup3Program}">
+											(Programm: <f:render partial="Master/Personlist" arguments="{list:master.kidsGroup3Program,me:me}" />)
+										</f:if>
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+						</dl>
+					</f:case>
+					<f:case value="2">
+						<dl>
+							<dt>Thema</dt>
+							<dd>
+								<f:if condition="{master.kidsTopic}">
+									<f:then>
+										{master.kidsTopic}
+									</f:then>
+									<f:else>
+										(offen)
+									</f:else>
+								</f:if>
+								<f:if condition="{master.kidsTopicLink}">
+									<br />
+									<f:link.action pageUid="{settings.PidKidsDownloads}" extensionName="fkufile" pluginName="file" controller="File" action="listFolder" arguments="{folder:'{master.kidsTopicLink}'}"><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-960-files-queue.svg#glyphicons-basic"/></svg> Dokumente zum Thema</f:link.action>
+								</f:if>
+							</dd>
+							<br />
+							
+							<dt>Bemerkungen</dt>
+							<dd>
+								Kinder anfangs im GD
+								<f:if condition="{master.kidsNotes}">
+									<br />{master.kidsNotes->f:format.nl2br()}
+								</f:if>
+							</dd>
+							<br />
+							
+							<dt>Plenum</dt>
+							<dd>
+								<f:if condition="{master.kidsPlenum}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsPlenum,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+							<br />
+						
+							<dt>Kleingruppen</dt>
+							<dd>
+								Habakuk: 
+								<f:if condition="{master.kidsGroup1}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsGroup1,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+								<br />
+								Karibu: 
+								<f:if condition="{master.kidsGroup2}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsGroup2,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+								<br />
+								Zundhölzli: 
+								<f:if condition="{master.kidsGroup3}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsGroup3,me:me}" />
+										<f:if condition="{master.kidsGroup3Program}">
+											(Programm: <f:render partial="Master/Personlist" arguments="{list:master.kidsGroup3Program,me:me}" />)
+										</f:if>
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+						</dl>
+					</f:case>
+					<f:case value="3">
+						<dl>
+							<dt>Information</dt>
+							<dd>
+								Kinder ganzzeitig im GD
+								<f:if condition="{master.kidsNotes}">
+									<br />{master.kidsNotes->f:format.nl2br()}
+								</f:if>
+							</dd>
+							<br />
+							
+							<dt>Leiter</dt>
+							<dd>
+								<f:if condition="{master.kidsPlenum}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsPlenum,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+						</dl>
+					</f:case>
+					<f:case value="4">
+						<dl>
+							<dt>Thema</dt>
+							<dd>Ferienprogramm</dd>
+							<br />
+							
+							<f:if condition="{master.kidsNotes}">
+								<dt>Bemerkungen</dt>
+								<dd>{master.kidsNotes->f:format.nl2br()}</dd>
+								<br />
+							</f:if>
+							
+							<dt>Spielstrasse</dt>
+							<dd>
+								<f:if condition="{master.kidsPlaying}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsPlaying,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+						</dl>
+					</f:case>
+					<f:case value="5">
+						<dl>
+							<dt>Thema</dt>
+							<dd>Theaterprobe</dd>
+							<br />
+							
+							<f:if condition="{master.kidsNotes}">
+								<dt>Bemerkungen</dt>
+								<dd>{master.kidsNotes->f:format.nl2br()}</dd>
+								<br />
+							</f:if>
+							
+							<dt>Leiter</dt>
+							<dd>
+								<f:if condition="{master.kidsPlenum}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.kidsPlenum,me:me}" />
+									</f:then>
+									<f:else>
+										--
+									</f:else>
+								</f:if>
+							</dd>
+						</dl>
+					</f:case>
+					<f:case value="6">
+						<dl>
+							<dt>Ausflug</dt>
+							<dd>{master.kidsNotes->f:format.nl2br()}</dd>
+                            <br />
+							
+							<dt>Leiter</dt>
+							<dd>
+								<f:if condition="{master.kidsPlenum}">
+									<f:render partial="Master/Personlist" arguments="{list:master.kidsPlenum,me:me}" /><br />
+								</f:if>
+								<f:if condition="{master.kidsGroup1}">
+									Habakuk: <f:render partial="Master/Personlist" arguments="{list:master.kidsGroup1,me:me}" /><br />
+								</f:if>
+								<f:if condition="{master.kidsGroup2}">
+									Karibu: <f:render partial="Master/Personlist" arguments="{list:master.kidsGroup2,me:me}" /><br />
+								</f:if>
+								<f:if condition="{master.kidsGroup3}">
+									Zundhölzli: <f:render partial="Master/Personlist" arguments="{list:master.kidsGroup3,me:me}" /><br />
+								</f:if>
+                                <f:if condition="{master.kidsPlenum} || {master.kidsGroup1} || {master.kidsGroup2} || {master.kidsGroup3}">
+                                	<f:else>--</f:else>
+                                </f:if>
+							</dd>
+					</f:case>
+				</f:switch>
+	
+			</div>
+		</div>
+		
+		<br />
+
+		<div class="card">
+			<div class="card-header">
+            	<b>Kinderhüeti</b>
+                <f:security.ifHasRole role="{settings.usergroupChildren}">
+                	<span class="float-right">
+                    	<f:link.action action="edit" arguments="{master:master,section:'children',back:'show'}" additionalAttributes="{title:'Kinderhüeti-Angaben ändern'}">
+                    		<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                    	</f:link.action>
+                	</span>
+                </f:security.ifHasRole>
+            </div>
+			<div class="card-body">		
+				<f:if condition="{master.childrenActive}==0">
+					<f:then>
+						Keine Kinderhüeti
+					</f:then>
+					<f:else>
+						<dl>
+							<dt>Verantwortlich</dt>
+							<dd>
+								<f:if condition="{master.childrenPeople}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.childrenPeople,me:me}" />
+									</f:then>
+									<f:else>
+										(offen)
+									</f:else>
+								</f:if>
+							</dd>
+						</dl>
+					</f:else>
+				</f:if>
+
+				<f:if condition="{master.kidsProgram}>0">
+					<dt>Summervögeli</dt>
+					<dd>
+						<f:if condition="{master.kidsYoung}">
+							<f:then>
+								<f:render partial="Master/Personlist" arguments="{list:master.kidsYoung,me:me}" />
+							</f:then>
+							<f:else>
+								--
+							</f:else>
+						</f:if>
+					</dd>
+				</f:if>
+			
+			</div>
+		</div>
+        <br />
+		
+	</div>
+	<div class="col-md-4">
+		
+		<div class="card">
+			<div class="card-header">
+            	<b>Teens Treff</b>
+                <f:security.ifHasRole role="{settings.usergroupTeens}">
+                	<span class="float-right">
+                    	<f:link.action action="edit" arguments="{master:master,section:'teens',back:'show'}" additionalAttributes="{title:'Teens-Treff-Angaben ändern'}">
+                        	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                        </f:link.action>
+                    </span>
+                </f:security.ifHasRole>
+            </div>
+			<div class="card-body">
+			
+				<f:if condition="{master.teensProgram1}==0">
+					<f:then>
+						<dl>
+							<dt>1./2. Jahr</dt>
+							<dd>
+								Kein Teens Treff
+								<f:if condition="{master.teensNotes1}">
+									<br />{master.teensNotes1->f:format.nl2br()}
+								</f:if>
+							</dd>
+						</dl>
+					</f:then>
+					<f:else>
+						<f:switch expression="{master.teensProgram1}">
+							<f:case value="1">
+								<dl>
+									<dt>Thema 1./2. Jahr</dt>
+									<dd>
+										<f:if condition="{master.teensTopic1}">
+											<f:then>
+												{master.teensTopic1}
+											</f:then>
+											<f:else>
+												(offen)
+											</f:else>
+										</f:if>
+									</dd>
+									<br />
+									
+									<f:if condition="{master.teensNotes1}">
+										<dt>Bemerkungen 1./2. Jahr</dt>
+										<dd>{master.teensNotes1->f:format.nl2br()}</dd>
+										<br />
+									</f:if>
+									
+									<dt>Leiter 1./2. Jahr</dt>
+									<dd>
+										<f:if condition="{master.teensPeople1}">
+											<f:then>
+												<f:render partial="Master/Personlist" arguments="{list:master.teensPeople1,me:me}" />
+											</f:then>
+											<f:else>
+												(offen)
+											</f:else>
+										</f:if>
+									</dd>
+								</dl>
+							</f:case>
+
+							<f:case value="2">
+								<dl>
+									<dt>1./2. Jahr</dt>
+									<dd>
+										Gottesdienstbesuch
+										<f:if condition="{master.teensNotes1}">
+											<br />{master.teensNotes1->f:format.nl2br()}
+										</f:if>
+									</dd>
+								</dl>							
+							</f:case>
+						</f:switch>					
+					</f:else>
+				</f:if>
+
+				<f:if condition="{master.teensProgram2}==0">
+					<f:then>
+						<dl>
+							<dt>3. Jahr</dt>
+							<dd>
+								Kein Teens Treff
+								<f:if condition="{master.teensNotes2}">
+									<br />{master.teensNotes2->f:format.nl2br()}
+								</f:if>
+							</dd>
+						</dl>
+					</f:then>
+					<f:else>
+						<f:switch expression="{master.teensProgram2}">
+							<f:case value="1">
+								<dl>
+									<dt>Thema 3. Jahr</dt>
+									<dd>
+										<f:if condition="{master.teensTopic2}">
+											<f:then>
+												{master.teensTopic2->f:format.nl2br()}
+											</f:then>
+											<f:else>
+												(offen)
+											</f:else>
+										</f:if>
+									</dd>
+									<br />
+									
+									<f:if condition="{master.teensNotes2}">
+										<dt>Bemerkungen 3. Jahr</dt>
+										<dd>{master.teensNotes2->f:format.nl2br()}</dd>
+										<br />
+									</f:if>
+									
+									<dt>Leiter 3. Jahr</dt>
+									<dd>
+										<f:if condition="{master.teensPeople2}">
+											<f:then>
+												<f:render partial="Master/Personlist" arguments="{list:master.teensPeople2,me:me}" />
+											</f:then>
+											<f:else>
+												(offen)
+											</f:else>
+										</f:if>
+									</dd>
+								</dl>
+							</f:case>
+
+							<f:case value="2">
+								<dl>
+									<dt>3. Jahr</dt>
+									<dd>
+										Gottesdienstbesuch
+										<f:if condition="{master.teensNotes2}">
+											<br />{master.teensNotes2->f:format.nl2br()}
+										</f:if>
+									</dd>
+								</dl>							
+							</f:case>
+
+							<f:case value="3">
+								<dl>
+									<dt>3. Jahr</dt>
+									<dd>
+										Schnuppereinsatz im GD
+										<f:if condition="{master.teensNotes2}">
+											<br />{master.teensNotes2->f:format.nl2br()}
+										</f:if>
+									</dd>
+								</dl>							
+							</f:case>
+						</f:switch>					
+					</f:else>
+				</f:if>
+							
+			</div>
+		</div>
+
+		<br />
+
+		<div class="card">
+			<div class="card-header">
+            	<b>Vorher, nachher</b>
+                <f:security.ifHasRole role="{settings.usergroupOthers}">
+                	<span class="pull-right">
+                    	<f:link.action action="edit" arguments="{master:master,section:'others',back:'show'}" additionalAttributes="{title:'Vorher/Nachher-Angaben ändern'}">
+                        	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                        </f:link.action>
+                    </span>
+                </f:security.ifHasRole>
+            </div>
+			<div class="card-body">
+	
+				<dl>
+					<dt>Fahrdienst</dt>
+					<dd>
+						<f:if condition="{master.drivingActive}==0">
+							<f:then>
+								Kein Fahrdienst
+							</f:then>
+							<f:else>
+								<f:if condition="{master.drivingPeople}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.drivingPeople,me:me}" />
+									</f:then>
+									<f:else>
+										(offen)
+									</f:else>
+								</f:if>
+							</f:else>
+						</f:if>
+					</dd>
+					<br />
+		
+					<dt>Gebet</dt>
+					<dd>
+						<f:if condition="{master.prayerActive}==0">
+							<f:then>
+								Kein Gebets-Angebot
+							</f:then>
+							<f:else>
+								<f:if condition="{master.prayerPeople}">
+									<f:then>
+										<f:render partial="Master/Personlist" arguments="{list:master.prayerPeople,me:me}" />
+									</f:then>
+									<f:else>
+										(offen)
+									</f:else>
+								</f:if>
+							</f:else>
+						</f:if>
+					</dd>
+					<br />
+		
+					<dt>Chilekafi</dt>
+					<dd>
+						<f:if condition="{master.coffeeActive}==0">
+							<f:then>
+								Kein Chilekafi
+								<f:if condition="{master.coffeeNotes}">
+									<br />{master.coffeeNotes}
+								</f:if>
+							</f:then>
+							<f:else>
+								<f:if condition="{master.coffeePeople}">
+									<f:then>
+										Verantwortlich: 
+										<f:render partial="Master/Personlist" arguments="{list:master.coffeePeople,me:me}" />
+									</f:then>
+									<f:else>
+										(offen)
+									</f:else>
+								</f:if>								
+								<f:if condition="{master.coffeeNotes}">
+									<br />{master.coffeeNotes}<br />
+								</f:if>
+								
+							</f:else>
+						</f:if>
+						<f:if condition="{master.coffeeSpecial}">
+							<br />Kaffeemaschine:
+							<f:render partial="Master/Personlist" arguments="{list:master.coffeeSpecial,me:me}" />
+						</f:if>
+					</dd>
+					
+					<f:if condition="{master.serviceWinter}">
+						<br />
+						<dt>Winterdienst</dt>
+						<dd>
+							<f:render partial="Master/Personlist" arguments="{list:master.serviceWinter,me:me}" />
+						</dd>
+					</f:if>
+					
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>
+<br /><br />
+
+<div id="logs_close" class="d-block">
+	<a style="cursor:pointer" onclick="document.getElementById('logs_open').className='d-block';document.getElementById('logs_close').className='d-none'"><h3><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg> Änderungen in diesem Gottesdienst</h3></a>
+</div>
+<div id="logs_open" class="d-none">
+	<a style="cursor:pointer" onclick="document.getElementById('logs_open').className='d-none';document.getElementById('logs_close').className='d-block'"><h3><svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-221-chevron-down.svg#glyphicons-basic"/></svg> Änderungen in diesem Gottesdienst</h3></a>
+	<f:if condition="{logs}">
+		<f:then>
+        	<div class="d-none d-sm-block">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Datum / Zeit</th>
+                        <th>Benutzer</th>
+                        <th>Feld</th>
+                        <th>Alter Inhalt</th>
+                        <th>Neuer Inhalt</th>
+                    </tr>
+                    <f:for each="{logs}" as="log">
+                        <tr>
+                            <td><nobr>{log.moment->f:format.date(format:'d.m.y H:i')}</nobr></td>
+                            <td><nobr>{log.user.name}</nobr></td>
+                            <td><f:translate key="{log.field}" /></td>
+                            <td><f:if condition="{log.old}"><f:then>{log.old}</f:then><f:else>(leer)</f:else></f:if></td>
+                            <td><f:if condition="{log.new}"><f:then>{log.new}</f:then><f:else>(leer)</f:else></f:if></td>
+                        </tr>
+                    </f:for>
+                </table>
+            </div>
+            <div class="d-block d-sm-none">
+                <f:for each="{logs}" as="log">
+                	<hr />
+                    {log.moment->f:format.date(format:'d.m.y H:i')} durch {log.user.name}<br />
+                    Feld: <f:translate key="{log.field}" /><br />
+                    Alter Wert: <f:if condition="{log.old}"><f:then>{log.old}</f:then><f:else>(leer)</f:else></f:if><br />
+                    Neuer Wert: <f:if condition="{log.new}"><f:then>{log.new}</f:then><f:else>(leer)</f:else></f:if><br />
+                </f:for>
+            </div>
+		</f:then>
+		<f:else>
+			<p>Keine Änderungen registriert</p>
+		</f:else>
+	</f:if>
+</div>
+
+</f:section>

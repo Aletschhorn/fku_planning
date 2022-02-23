@@ -1,0 +1,8 @@
+{namespace fpdf=CodingMs\FluidFpdf\ViewHelpers}
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+
+<f:variable name="pageWidth" value="{fpdf:getPageWidth()}" />
+<fpdf:image filename="fileadmin/images/fku_briefkopf.png" width="13.5" x="10" y="10" />
+<fpdf:setFont family="Trebuchet" size="14" style="B" />
+<fpdf:text text="FREIE KIRCHE USTER" x="25" y="16" />
+<fpdf:line x1="25" y1="18" x2="{pageWidth - 12}" y2="18" />

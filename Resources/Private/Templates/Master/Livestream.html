@@ -1,0 +1,31 @@
+<f:layout name="Default" />
+<f:section name="main">
+
+<f:if condition="{settings.livestreamSelection}">
+	<f:then>
+    	<f:comment>*** Previous livestream ***</f:comment>
+        <f:if condition="{master.serviceLivestreamlink}">
+            <f:then>
+                <p>Wenn Sie den Livestream-Gottesdienst verpasst haben, können Sie den letzten Gottesdienst hier nochmals ansehen.</p>
+                <f:render partial="Master/YoutubeEmbedded" arguments="{link:master.serviceLivestreamlink}" />
+            </f:then>
+            <f:else>
+                <p>Zum Gottesdienst vom {master.date->f:format.date(format:'%e. %B')} gibt es keinen Livestream-Link.</p>
+            </f:else>
+        </f:if>
+    </f:then>
+    <f:else>
+    	<f:comment>*** Next livestream ***</f:comment>
+        <f:if condition="{master.serviceLivestreamlink}">
+            <f:then>
+                <p>Direkter Link zum Livestream für den Gottesdienst vom {master.date->f:format.date(format:'%e. %B')}: <f:link.external uri="https://youtu.be/{master.serviceLivestreamlink}" target="_blank">https://youtu.be/{master.serviceLivestreamlink}</f:link.external></p>
+                <f:render partial="Master/YoutubeEmbedded" arguments="{link:master.serviceLivestreamlink}" />
+            </f:then>
+            <f:else>
+                <p>Zum Gottesdienst vom {master.date->f:format.date(format:'%e. %B')} gibt es noch keinen Livestream-Link.</p>
+            </f:else>
+        </f:if>
+	</f:else>
+</f:if>
+
+</f:section>

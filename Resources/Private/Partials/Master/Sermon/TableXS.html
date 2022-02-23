@@ -1,0 +1,63 @@
+{namespace ff=FKU\FkuPlanning\ViewHelpers}
+{namespace vhs=FluidTYPO3\Vhs\ViewHelpers}
+
+<f:for each="{masters}" as="master">
+	<f:if condition="{master.sermonExist}">
+        <f:if condition="{master.sermonPublic}">
+            <f:then>
+            	<p>
+                    <b><f:format.date format="d.m.Y">{master.date}</f:format.date></b><br />
+                    <f:link.action action="sermonShow" arguments="{master:master,expression:filter.expression,year:filter.year,sorting:filter.sorting}"><f:or content="{master.serviceTopic}" alternative="Kein Thema" /></f:link.action><br />
+                    {master.serviceBible}<br />
+    
+                    <f:if condition="{master.sermonRelatedFiles}">
+                        <f:for each="{master.sermonRelatedFiles}" as="file">
+                            <a href="{file.originalResource.publicUrl}" target="_blank">
+                                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/{file.originalResource.originalFile.properties.mime_type->ff:fileIcon()}.svg#glyphicons-basic"/></svg>
+                            </a>
+                        </f:for>
+                    </f:if>
+                    <f:security.ifHasRole role="{settings.usergroupSermon}">
+                        <span class="float-right">
+                            <f:link.action action="sermonEdit" arguments="{master:master}">
+                                <span title="Predigt editieren">
+                                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                                </span>
+                            </f:link.action>
+                        </span>
+                    </f:security.ifHasRole>
+                </p>
+            </f:then>
+            <f:else>
+                <f:security.ifHasRole role="{settings.usergroupSermon}">
+                	<p class="bg-light p-2">
+                        <b><f:format.date format="d.m.Y">{master.date}</f:format.date></b><br />
+                        <f:link.action action="sermonShow" arguments="{master:master,expression:filter.expression,year:filter.year,sorting:filter.sorting}"><f:or content="{master.serviceTopic}" alternative="Kein Thema" /></f:link.action><br />
+                        {master.serviceBible}<br />
+        
+                        <f:if condition="{master.sermonRelatedFiles}">
+                            <f:for each="{master.sermonRelatedFiles}" as="file">
+                                <a href="{file.originalResource.publicUrl}" target="_blank">
+                                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/{file.originalResource.originalFile.properties.mime_type->ff:fileIcon()}.svg#glyphicons-basic"/></svg>
+                                </a>
+                            </f:for>
+                        </f:if>
+                        <f:security.ifHasRole role="{settings.usergroupSermon}">
+                            <span class="float-right">
+                                <span title="Predigt ist versteckt">
+                                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-305-no-symbol.svg#glyphicons-basic"/></svg>
+                                </span>
+                                <f:link.action action="sermonEdit" arguments="{master:master}">
+                                    <span title="Predigt editieren">
+                                        <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                                    </span>
+                                </f:link.action>
+                            </span>
+                        </f:security.ifHasRole>
+                    </p>
+                </f:security.ifHasRole>
+            </f:else>
+        </f:if>
+	</f:if>
+    <hr />
+</f:for>

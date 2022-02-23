@@ -1,0 +1,78 @@
+<div class="d-none d-md-block">
+    <p class="d-none d-lg-block"><f:link.action action="export" target="_blank" arguments="{section:'children',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-200-save-as.svg#glyphicons-basic"/></svg>
+        Tabelle als PDF herunterladen und drucken
+    </f:link.action></p>
+    
+    <table class="table table-bordered" >
+        <thead>
+            <tr>
+                <th width="5%">Datum</th>
+                <th width="40%">Personen</th>
+                <th width="40%">Summervögeli</th>
+                <th width="15%">Bemerkungen</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <f:for each="{masters}" as="master">
+                <tr>
+                    <td>
+                        <f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'children',settings:settings}" />
+                    </td>
+                    <td>
+                        <f:if condition="{master.childrenActive}">
+                            <f:then>
+                                <p><f:render partial="Master/Personlist" arguments="{list:master.childrenPeople,me:me}" /></p>
+                            </f:then>
+                            <f:else>
+                                <span class="text-muted">Keine Kinderhüeti</span>
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{master.kidsYoungActive}">
+                            <f:then>
+                                <f:render partial="Master/Personlist" arguments="{list:master.kidsYoung,me:me}" />
+                            </f:then>
+                            <f:else>
+                                <span class="text-muted">Keine Summervögeli</span>
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{master.serviceSupper}">
+                            <p>Abendmahl im GD</p>
+                        </f:if>
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-block d-md-none">
+	<f:for each="{masters}" as="master">
+        <hr />
+        <f:render partial="Master/DateTimeHolidaysXS" arguments="{master:master,section:'children',settings:settings}" />
+        <f:if condition="{master.childrenActive}">
+            <f:then>
+                <p>Kinderhüeti: <f:render partial="Master/Personlist" arguments="{list:master.childrenPeople,me:me}" /></p>
+            </f:then>
+            <f:else>
+                <p>Keine Kinderhüeti</p>
+            </f:else>
+        </f:if>
+        <f:if condition="{master.kidsYoungActive}">
+            <f:then>
+                <p>Summervögeli: <f:render partial="Master/Personlist" arguments="{list:master.kidsYoung,me:me}" /></p>
+            </f:then>
+            <f:else>
+                <p><small>Keine Summervögeli</small></p>
+            </f:else>
+        </f:if>
+        <f:if condition="{master.serviceSupper}">
+            <p><small>Abendmahl im GD</small></p>
+        </f:if>
+    </f:for>
+</div>

@@ -1,0 +1,8 @@
+{namespace p=FKU\FkuPlanning\ViewHelpers}
+
+<f:if condition="{link}">
+    <f:link.action pageUid="{pid}" extensionName="filelist" pluginName="filelist" controller="File" action="list" pluginName="Serviceplan" arguments="{path:link}" additionalAttributes="{title:'Dokumente zum Thema'}">
+        <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-960-files-queue.svg#glyphicons-basic"/></svg>
+        <f:if condition="linkText">{linkText}</f:if>
+    </f:link.action>
+</f:if>

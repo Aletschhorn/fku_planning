@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  FKU\FkuPlanning\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+
+  FKU\FkuPlanning\Command\IcalCommand:
+    tags:
+      - name: 'console.command'
+        command: 'fku_planning:ical'
+        description: 'Creates individual .ics files of events with duties of the respective people'
+
+  FKU\FkuPlanning\Command\NotificationCommand:
+    tags:
+      - name: 'console.command'
+        command: 'fku_planning:notification'
+        description: 'Creates notification texts for FE users based on reminder settings'

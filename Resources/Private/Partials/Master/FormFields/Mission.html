@@ -1,0 +1,30 @@
+
+<div class="row">
+	<div class="col-sm-6 col-12">
+
+        <div class="row form-group">
+            <label for="serviceMissionary" class="col-sm-3 col-4 col-form-label">Verantwortlich</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceMissionary,name:'serviceMissionary',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceMissionNotes" class="col-sm-3 col-4 col-form-label">Bemerkungen</label>
+            <div class="col-8">
+                <f:form.textarea property="serviceMissionNotes" rows="2" class="form-control" />
+            </div>
+        </div>
+
+	</div>
+	<div class="col-sm-6 col-12">
+
+		Inhalt
+        <f:for each="{0:1, 1:2, 2:3}" as="item" iteration="it">
+            <div class="row form-group">
+                <label for="missionContent" class="col-1 col-form-label">{item}.</label>
+                <div class="col-7">
+                    <f:form.select value="{master.serviceMissionContent.{it.index}.uid}" name="missionContent[{it.index}]" options="{missionaryOptions}" optionLabelField="title" prependOptionLabel="(leer)" prependOptionValue="0" class="form-control" />
+                </div>
+            </div>
+        </f:for>
+
+	</div>
+</div>

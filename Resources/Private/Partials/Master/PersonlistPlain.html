@@ -1,0 +1,5 @@
+<f:spaceless>
+	<f:for each="{list}" as="person" iteration="it">
+		{person.name}<f:if condition="{append}">{append}</f:if><f:if condition="{it.isLast}==0">, </f:if>
+	</f:for>
+</f:spaceless>

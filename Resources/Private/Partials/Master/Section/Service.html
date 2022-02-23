@@ -1,0 +1,298 @@
+<div class="d-none d-md-block">
+    <p class="d-none d-lg-block"><f:link.action action="export" target="_blank" arguments="{section:'service',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-200-save-as.svg#glyphicons-basic"/></svg>
+        Tabelle als PDF herunterladen und drucken
+    </f:link.action></p>
+    
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th width="5%">Datum</th>
+                <th width="15%">Predigtthema / Bibeltext</th>
+                <th width="15%">Prediger / Bemerkungen</th>
+                <th width="2%" title="Kinder im Gottesdienst">K</th>
+                <th width="2%" title="Teens im Gottesdienst">T</th>
+                <th width="12%">Leitung</th>
+                <th width="22%" title="L = Liederauswahl, M = Musikteam, O = Organist/in, P = Probe-Verantwortung">Musik</th>
+                <th width="13%" title="B = Beamer, M = Mischpult">Technik</th>
+                <th width="13%" title="S = Sigrist, T = Türbegrüssung">Weitere</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <f:for each="{masters}" as="master">
+                <tr>
+                    <td>
+                        <f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'service',settings:settings}" />
+                    </td>
+                    <f:if condition="{master.serviceActive}">
+                        <f:then>
+                            <td>
+                                <p>{master.serviceTopic}</p>
+                                <p><small>{master.serviceBible}</small></p>
+                                <f:if condition="{master.serviceSerial}">
+	                                <p><small>Predigtreihe: {master.serviceSerial.title}</small></p>
+                                </f:if>
+                            </td>
+                            <td>
+                                <f:if condition="{master.servicePreacher}">
+                                    <p>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.servicePreacher,me:me}" />
+                                    </p>
+                                </f:if>
+                                <p>
+                                    <small>
+                                        <f:if condition="{master.serviceSupper}">
+                                            mit Abendmahl<f:if condition="{master.serviceSupperPeople}"> (<f:render partial="Master/Personlist" arguments="{list:master.serviceSupperPeople,me:me}" />)</f:if>
+                                            <br />
+                                        </f:if>
+                                        <f:if condition="{master.serviceMission}">
+                                            mit Fürbitte für die weltweite Kirche<f:if condition="{master.serviceMissionary}"> (<f:render partial="Master/Personlist" arguments="{list:master.serviceMissionary,me:me}" />)</f:if>
+                                            <br />
+                                        </f:if>
+                                        <f:format.nl2br>{master.serviceNotes}</f:format.nl2br>
+                                    </small>
+                                </p>
+                            </td>
+                            <td>
+                                <f:switch expression="{master.kidsProgram}">
+                                    <f:case value="2">
+                                        <span title="Kinder anfangs im GD" style="cursor:default">O</span>
+                                    </f:case>
+                                    <f:case value="3">
+                                        <span title="Kinder ganzzeitig im GD" style="cursor:default">X</span>
+                                    </f:case>
+                                    <f:defaultCase>
+                                        <span title="Kinder nicht im GD" style="cursor:default">&nbsp;</span>
+                                    </f:defaultCase>
+                                </f:switch>
+                            </td>
+                            <td>
+                                <f:if condition="{master.teensProgram1}==2">
+                                    <f:then>
+                                        <f:switch expression="{master.teensProgram2}">
+                                            <f:case value="2">
+                                                <span title="Alle Teens im GD" style="cursor:default">X</span>
+                                            </f:case>
+                                            <f:case value="3">
+                                                <span title="Alle Teens im GD, Schnuppereinsatz" style="cursor:default">X<br />S</span>
+                                            </f:case>
+                                            <f:defaultCase>
+                                                <span title="Teens des 1.+ 2. Jahr im GD" style="cursor:default">2</span>
+                                            </f:defaultCase>
+                                        </f:switch>
+                                    </f:then>
+                                    <f:else>
+                                        <f:switch expression="{master.teensProgram2}">
+                                            <f:case value="2">
+                                                <span title="Teens des 3. Jahr im GD" style="cursor:default">3</span>
+                                            </f:case>
+                                            <f:case value="3">
+                                                <span title="Teens-Schnuppereinsatz im GD" style="cursor:default">S</span>
+                                            </f:case>
+                                            <f:defaultCase>
+                                                <span title="Teens nicht im GD" style="cursor:default">&nbsp;</span>
+                                            </f:defaultCase>
+                                        </f:switch>
+                                    </f:else>
+                                </f:if>
+                            </td>
+                            <td>
+                                <f:render partial="Master/Personlist" arguments="{list:master.serviceModerator,me:me}" />
+                            </td>
+                            <td>
+                                <p>
+                                    <span title="Liederauswahl">L: </span>
+                                    <f:if condition="{master.serviceMusicSelect}">
+                                        <f:then>
+                                            <f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicSelect,me:me}" />
+                                            <f:if condition="{master.serviceMusicSelectAll}">(alle Lieder)</f:if>
+                                        </f:then>
+                                        <f:else>--</f:else>
+                                    </f:if>
+                                </p>
+                                <p>
+                                    <span title="Musikteam">M: </span>
+                                    <f:if condition="{master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicRehearse,append:' (P)',me:me}" />,</f:if>
+                                    <f:if condition="{master.serviceMusicBand}">
+                                        <f:then>
+                                            <f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicBand,me:me}" />
+                                        </f:then>
+                                        <f:else>--</f:else>
+                                    </f:if>
+                                </p>
+                                <p>
+                                    <span title="Organist/in">O: </span>
+                                    <f:if condition="{master.serviceMusicOrgan}">
+                                        <f:then>
+                                            <f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicOrgan,me:me}" />
+                                        </f:then>
+                                        <f:else>--</f:else>
+                                    </f:if>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <span title="Beamer">B: </span>
+                                    <f:render partial="Master/Personlist" arguments="{list:master.serviceBeamer,me:me}" />
+                                </p>
+                                <p>
+                                    <span title="Mischpult">M: </span>
+                                    <f:render partial="Master/Personlist" arguments="{list:master.serviceConsole,me:me}" />
+                                </p>
+                                <p>
+                                    <span title="Kamera">K: </span>
+                                    <f:if condition="{master.serviceCamera}">
+                                        <f:then>
+                                            <f:render partial="Master/Personlist" arguments="{list:master.serviceCamera,me:me}" />
+                                        </f:then>
+                                        <f:else>--</f:else>
+                                    </f:if>
+                                </p>
+                                <p>
+                                    <span title="Livestream-Schnitt">S: </span>
+                                    <f:if condition="{master.serviceFilmeditor}">
+                                        <f:then>
+                                            <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
+                                        </f:then>
+                                        <f:else>--</f:else>
+                                    </f:if>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <span title="Sigrist">S: </span>
+                                    <f:render partial="Master/Personlist" arguments="{list:master.serviceSexton,me:me}" />
+                                </p>
+                                <p>
+                                    <span title="Türbegrüssung">T: </span>
+                                    <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
+                                </p>
+                            </td>
+                        </f:then>
+                        <f:else>
+                            <td colspan="8">Kein Gottesdienst<f:if condition="{master.serviceNotes}">: {master.serviceNotes}</f:if></td>
+                        </f:else>
+                    </f:if>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-block d-md-none">
+    <f:for each="{masters}" as="master">
+        <hr />
+        <f:render partial="Master/DateTimeHolidaysXS" arguments="{master:master,section:'service',settings:settings}" />
+        <f:if condition="{master.serviceActive}">
+            <f:then>
+                <f:if condition="{master.serviceTopic}">
+                    <p>{master.serviceTopic}<br /><small>{master.serviceBible}</small></p>
+                </f:if>
+                <f:if condition="{master.servicePreacher}">
+                    <p>Prediger: <f:render partial="Master/Personlist" arguments="{list:master.servicePreacher,me:me}" /></p>
+                </f:if>
+                <f:if condition="{master.serviceSupper} || {master.serviceMission} || {master.serviceNotes}">
+                    <p>
+                        <f:if condition="{master.serviceSupper}">
+                            mit Abendmahl<f:if condition="{master.serviceSupperPeople}"> (<f:render partial="Master/Personlist" arguments="{list:master.serviceSupperPeople,me:me}" />)</f:if><br />
+                        </f:if>
+                        <f:if condition="{master.serviceMission}">
+                            mit Fürbitte für die weltweite Kirche<f:if condition="{master.serviceMissionary}"> (<f:render partial="Master/Personlist" arguments="{list:master.serviceMissionary,me:me}" />)</f:if><br />
+                        </f:if>
+                        <f:format.nl2br>{master.serviceNotes}</f:format.nl2br>
+                    </p>
+                </f:if>
+                <p>GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:master.serviceModerator,me:me}" /></p>
+                <f:switch expression="{master.kidsProgram}">
+                    <f:case value="2">
+                        <f:variable name="kids" value="Kinder anfangs im GD" />
+                    </f:case>
+                    <f:case value="3">
+                        <f:variable name="kids" value="Kinder ganzzeitig im GD" />
+                    </f:case>
+                    <f:defaultCase>
+                        <f:variable name="kids" value="" />
+                    </f:defaultCase>
+                </f:switch>
+                <f:if condition="{master.teensProgram1}==2">
+                    <f:then>
+                        <f:switch expression="{master.teensProgram2}">
+                            <f:case value="2">
+                                <f:variable name="teens" value="Alle Teens im GD" />
+                            </f:case>
+                            <f:case value="3">
+                                <f:variable name="teens" value="Alle Teens im GD, Schnuppereinsatz" />
+                            </f:case>
+                            <f:defaultCase>
+                                <f:variable name="teens" value="Teens des 1.+ 2. Jahr im GD" />
+                            </f:defaultCase>
+                        </f:switch>
+                    </f:then>
+                    <f:else>
+                        <f:switch expression="{master.teensProgram2}">
+                            <f:case value="2">
+                                <f:variable name="teens" value="Teens des 3. Jahr im GD" />
+                            </f:case>
+                            <f:case value="3">
+                                <f:variable name="teens" value="Teens-Schnuppereinsatz im GD" />
+                            </f:case>
+                            <f:defaultCase>
+                                <f:variable name="teens" value="" />
+                            </f:defaultCase>
+                        </f:switch>
+                    </f:else>
+                </f:if>
+                <f:if condition="{kids} || {teens}">
+                    <f:if condition="{kids} && {teens}">
+                        <f:then>
+                            <p>{kids}, {teens}</p>
+                        </f:then>
+                        <f:else>
+                            <p>{kids}{teens}</p>
+                        </f:else>
+                    </f:if>
+                </f:if>
+                <p>
+                    Liederauswahl: 
+                    <f:if condition="{master.serviceMusicSelect}">
+                        <f:then>
+                            <f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicSelect,me:me}" />
+                        </f:then>
+                        <f:else>--</f:else>
+                    </f:if>
+                    <br />
+                    Musikteam: 
+                    <f:if condition="{master.serviceMusicRehearse}"><f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicRehearse,append:' (P)',me:me}" />,</f:if>
+                    <f:if condition="{master.serviceMusicBand}">
+                        <f:then>
+                            <f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicBand,me:me}" />
+                        </f:then>
+                        <f:else>--</f:else>
+                    </f:if>
+                    <br />
+                    Orgel: 
+                    <f:if condition="{master.serviceMusicOrgan}">
+                        <f:then>
+                            <f:render partial="Master/PersonlistShort" arguments="{list:master.serviceMusicOrgan,me:me}" />
+                        </f:then>
+                        <f:else>--</f:else>
+                    </f:if>
+                </p>
+                <p>
+                    Beamer: <f:render partial="Master/Personlist" arguments="{list:master.serviceBeamer,me:me}" /><br />
+                    Mischpult: <f:render partial="Master/Personlist" arguments="{list:master.serviceConsole,me:me}" /><br />
+                    Kamera: <f:render partial="Master/Personlist" arguments="{list:master.serviceCamera,me:me}" /><br />
+                    Livestream-Schnitt: <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
+                </p>
+                <p>
+                    Sigrist: <f:render partial="Master/Personlist" arguments="{list:master.serviceSexton,me:me}" /><br />
+                    Türbegrüssung: <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
+                </p>
+            </f:then>
+            <f:else>
+                <p>Kein Gottesdienst<f:if condition="{master.serviceNotes}">: {master.serviceNotes}</f:if></p>
+            </f:else>
+        </f:if>
+    </f:for>
+</div>

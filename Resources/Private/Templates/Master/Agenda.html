@@ -1,0 +1,67 @@
+
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:if condition="{go.arguments.section}=='general'">
+	<f:then>
+		<h2>Generelle Gottesdienst-Angaben ändern</h2>
+	</f:then>
+	<f:else>
+		<h2>{sectionInfo.title}-Angaben vom {master.date->f:format.date(format:'%e. %B %Y')} ändern</h2>
+	</f:else>
+</f:if>
+<br />
+
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<div class="alert alert-warning my-3" role="alert">
+    <f:format.html parseFuncTSPath="lib.parseFunc_alert">
+        <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-637-circle-alert.svg#glyphicons-basic"/></svg>
+        <f:if condition="{flashMessage.title}"><b>{flashMessage.title}</b><br /></f:if>
+        Die gemachten Änderungen haben möglicherweise einen Einfluss auf den Agenda-Eintrag dieses Gottesdienstes.
+    </f:format.html>
+</div>
+
+<h3>Agenda-Eintrag des Gottesdienstes</h3>
+
+<f:form action="agendaUpdate" name="master" object="{master}">
+	<f:form.hidden name="back" value="{go.arguments.back}" />
+	<f:form.hidden name="section" value="{go.arguments.section}" />
+	<f:form.hidden name="forward" value="{go.arguments.forward}" />
+
+	<div class="row">
+		<div class="col-sm-6 col-12">
+			<div class="row form-group">
+				<label for="serviceNotes" class="col-sm-2 col-3 col-form-label">Bisher</label>
+				<div class="col-9">
+					<f:form.textarea name="eventDescriptionOld" value="{master.event.description}" rows="5" class="form-control" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="offset-sm-2 offset-3">
+					<f:link.action action="{go.action}" arguments="{go.arguments}" class="btn btn-outline-dark ml-3">Bisherigen Text beibehalten</f:link.action>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-sm-6 col-12">
+			<div class="row form-group">
+				<label for="serviceNotes" class="col-sm-2 col-3 col-form-label">Neu</label>
+				<div class="col-9">
+					<f:form.textarea name="eventDescriptionNew" value="{f:render(partial:'Master/Agenda',arguments:{master:master})}" rows="5" class="form-control" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="offset-sm-2 offset-3">
+					<f:form.submit value="Neuen Text übernehmen" class="btn btn-primary ml-3" />
+				</div>
+			</div>
+		</div>
+	</div>
+</f:form>
+
+<br /><br />
+<p><b>Hinweis:</b> Die Änderung kann nicht rückgängig gemacht werden. Im Zweifelsfall den bisherigen Text beibehalten und <a href="mailto:franziska.saegesser@fku.ch">Franziska Sägesser</a> informieren.</p>
+</f:section>

@@ -1,0 +1,194 @@
+<div class="d-none d-md-block">
+    <p class="d-none d-lg-block"><f:link.action action="export" target="_blank" arguments="{section:'kids',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-200-save-as.svg#glyphicons-basic"/></svg>
+        Tabelle als PDF herunterladen und drucken
+    </f:link.action></p>
+    
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th width="5%">Datum</th>
+                <th width="16%">Thema</th>
+                <th width="9%">Spielstrasse</th>
+                <th width="9%">Singen</th>
+                <th width="17%">Plenum</th>
+                <th width="9%">Habakuk</th>
+                <th width="9%">Karibu</th>
+                <th width="17%">Zundhölzli</th>
+                <th width="9%">Summervögeli</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <f:for each="{masters}" as="master">
+                <tr>
+                    <td>
+                        <f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'kids',settings:settings}" />
+                    </td>
+                    <f:if condition="{master.kidsProgram}==0">
+                        <f:then>
+                            <td colspan="8" class="text-muted">Kein Kids Treff<f:if condition="{master.kidsNotes}">: {master.kidsNotes}</f:if></td>
+                        </f:then>
+                        <f:else>
+                            <td>
+                                <f:switch expression="{master.kidsProgram}">
+                                    <f:case value="1">
+                                        <p>{master.kidsTopic}
+                                            <f:if condition="{master.kidsTopicLink}">
+	                                        	&nbsp; <f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:''}" />
+                                            </f:if>
+                                        </p>
+                                    </f:case>
+                                    <f:case value="2">
+                                        <p>{master.kidsTopic}
+                                            <f:if condition="{master.kidsTopicLink}">
+	                                        	&nbsp; <f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:''}" />
+                                            </f:if>
+                                        </p>
+                                    </f:case>
+                                    <f:case value="3">
+                                        <p>Kinder ganzzeitig im GD</p>
+                                    </f:case>
+                                    <f:case value="4">
+                                        <p>Ferienprogramm</p>
+                                    </f:case>
+                                    <f:case value="5">
+                                        <p>Theaterprobe</p>
+                                    </f:case>
+                                    <f:case value="6">
+                                        <p>
+                                        	Ausflug<f:if condition="{master.kidsTopic}">: {master.kidsTopic}</f:if>
+                                            <f:if condition="{master.kidsTopicLink}">
+	                                        	&nbsp; <f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:''}" />
+                                            </f:if>
+                                        </p>
+                                    </f:case>
+                                </f:switch>
+                                <p>
+                                    <small>
+                                        <f:if condition="{master.kidsProgram}==2">Kinder anfangs im GD<br /></f:if>
+                                        <f:if condition="{master.kidsNotes}">{master.kidsNotes}<br /></f:if>
+                                        <f:if condition="{master.serviceSupper}">Abendmahl im GD</f:if>
+                                    </small>
+                                </p>
+                            </td>
+                                
+                            <td>
+                                <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsPlaying,me:me}" />
+                            </td>
+                            <td>
+                                <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsSinging,me:me}" />
+                            </td>
+                            <td>
+                                <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsPlenum,me:me}" />
+                            </td>
+                            <td>
+                                <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup1,me:me}" />
+                            </td>
+                            <td>
+                                <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup2,me:me}" />
+                            </td>
+                            <td>
+                                <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup3,me:me}" />
+                            </td>
+                            <td>
+                                <f:if condition="{master.kidsYoungActive}">
+                                    <f:then>
+                                        <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsYoung,me:me}" />
+                                    </f:then>
+                                    <f:else>
+                                        <span class="text-muted">Keine Summervögeli</span>
+                                    </f:else>
+                                </f:if>
+                            </td>
+                        </f:else>
+                    </f:if>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-block d-md-none">
+	<f:for each="{masters}" as="master">
+        <hr />
+        <f:render partial="Master/DateTimeHolidaysXS" arguments="{master:master,section:'kids',settings:settings}" />
+		<f:if condition="{master.kidsProgram}==0">
+			<f:then>
+				<p>Kein Kids Treff<f:if condition="{master.kidsNotes}">: {master.kidsNotes}</f:if></p>
+			</f:then>
+			<f:else>
+                <f:switch expression="{master.kidsProgram}">
+                    <f:case value="1">
+                        <p>{master.kidsTopic}
+                            <f:if condition="{master.kidsTopicLink}">
+                                &nbsp;
+                                <f:link.action pageUid="{settings.PidKidsDownloads}" extensionName="fkufile" pluginName="file" controller="File" action="listFolder" arguments="{folder:'{master.kidsTopicLink}'}" additionalAttributes="{title:'Dokumente zum Thema'}">
+							    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-960-files-queue.svg#glyphicons-basic"/></svg>
+                                </f:link.action>
+                            </f:if>
+                        </p>
+                    </f:case>
+                    <f:case value="2">
+                        <p>{master.kidsTopic}
+                            <f:if condition="{master.kidsTopicLink}">
+                                &nbsp;
+                                <f:link.action pageUid="{settings.PidKidsDownloads}" extensionName="fkufile" pluginName="file" controller="File" action="listFolder" arguments="{folder:'{master.kidsTopicLink}'}" additionalAttributes="{title:'Dokumente zum Thema'}">
+							    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-960-files-queue.svg#glyphicons-basic"/></svg>
+                                </f:link.action>
+                            </f:if>
+                        </p>
+                    </f:case>
+                    <f:case value="3">
+                        <p>Kinder ganzzeitig im GD</p>
+                    </f:case>
+                    <f:case value="4">
+                        <p>Ferienprogramm</p>
+                    </f:case>
+                    <f:case value="5">
+                        <p>Theaterprobe</p>
+                    </f:case>
+                    <f:case value="6">
+                        <p>Ausflug</p>
+                    </f:case>
+                </f:switch>
+                <p>
+                    <small>
+                        <f:if condition="{master.kidsProgram}==2">Kinder anfangs im GD<br /></f:if>
+                        <f:if condition="{master.kidsNotes}">{master.kidsNotes}<br /></f:if>
+                        <f:if condition="{master.serviceSupper}">Abendmahl im GD</f:if>
+                    </small>
+                </p>
+                <f:if condition="{master.kidsPlaying}">
+                	<p>Spielstrasse: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsPlaying,me:me}" /></p>
+                </f:if>
+                <f:if condition="{master.kidsProgram}==1 || {master.kidsProgram}==2">
+                    <f:if condition="{master.kidsSinging} && {master.kidsPlenum}">
+                        <f:then>
+                            <p>
+                                Singen: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsSinging,me:me}" /><br />
+                                Plenum: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsPlenum,me:me}" />
+                            </p>
+                        </f:then>
+                        <f:else if="{master.kidsSinging}">
+                        	<p>Singen: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsSinging,me:me}" /></p>
+                        </f:else>
+                        <f:else if="{master.kidsPlenum}">
+                        	<p>Plenum: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsPlenum,me:me}" /></p>
+                        </f:else>
+                    </f:if>
+                    <f:if condition="{master.kidsGroup1} || {master.kidsGroup2} || {master.kidsGroup3}">
+                    	<p>
+                        	Habakuk: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup1,me:me}" /><br />
+                            Karibu: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup2,me:me}" /><br />
+                            Zundhölzli: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsGroup3,me:me}" />
+                        </p>
+                    </f:if>
+                </f:if>
+            </f:else>
+        </f:if>
+        <f:if condition="{master.kidsYoungActive}">
+            <p>Summervögeli: <f:render partial="Master/PersonlistShort" arguments="{list:master.kidsYoung,me:me}" /></p>
+        </f:if>
+	</f:for>
+</div>

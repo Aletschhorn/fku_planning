@@ -1,0 +1,24 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<h2>Fahrdienst im <f:format.date date="{date}" format="%B %Y" /></h2>
+
+<table class="table">
+	<f:for each="{masters}" as="master">
+   	    <f:for each="{master.drivingPeople}" as="person" iteration="it">
+	    	<tr>
+            	<f:if condition="{it.index}==0">
+			    	<td width="15%" rowspan="{master.drivingPeople->f:count()}"><f:format.date date="{master.date}" format="%e. %B" /></td>
+                </f:if>
+        		<td width="60%">{person.name}</td>
+                <td width="25%"><f:if condition="{person.mobile}"><f:then>{person.mobile}</f:then><f:else>{person.phone}</f:else></f:if></td>
+	    	</tr>
+       	</f:for>
+	</f:for>
+</table>
+
+</f:section>

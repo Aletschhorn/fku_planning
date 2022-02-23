@@ -1,0 +1,255 @@
+{namespace agenda=FKU\FkuAgenda\ViewHelpers}
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+
+<f:layout name="Default" />
+<f:section name="main">
+
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<h2>Datum des Gottesdiensts</h2>
+<nav class="my-3">
+	<ul class="pagination">
+        <f:if condition="{navigationExtra.before}">
+            <li class="page-item active"><f:link.action action="beamer" arguments="{master:master}" additionalAttributes="{title:'Gottesdienst-Infos vom {master.date->f:format.date(format:\'d.m.Y\')}'}" class="page-link">{master.date->f:format.date(format:'d.m.Y')}</f:link.action></li>
+        </f:if>
+        <f:for each="{navigationMasters}" as="nav">
+            <li class="page-item{f:if(condition:'{master}=={nav}',then:' active')}"><f:link.action action="beamer" arguments="{master:nav}" additionalAttributes="{title:'Gottesdienst-Infos vom {nav.date->f:format.date(format:\'d.m.Y\')}'}" class="page-link">{nav.date->f:format.date(format:'d.m.Y')}</f:link.action></li>
+        </f:for>
+        <f:if condition="{navigationExtra.after}">
+            <li class="page-item active"><f:link.action action="beamer" arguments="{master:master}" additionalAttributes="{title:'Gottesdienst-Infos vom {master.date->f:format.date(format:\'d.m.Y\')}'}" class="page-link">{master.date->f:format.date(format:'d.m.Y')}</f:link.action></li>
+        </f:if>
+    </ul>
+</nav>
+
+<h2 class="mt-5">Kontakte und Angaben</h2>
+<div class="row">
+	<div class="col-3 col-xl-2"><b>Thema:</b></div>
+    <div class="col-9">{master.serviceTopic}</div>
+	<div class="col-3 col-xl-2"><b>Prediger:</b></div>
+    <div class="col-9"><f:render partial="Master/Personlist" arguments="{list:master.servicePreacher}" /></div>
+	<div class="col-3 col-xl-2"><b>GD-Leitung:</b></div>
+    <div class="col-9"><f:render partial="Master/Personlist" arguments="{list:master.serviceModerator}" /></div>
+	<div class="col-3 col-xl-2"><b>Liederauswahl:</b></div>
+    <div class="col-9"><f:render partial="Master/Personlist" arguments="{list:master.serviceMusicSelect}" /></div>
+	<div class="col-3 col-xl-2"><b>Musikprobe:</b></div>
+    <div class="col-9"><f:render partial="Master/Personlist" arguments="{list:master.serviceMusicRehearse}" /></div>
+    <f:if condition="{master.serviceMission}">
+        <div class="col-3 col-xl-2"><b>Missionsteam:</b></div>
+        <div class="col-9">
+        	<f:if condition="{master.serviceMissionary}">
+            	<f:then><f:render partial="Master/Personlist" arguments="{list:master.serviceMissionary}" /></f:then>
+                <f:else>?</f:else>
+            </f:if>
+            (Fürbitte weltweite Kirche)
+		</div>
+    </f:if>
+</div>
+
+<div class="my-3">
+	<f:link.action action="show" pluginName="Serviceplan" arguments="{master:master}" pageUid="{settings.PidPlanning}">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+        Alle Kontakte und Angaben
+    </f:link.action>
+</div>
+
+<h2 class="mt-5">Liederfolien</h2>
+<table class="table">
+	<f:if condition="{reporting}">
+		<f:for each="{reporting}" as="report">
+			<tr>
+				<td>{report.song.title}</td>
+				<td>
+					<f:if condition="{report.song.collection}">
+						<f:then>
+							<f:for each="{report.song.collection}" as="collection" iteration="it">
+								<f:if condition="{collection.rejected}">
+									<f:then>
+										<del>{collection.source.acronym}<f:if condition="{collection.number}>0">&nbsp;<f:if condition="{complete}">Nr.&nbsp;</f:if>{collection.number}</f:if></del><f:if condition="{it.isLast}==0">, </f:if>
+									</f:then>
+									<f:else>
+										{collection.source.acronym}<f:if condition="{collection.number}>0">&nbsp;<f:if condition="{complete}">Nr.&nbsp;</f:if>{collection.number}</f:if><f:if condition="{it.isLast}==0">, </f:if>
+									</f:else>
+								</f:if>
+							</f:for>
+						</f:then>
+						<f:else>
+							--
+						</f:else>
+					</f:if>
+				</td>
+				<td>
+					<f:for each="{report.song.links}" as="link">
+						<f:if condition="{link.type}==3">
+							<f:link.external uri="{link.url}" target="_blank">
+                            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-37-file.svg#glyphicons-basic"/></svg>
+                                {link.title}
+                            </f:link.external>
+                            &nbsp; &nbsp;
+						</f:if>
+					</f:for>
+				</td>
+			</tr>
+		</f:for>
+	</f:if>
+	<tr>
+		<td colspan="3">
+			<f:link.external uri="https://www.fku.ch/dateien/data/gottesdienst/Beamer/Vorlage%20Gottesdienst.potx">
+            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-37-file.svg#glyphicons-basic"/></svg>
+                PowerPoint-Vorlage (nicht für Livestream)
+            </f:link.external>
+            <br />
+			<f:link.action action="list" pluginName="Serviceplan" controller="File" extensionName="filelist" pluginName="filelist" arguments="{path:'/gottesdienst/Beamer/'}" pageUid="{settings.PidServiceDownloads}">
+            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                Weitere Präsentationen und Vorlagen
+            </f:link.action>
+			<f:if condition="{reporting}">
+            	<br />
+                <f:link.action action="showEvent" controller="Reporting" extensionName="fkusongs" pluginName="Reporting" arguments="{event:master.event}" pageUid="{settings.PidSongReporting}">
+                	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                    Liederliste dieses Gottesdienstes
+                </f:link.action>
+            </f:if>
+		</td>
+	</tr>
+</table>
+
+<f:if condition="{master.serviceMission}">
+    <h2 class="mt-5">Folien zur Fürbitte weltweite Kirche</h2>
+    <div class="row">
+        <div class="col-3 col-xl-2"><b>Verantwortlich:</b></div>
+        <div class="col-9">
+            <f:render partial="Master/Personlist" arguments="{list:master.serviceMissionary}" />
+        </div>
+        <div class="col-3 col-xl-2"><b>Foliensatz:</b></div>
+        <div class="col-9">
+            <f:link.external uri="https://www.fku.ch/dateien/data/gottesdienst/Beamer/Missionsfenster-Foliensatz.pptx">
+                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-37-file.svg#glyphicons-basic"/></svg>
+                PowerPoint-Folien
+            </f:link.external>
+        </div>
+        <div class="col-3 col-xl-2"><b>Reihenfolge:</b></div>
+        <div class="col-9">
+            <f:if condition="{master.serviceMissionContent}">
+                <f:then>
+                    <ol start="0" style="padding-left: 15px;">
+                        <li>Titelfolie</li>
+                        <f:for each="{master.serviceMissionContent}" as="content">
+                            <li>{content.title}</li>
+                        </f:for>
+                    </ol>
+                </f:then>
+                <f:else>
+                    Das Missionsteam hat (noch) keine Inhalte festgelegt.
+                </f:else>
+            </f:if>
+        </div>
+        <div class="col-3 col-xl-2"><b>Bemerkungen:</b></div>
+        <div class="col-9">
+            <f:if condition="{master.serviceMissionNotes}">
+                <f:then>{master.serviceMissionNotes}</f:then>
+                <f:else>--</f:else>
+            </f:if>
+        </div>
+    </div>
+</f:if>
+
+<h2 class="mt-5">Text für Folie mit Wochenprogramm</h2>
+<p><b>Hinweis:</b> Das Sonderzeichen im Text wird in Powerpoint durch eine Zeilenschaltung ersetzt.</p>
+
+<textarea name="wochenprogramm" rows="15" class="form-control"><agenda:groupedByDay each="{events}" as="eventsDay"><f:for each="{eventsDay}" as="event" iteration="iteration"><f:if condition="{iteration.isFirst}"><f:then><f:if condition="{event.eventStart->f:format.date(format:'Ymd')}=={master.date->f:format.date(format:'Ymd')}"><f:then>Heute</f:then><f:else><agenda:weekday date="{event.eventStart}" crop="2" />.&#09;<f:format.date format="j.n.">{event.eventStart}</f:format.date><f:if condition="{event.severalDays}"> &ndash; <f:format.date format="j.n.">{event.eventEnd}</f:format.date></f:if></f:else></f:if></f:then><f:else>&#09;</f:else></f:if>&#09;<f:if condition="{event.allDay}==0">{f:format.date(date:event.eventStart,format:'H:i')}</f:if>&#09;{event.descriptionTextarea}&#13;</f:for></agenda:groupedByDay></textarea>
+
+<f:if condition="{master.serviceCollection}>0">
+	<h3>Kollekte-Hinweis</h3>
+    <p>
+    	<svg class="icon-md" width="32" height="32" fill="#D07601"><use xlink:href="fileadmin/icon/glyphicons-basic-637-circle-alert.svg#glyphicons-basic"/></svg>
+        <f:switch expression="{master.serviceCollection}">
+            <f:case value="1">Die Kollekte ist zur Hälfte für das Missionswerk bestimmt. Wochenprogramm-Folie entsprechend ändern.</f:case>
+            <f:case value="2">Die ganze Kollekte ist für das Missionswerk bestimmt. Wochenprogramm-Folie entsprechend ändern.</f:case>
+        </f:switch>
+    </p>
+</f:if>
+
+<h2 class="mt-5">Text für Folie mit Losung und Geburtstagen</h2>
+
+<h3>Gebets-Hinweis</h3>
+<f:if condition="{master.prayerActive}==0">
+	<f:then>
+	    <p>
+    	    <svg class="icon-md" width="32" height="32" fill="#D07601"><use xlink:href="fileadmin/icon/glyphicons-basic-637-circle-alert.svg#glyphicons-basic"/></svg>
+        	Gemäss GD-Planung ist am Ende dieses Gottesdienstes <strong>kein</strong> Gebetsangebot geplant.
+	    </p>
+    </f:then>
+    <f:else>
+    	<p>
+	        <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-636-circle-info.svg#glyphicons-basic"/></svg>
+	    	<f:if condition="{master.prayerPeople}">
+	        	<f:then>Gemäss GD-Planung ist jemand fürs Gebet am Ende dieses Gottesdienstes eingeplant.</f:then>
+    	        <f:else>Gemäss GD-Planung ist ein Gebet am Ende dieses Gottesdienstes geplant, allerdings ist keine Person dafür eingetragen.</f:else>
+	        </f:if>
+        </p>
+    </f:else>
+</f:if>
+
+<h3>Losung</h3>
+<textarea name="losung" rows="3" class="form-control mb-3">{losung.text}&#13;{losung.vers}</textarea>
+
+<h3>Lehrtext</h3>
+<p>Der Lehrtext kann verwendet werden als Alternative zur Losung, falls diese sehr unpassend ist.</p>
+<textarea name="lehrtext" rows="3" class="form-control mb-3">{lehrtext.text}&#13;{lehrtext.vers}</textarea>
+
+<h3>Geburtstage</h3>
+
+<f:if condition="{isSunday}">
+	<f:then>
+        <f:if condition="{birthdays}">
+            <f:then>
+                <f:if condition="{birthdayCount.adults}>0">
+                    <f:then>
+                        <f:if condition="{birthdayCount.children}>0">
+                            <f:then>
+                                <p>Kinder und Erwachsene</p>
+                            </f:then>
+                            <f:else>
+                                <p>Nur Erwachsene, keine Kinder</p>
+                            </f:else>
+                        </f:if>
+                    </f:then>
+                    <f:else>
+                        <p>Nur Kinder, keine Erwachsene</p>
+                    </f:else>
+                </f:if>
+        
+                <textarea name="birthday" rows="1" class="form-control">In der kommenden Woche haben folgende Mitglieder bzw. Kinder von Mitgliedern Geburtstag</textarea>
+                <textarea name="birthday" rows="6" class="form-control"><f:groupedFor each="{birthdays}" groupBy="geburtsdatum" groupKey="actualDay" as="names"><f:for each="{names}" as="name" iteration="it"><f:if condition="{it.isFirst}"><f:if condition="{actualDay}=={master.date->f:format.date(format:'j.n.')}"><f:then>Heute&#09;</f:then><f:else>{name.wtag}&#09;{actualDay}</f:else></f:if>&#09;</f:if>{name.vorname} {name.nachname}{f:if(condition:it.isLast,else:', ')}</f:for>&#13;</f:groupedFor></textarea>
+            </f:then>
+            <f:else>
+                <p>Keine Geburtstage in der Folgewoche</p>
+                <textarea name="birthday" rows="1" class="form-control">In der kommenden Woche haben keine Mitglieder bzw. Kinder von Mitgliedern Geburtstag</textarea>
+            </f:else>
+        </f:if>
+    </f:then>
+    <f:else>
+   	    <p>
+        	<svg class="icon-md" width="32" height="32" fill="#D07601"><use xlink:href="fileadmin/icon/glyphicons-basic-637-circle-alert.svg#glyphicons-basic"/></svg>
+            Weil dieser Gottesdienst nicht am Sonntag ist, werden keine Geburtstage angezeigt. Auf der Folie soll nur die Losung (oder der Lehrtext) stehen.
+        </p>
+    </f:else>
+</f:if>
+
+<h2 class="mt-5">SongBeamer-Folien</h2>
+<h3>Wochenprogramm</h3>
+<f:variable name="linefeed" value="&lt;br&gt;&lt;posx:230&gt;" />
+<textarea name="wochenprogramm" rows="15" class="form-control mb-3">&lt;s:40&gt;&lt;b&gt;Wochenprogramm&#13;&lt;incposy:20&gt;<agenda:groupedByDay each="{events}" as="eventsDay"><f:for each="{eventsDay}" as="event" iteration="iteration">&lt;s:20&gt;<f:if condition="{iteration.isFirst}"><f:then><f:if condition="{event.eventStart->f:format.date(format:'Ymd')}=={master.date->f:format.date(format:'Ymd')}"><f:then>Heute</f:then><f:else><agenda:weekday date="{event.eventStart}" crop="2" />.&lt;posx:50&gt;<f:format.date format="j.n.">{event.eventStart}</f:format.date><f:if condition="{event.severalDays}"> &ndash; <f:format.date format="j.n.">{event.eventEnd}</f:format.date></f:if></f:else></f:if></f:then><f:else></f:else></f:if>&lt;posx:140&gt;<f:if condition="{event.allDay}==0">{f:format.date(date:event.eventStart,format:'H:i')}</f:if>&lt;posx:230&gt;<v:format.replace substring="{chr11}" content="{event.descriptionTextarea}" replacement="{linefeed->f:format.htmlentitiesDecode()}" />&#13;</f:for></agenda:groupedByDay>&#13;&#13;&lt;s:20&gt;<f:switch expression="{master.serviceCollection}"><f:case value="1">Mit der Kollekte unterstützen Sie je zur Hälfte das Missionswerk und unsere Gemeindearbeit.</f:case><f:case value="2">Die Kollekte ist vollumfänglich für das Missionswerk bestimmt.</f:case><f:defaultCase>Mit der Kollekte am Ausgang unterstützen Sie unsere Gemeindearbeit.</f:defaultCase></f:switch></textarea>
+
+<h3>Losung und Geburtstage</h3>
+<textarea name="birthday" rows="12" class="form-control mb-3">&lt;s:24&gt;&lt;b&gt;Heutige Losung&#13;&lt;incposy:10&gt;&lt;s:24&gt;&lt;wordwrap&gt;{losung.text}&#13;&lt;s:24&gt;&lt;i&gt;{losung.vers}&#13;&#13;&lt;s:24&gt;&lt;b&gt;In der kommenden Woche haben folgende Mitglieder&lt;br&gt;bzw. Kinder von Mitgliedern Geburtstag&#13;&lt;incposy:10&gt;<f:groupedFor each="{birthdays}" groupBy="geburtsdatum" groupKey="actualDay" as="names"><f:for each="{names}" as="name" iteration="it"><f:if condition="{it.isFirst}">&lt;s:24&gt;<f:if condition="{actualDay}=={master.date->f:format.date(format:'j.n.')}"><f:then>Heute</f:then><f:else>{name.wtag}&lt;posx:190&gt;{actualDay}</f:else></f:if>&lt;posx:300&gt;</f:if>{name.vorname} {name.nachname}{f:if(condition:it.isLast,else:', ')}</f:for>&#13;</f:groupedFor>&#13;&#13;&lt;s:20&gt;Gebets-Angebot im Anschluss an den Gottesdienst in der ersten Bank rechts</textarea>
+
+
+<f:security.ifHasRole role="Administrator">
+	<h2 class="mt-5">Administration</h2>
+	<f:link.action action="beamer" arguments="{master:master,clearCache:1}" class="btn btn-outline-dark">Seiten-Cache löschen</f:link.action>
+</f:security.ifHasRole>
+
+</f:section>

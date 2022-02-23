@@ -1,0 +1,18 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages renderMode="div" />
+
+<f:form action="show" pluginName="Youtube" name="youtube" class="form-horizontal">
+	<div class="row">
+		<div class="form-group">
+			<label for="url" class="col-sm-2 col-xs-3 control-label">YouTube-Adresse</label>
+			<div class="col-sm-10 col-xs-9">
+				<f:form.textfield name="url" class="form-control" placeholder="https://www.youtube.com/watch?v=xxxxx" />
+			</div>
+		</div>
+	</div>
+	<f:form.submit value="Zeigen" class="btn btn-primary" />
+</f:form>
+
+</f:section>

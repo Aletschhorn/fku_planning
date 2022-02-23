@@ -1,0 +1,82 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<f:comment> Form to select date range </f:comment>
+<div class="row">
+	<div class="col-lg-7 col-12">
+		<f:form action="list" pluginName="Serviceplan" class="form-inline">
+            <label for="lowLimit">Datumsbereich von</label>
+            <f:form.select class="form-control mx-2" name="lowLimit" options="{daterange.options}" value="{daterange.low}" />
+            <label for="highLimit">bis</label>
+            <f:form.select class="form-control mx-2" name="highLimit" options="{daterange.options}" value="{daterange.high}" />
+			<f:form.submit value="Zeigen" class="btn btn-primary" /> &nbsp;
+            <span class="d-block d-md-none">
+                <span class="float-right">
+                    <f:link.action action="listMonth" class="btn btn-default">
+	                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-92-contrast.svg#glyphicons-basic"/></svg>
+                        Monatsansicht
+                    </f:link.action>
+                </span>
+            </span>
+		</f:form>
+	</div>
+	<div class="d-none d-lg-block col-lg-5">
+		<div class="float-right">
+			<f:link.action action="listMonth">
+                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-92-contrast.svg#glyphicons-basic"/></svg>
+                Monatsansicht
+             </f:link.action>
+             &nbsp; &nbsp;
+
+			<f:if condition="{section}=='kids'">
+				<f:security.ifHasRole role="{settings.usergroupKidstreff}">
+					<f:link.page pageUid="{settings.PidDashboardKids}">
+	                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-157-thumbnails.svg#glyphicons-basic"/></svg>
+                        KT-Übersicht
+                    </f:link.page>
+					&nbsp; &nbsp;
+				</f:security.ifHasRole>
+			</f:if>
+
+			<f:link.page pageUid="{settings.PidDashboardService}">
+                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-157-thumbnails.svg#glyphicons-basic"/></svg>
+                GD-Übersicht
+            </f:link.page>
+
+			<f:security.ifHasRole role="{settings.usergroupGeneral}">
+				&nbsp; &nbsp;
+				<f:link.action action="new" additionalAttributes="{title:'Neuen Gottesdienst hinzufügen'}">
+                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-371-plus.svg#glyphicons-basic"/></svg>
+                    GD
+                </f:link.action>
+			</f:security.ifHasRole>
+		</div>
+	</div>
+
+</div>
+
+<f:comment> Navigation for sections </f:comment>
+<br />
+<f:render partial="Master/NavigationSections" arguments="{_all}" />
+
+
+<f:comment> Show content </f:comment>
+<f:if condition="{masters}">
+	<f:then>
+    	<f:variable name="missionBack" value="list" />
+		<f:render partial="Master/Section/{section->f:format.case(mode:'capital')}" arguments="{_all}" />
+	</f:then>
+	<f:else>
+		<p class="lead">Keine Einträge in diesem Datumsbereich.</p>
+	</f:else>
+</f:if>
+
+<f:if condition="{jump}">
+	<script type="text/javascript">document.getElementById("{jump}").scrollIntoView();</script>
+</f:if>
+
+</f:section>

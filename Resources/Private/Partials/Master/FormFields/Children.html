@@ -1,0 +1,39 @@
+
+<div class="row">
+	<div class="col-sm-6 col-12">
+
+		<h3>Kinderhüeti</h3>
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Grundsätzlich</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="childrenActive" value="1" checked="{master.childrenActive}==1" class="form-check-input" />
+                    <label for="childrenActive" class="form-check-label">Kinderhüeti wird angeboten</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="childrenPeople" class="col-sm-3 col-4 col-form-label">Leiter</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.childrenPeople,name:'childrenPeople',allPeople:allPeople}" />
+        </div>
+
+	</div>
+	<div class="col-sm-6 col-12">
+
+		<h3>Summervögeli</h3>
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Grundsätzlich</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="kidsYoungActive" value="1" checked="{master.kidsYoungActive}==1" class="form-check-input" />
+                    <label for="kidsYoungActive" class="form-check-label">Kinderhüeti wird angeboten</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="kidsYoung" class="col-sm-3 col-4 col-form-label">Leiter</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.kidsYoung,name:'kidsYoung',allPeople:allPeople}" />
+        </div>
+
+	</div>
+</div>

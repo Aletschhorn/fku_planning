@@ -1,0 +1,94 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>Settings</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.showVisibility>
+						<TCEforms>
+							<label>Master visibility type to be shown</label>
+							<config>
+								<type>select</type>
+								<renderType>selectCheckBox</renderType>
+								<foreign_table>tx_fkuplanning_domain_model_visibility</foreign_table>
+								<size>5</size>
+								<autoSizeMax>20</autoSizeMax>
+								<minitems>1</minitems>
+							</config>
+						</TCEforms>
+					</settings.showVisibility>
+					<settings.showContents>
+						<TCEforms>
+							<label>Contents to be shown</label>
+							<config>
+								<type>check</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">Agenda</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">Losungen</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">Birthdays</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">Songs</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">Mission infos</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.showContents>
+					<settings.showEventAllCategories>
+						<TCEforms>
+							<label>Show events of all categories</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.showEventAllCategories>
+					<settings.showEventCategory>
+						<TCEforms>
+							<label>Event categories to be shown (if not all)</label>
+							<config>
+								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
+								<foreign_table>tx_fkuagenda_domain_model_category</foreign_table>
+								<size>5</size>
+								<autoSizeMax>20</autoSizeMax>
+								<minitems>0</minitems>
+							</config>
+						</TCEforms>
+					</settings.showEventCategory>
+					<settings.showEventVisibility>
+						<TCEforms>
+							<label>Event visibility type to be shown</label>
+							<config>
+								<type>select</type>
+								<renderType>selectCheckBox</renderType>
+								<foreign_table>tx_fkuagenda_domain_model_visibilitycategory</foreign_table>
+								<size>5</size>
+								<autoSizeMax>20</autoSizeMax>
+								<minitems>1</minitems>
+							</config>
+						</TCEforms>
+					</settings.showEventVisibility>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

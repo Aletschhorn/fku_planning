@@ -1,0 +1,131 @@
+<div class="d-none d-md-block">
+    <p class="d-none d-lg-block"><f:link.action action="export" target="_blank" arguments="{section:'teens',lowLimit:daterange.low,highLimit:daterange.high,visible:daterange.visible}" pageType="{settings.pdfPageType}">
+    	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-200-save-as.svg#glyphicons-basic"/></svg>
+        Tabelle als PDF herunterladen und drucken
+    </f:link.action></p>
+    
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th width="5%">Datuma</th>
+                <th width="25%">Thema 1./2. Jahr</th>
+                <th width="20%">Leiter 1./2. Jahr</th>
+                <th width="25%">Thema 3. Jahr</th>
+                <th width="25%">Leiter 3. Jahr</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <f:for each="{masters}" as="master">
+                <tr>
+                    <td>
+                        <f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'teens',settings:settings}" />
+                    </td>
+                    <f:if condition="{master.teensProgram1}>0">
+                        <f:then>
+                            <td>
+                                <f:switch expression="{master.teensProgram1}">
+                                    <f:case value="1">
+                                        <p>{master.teensTopic1}</p>
+                                    </f:case>
+                                    <f:case value="2">
+                                        <p>Gottesdienstbesuch</p>
+                                    </f:case>
+                                </f:switch>
+                                <p><small>{master.teensNotes1->f:format.nl2br()}</small></p>									
+                            </td>
+                            <td>
+                                <f:render partial="Master/Personlist" arguments="{list:master.teensPeople1,me:me}" />
+                            </td>
+                        </f:then>
+                        <f:else>
+                            <td colspan="2" class="text-muted">Kein Teens Treff<f:if condition="{master.teensNotes1}">: {master.teensNotes1}</f:if></td>
+                        </f:else>
+                    </f:if>
+                    <f:if condition="{master.teensProgram2}>0">
+                        <f:then>
+                            <td>
+                                <f:switch expression="{master.teensProgram2}">
+                                    <f:case value="1">
+                                        <p>{master.teensTopic2}</p>
+                                    </f:case>
+                                    <f:case value="2">
+                                        <p>Gottesdienstbesuch</p>
+                                    </f:case>
+                                    <f:case value="3">
+                                        <p>Schnuppereinsatz im GD</p>
+                                    </f:case>
+                                </f:switch>
+                                <p><small>{master.teensNotes2->f:format.nl2br()}</small></p>									
+                            </td>
+                            <td>
+                                <f:render partial="Master/Personlist" arguments="{list:master.teensPeople2,me:me}" />
+                            </td>
+                        </f:then>
+                        <f:else>
+                            <td colspan="2" class="text-muted">Kein Teens Treff<f:if condition="{master.teensNotes2}">: {master.teensNotes2}</f:if></td>
+                        </f:else>
+                    </f:if>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-block d-md-none">
+	<f:for each="{masters}" as="master">
+        <hr />
+        <f:render partial="Master/DateTimeHolidaysXS" arguments="{master:master,section:'teens',settings:settings}" />
+        <f:if condition="{master.teensProgram1}>0">
+            <f:then>
+            	<p>
+                	Teens Treff 1./2. Jahr
+                    <f:switch expression="{master.teensProgram1}">
+                        <f:case value="1">
+                        	<f:if condition="{master.teensTopic1}"><br />{master.teensTopic1}</f:if>
+                        </f:case>
+                        <f:case value="2">
+                            <br />Gottesdienstbesuch
+                        </f:case>
+                    </f:switch>
+                    <f:if condition="{master.teensNotes1}">
+	                    <br />{master.teensNotes1->f:format.nl2br()}
+                    </f:if>
+                    <f:if condition="{master.teensPeople1}">
+	                    <br />Leiter: <f:render partial="Master/Personlist" arguments="{list:master.teensPeople1,me:me}" />
+                    </f:if>
+                </p>									
+            </f:then>
+            <f:else>
+                <p>Kein Teens Treff 1./2. Jahr<f:if condition="{master.teensNotes1}">: {master.teensNotes1}</f:if></p>
+            </f:else>
+        </f:if>
+        <f:if condition="{master.teensProgram2}>0">
+            <f:then>
+            	<p>
+                	Teens Treff 3. Jahr
+                    <f:switch expression="{master.teensProgram2}">
+                        <f:case value="1">
+                        	<f:if condition="{master.teensTopic2}"><br />{master.teensTopic2}</f:if>
+                        </f:case>
+                        <f:case value="2">
+                            <br />Gottesdienstbesuch
+                        </f:case>
+                        <f:case value="3">
+                            <br />Schnuppereinsatz im GD
+                        </f:case>
+                    </f:switch>
+                    <f:if condition="{master.teensNotes2}">
+	                    <br />{master.teensNotes2->f:format.nl2br()}
+                    </f:if>
+                    <f:if condition="{master.teensPeople2}">
+	                    <br />Leiter: <f:render partial="Master/Personlist" arguments="{list:master.teensPeople2,me:me}" />
+                    </f:if>
+                </p>									
+            </f:then>
+            <f:else>
+                <p>Kein Teens Treff 3. Jahr<f:if condition="{master.teensNotes2}">: {master.teensNotes2}</f:if></p>
+            </f:else>
+        </f:if>
+    </f:for>
+</div>

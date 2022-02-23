@@ -1,0 +1,79 @@
+
+plugin.tx_fkuplanning {
+	view {
+		# cat=plugin.tx_fkuplanning/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:fku_planning/Resources/Private/Templates/
+		# cat=plugin.tx_fkuplanning/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:fku_planning/Resources/Private/Partials/
+		# cat=plugin.tx_fkuplanning/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:fku_planning/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_fkuplanning//a; type=string; label=Default storage PID
+		storagePid =
+	}
+	settings {
+		# cat=plugin.tx_fkuplanning/others/a; type=int+; label=Page type number for PDF export file
+		pdfPageType = 170
+		# cat=plugin.tx_fkuplanning/others/d1; type=int+; label=User group ID to edit general part and create new entries
+		usergroupGeneral = 
+		# cat=plugin.tx_fkuplanning/others/d2; type=int+; label=User group ID to edit service part
+		usergroupService = 
+		# cat=plugin.tx_fkuplanning/others/d3; type=int+; label=User group ID to edit children part
+		usergroupChildren = 
+		# cat=plugin.tx_fkuplanning/others/d4; type=int+; label=User group ID to edit kids part
+		usergroupKids = 
+		# cat=plugin.tx_fkuplanning/others/d5; type=int+; label=User group ID to edit teens part
+		usergroupTeens = 
+		# cat=plugin.tx_fkuplanning/others/d6; type=int+; label=User group ID to edit others part
+		usergroupOthers = 
+		# cat=plugin.tx_fkuplanning/others/d7; type=int+; label=User group ID to edit mission part
+		usergroupMission = 
+		# cat=plugin.tx_fkuplanning/others/d8; type=int+; label=User group ID to edit agenda
+		usergroupAgenda = 
+		# cat=plugin.tx_fkuplanning/others/d9; type=int+; label=User group ID to see music area
+		usergroupMusic = 
+		# cat=plugin.tx_fkuplanning/others/e1; type=int+; label=User group ID to edit sermons
+		usergroupSermon = 
+		# cat=plugin.tx_fkuplanning/others/e2; type=int+; label=User group ID of Kids Treff people
+		usergroupKidstreff = 
+		# cat=plugin.tx_fkuplanning/others/k; type=string; label=Default service start time (format HH.MM)
+		defaultStartTime = 09.30
+		# cat=plugin.tx_fkuplanning/others/p1; type=int+; label=Page ID of planning (main PID)
+		PidPlanning = 
+		# cat=plugin.tx_fkuplanning/others/p2; type=int+; label=Page ID of beamer information
+		PidBeamer = 
+		# cat=plugin.tx_fkuplanning/others/p3; type=int+; label=Page ID for agenda edit
+		PidAgendaEdit = 
+		# cat=plugin.tx_fkuplanning/others/p4; type=int+; label=Page ID for song reporting per event
+		PidSongReporting = 
+		# cat=plugin.tx_fkuplanning/others/p5; type=int+; label=Page ID for song search
+		PidSongSearch = 
+		# cat=plugin.tx_fkuplanning/others/p6; type=int+; label=Page ID for internal service dashboard
+		PidDashboardService = 
+		# cat=plugin.tx_fkuplanning/others/p7; type=int+; label=Page ID for internal kids dashboard
+		PidDashboardKids = 
+		# cat=plugin.tx_fkuplanning/others/p8; type=int+; label=Page ID for kids file download
+		PidKidsDownloads = 
+		# cat=plugin.tx_fkuplanning/others/p9; type=int+; label=Page ID for service file download
+		PidServiceDownloads = 
+		# cat=plugin.tx_fkuplanning/others/q1; type=int+; label=Page ID for notification settings
+		PidNotifications = 
+		# cat=plugin.tx_fkuplanning/others/q2; type=int+; label=Page ID for sermons
+		PidSermon = 
+		# cat=plugin.tx_fkuplanning/others/q2; type=int+; label=Page ID for livestream
+		PidLivestream = 
+		# cat=plugin.tx_fkuplanning/others/q3; type=int+; label=Page ID of missionary planning
+		PidMissionary = 
+		# cat=plugin.tx_fkuplanning/others/v; type=string; label=Complete path and file name of .ics file without extension, e.g. fileadmin/calendar/personal
+		IcalFilePathAndName = 
+		# cat=plugin.tx_fkuplanning/others/w; type=string; label=Comma-separated list of visibility table uids used in .ics files
+		IcalVisible = 
+		# cat=plugin.tx_fkuplanning/others/x; type=int+; label=Number of hours between updates of .ics files
+		IcalUpdateIntervalHours = 
+		# cat=plugin.tx_fkuplanning/others/y; type=string; label=Path to Losungen files (file name "losungen20xx.xml")
+		losungenRootPath = fileadmin/losungen/
+		# cat=plugin.tx_fkuplanning/others/z; type=int+; label=Sermon file storage UID
+		fileStorageUid = 1
+	}
+}

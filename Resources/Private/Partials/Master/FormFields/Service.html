@@ -1,0 +1,143 @@
+
+<div class="row">
+	<div class="col-sm-6 col-12">
+
+		<h3>Generell</h3>
+		<div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Grundsätzlich</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="serviceActive" value="1" checked="{master.serviceActive}==1" class="form-check-input" />
+                    <label for="serviceActive" class="form-check-label">Gottesdienst findet statt</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="serviceTopic" class="col-sm-3 col-4 col-form-label">Thema</label>
+            <div class="col-8">
+                <f:form.textfield property="serviceTopic" class="form-control" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="serviceBible" class="col-sm-3 col-4 col-form-label">Bibelstelle</label>
+            <div class="col-8">
+                <f:form.textfield property="serviceBible" class="form-control" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="serviceSerial" class="col-sm-3 col-4 col-form-label">Predigtreihe</label>
+            <div class="col-8">
+                <f:form.select property="serviceSerial" options="{serials}" optionLabelField="title" prependOptionLabel="(keine)" prependOptionValue="0" class="form-control" />
+                <f:form.hidden name="old[serviceSerial]" value="{master.serviceSerial}" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="servicePreacher" class="col-sm-3 col-4 col-form-label">Prediger</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.servicePreacher,name:'servicePreacher',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Abendmahl</legend>
+            <div class="col-8">
+                <div class="form-check">
+	                <f:form.checkbox property="serviceSupper" value="1" checked="{master.serviceSupper}==1" class="form-check-input" />
+                    <label for="serviceSupper" class="form-check-label">Mit Abendmahl:</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="serviceSupperPeople" class="col-sm-3 col-4 col-form-label">&nbsp;</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceSupperPeople,name:'serviceSupperPeople',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+             <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Missionsfenster</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="serviceMission" value="1" checked="{master.serviceMission}==1" class="form-check-input" />
+                    <label for="serviceMission" class="form-check-label">Mit Fürbitte für die weltweite Kirche:</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="serviceMissionary" class="col-sm-3 col-4 col-form-label">&nbsp;</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceMissionary,name:'serviceMissionary',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceNotes" class="col-sm-3 col-4 col-form-label">Bemerkungen</label>
+            <div class="col-8">
+                <f:form.textarea property="serviceNotes" rows="2" class="form-control" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="serviceCollection" class="col-sm-3 col-4 col-form-label">Kollekte</label>
+            <div class="col-8">
+                <f:form.select property="serviceCollection" options="{0:'Normal (ganz für FKU)',1:'Zur Hälfte für Missionswerk',2:'Ganz für Missionswerk'}" class="form-control" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="serviceModerator" class="col-sm-3 col-4 col-form-label">Leitung</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceModerator,name:'serviceModerator',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceSexton" class="col-sm-3 col-4 col-form-label">Sigrist</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceSexton,name:'serviceSexton',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceWelcome" class="col-sm-3 col-4 col-form-label">Türbegrüssung</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceWelcome,name:'serviceWelcome',allPeople:allPeople}" />
+        </div>
+	</div>
+	<div class="col-sm-6 col-12">
+
+        <h3>Musik</h3>
+        <div class="row form-group">
+            <label for="serviceMusicSelect" class="col-sm-3 col-4 col-form-label">Liederauswahl</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceMusicSelect,name:'serviceMusicSelect',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+             <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">&nbsp;</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="serviceMusicSelectAll" value="1" checked="{master.serviceMusicSelectAll}==1" class="form-check-input" />
+                    <label for="serviceMusicSelectAll" class="form-check-label">Alle Lieder auswählen (inkl. Orgel)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="serviceMusicRehearse" class="col-sm-3 col-4 col-form-label">Probe-Organisation</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceMusicRehearse,name:'serviceMusicRehearse',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceMusicBand" class="col-sm-3 col-4 col-form-label">Musiker</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceMusicBand,name:'serviceMusicBand',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceMusicOrgan" class="col-sm-3 col-4 col-form-label">Orgel</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceMusicOrgan,name:'serviceMusicOrgan',allPeople:allPeople}" />
+        </div>
+    
+        <h3 class="mt-4">Technik</h3>
+        <div class="row form-group">
+            <label for="serviceBeamer" class="col-sm-3 col-4 col-form-label">Beamer</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceBeamer,name:'serviceBeamer',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceConsole" class="col-sm-3 col-4 col-form-label">Mischpult</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceConsole,name:'serviceConsole',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceCamera" class="col-sm-3 col-4 col-form-label">Kamera</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceCamera,name:'serviceCamera',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceFilmeditor" class="col-sm-3 col-4 col-form-label">Livestream-Schnitt</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceFilmeditor,name:'serviceFilmeditor',allPeople:allPeople}" />
+        </div>
+        <div class="row form-group">
+            <label for="serviceLivestreamlink" class="col-sm-3 col-4 col-form-label">YouTube-ID Livestream</label>
+            <div class="col-8">
+                <f:form.textfield property="serviceLivestreamlink" class="form-control" />
+            </div>            
+        </div>
+
+	</div>
+</div>

@@ -1,0 +1,132 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:switch expression="{settings.dashboardType}">
+	<f:case value="1">
+		<p>
+        	<f:link.action pageUid="{settings.PidPlanning}" action="list" pluginName="Serviceplan" arguments="{section:'service'}" controller="Master">
+            	<svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                Gottesdienst-Plan online
+            </f:link.action>
+        </p>
+	</f:case>
+	<f:case value="2">
+		<p>
+        	<f:link.action pageUid="{settings.PidPlanning}" action="list" pluginName="Serviceplan" arguments="{section:'kids'}" controller="Master">
+            	<svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+                KidsTreff-Plan online
+            </f:link.action>
+        </p>
+	</f:case>
+</f:switch>
+
+<f:if condition="{myMaster}">
+	<f:then>
+		<h3>Mein nächster Einsatz: <nobr>{myMaster.master.date->f:format.date(format:'%e. %B')}</nobr></h3>
+		<p>
+			<span class="lead">
+				<f:for each="{myMaster.roles}" as="role" iteration="it">
+					<f:switch expression="{role}">
+						<f:case value="servicePreacher">
+							Prediger<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceModerator">
+							Gottesdienst-Leitung<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceMusicSelect">
+							Liederauswahl<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceMusicRehearse">
+							Musikprobe organisieren<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceMusicBand">
+							Musikteam<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceMusicOrgan">
+							Organist<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceBeamer">
+							Beamer<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceConsole">
+							Mischpult<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceSexton">
+							Sigrist<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceWelcome">
+							Türbegrüssung<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceMissionary">
+							Fürbitte für die weltweite Kirche<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceSupperPeople">
+							Abendmahl<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="childrenPeople">
+							Kinderhüeti<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="kidsPlaying">
+							Spielstrasse<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="kidsSinging">
+							Singen im Kids Treff<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="kidsPlenum">
+							Plenum im Kids Treff<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="kidsGroup1">
+							Kleingruppe Habakuk<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="kidsGroup2">
+							Kleingruppe Karibu<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="kidsGroup3">
+							Zundhölzli<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="kidsGroup3Program">
+							Zundhölzli-Programm<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="kidsYoung">
+							Summervögeli<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="teensPeople1">
+							Teens Treff 1./2. Jahr<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="teensPeople2">
+							Teens Treff 3. Jahr<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="coffeePeople">
+							Chilekafi<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="coffeeSpecial">
+							Kaffeemaschine<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="drivingPeople">
+							Fahrdienst<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="prayerPeople">
+							Gebet nach Gottesdienst<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+						<f:case value="serviceWinter">
+							Winterdienst<f:if condition="{it.isLast}==0">, </f:if>
+						</f:case>
+					</f:switch>
+				</f:for>
+			</span>
+			<br />
+			<f:link.action pageUid="{settings.PidPlanning}" action="show" pluginName="Serviceplan" arguments="{master:myMaster.master}" controller="Master">Weitere Infos</f:link.action>
+		</p>
+		<p>
+        	<f:link.action pageUid="{settings.PidPlanning}" action="personal" controller="Master">
+            	<svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+	            Alle meine Einsätze
+            </f:link.action>
+        </p>
+	</f:then>
+	<f:else>
+		<p>Keine Einsätze in den nächsten Monaten</p>
+	</f:else>
+</f:if>
+
+</f:section>

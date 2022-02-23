@@ -1,0 +1,33 @@
+<f:spaceless>
+	<f:for each="{list}" as="person" iteration="it">
+		<f:if condition="{person.email}">
+			<f:then>
+				<f:if condition="{person.uid}=={me}">
+					<f:then>
+						<mark><f:link.email email="{person.email}" additionalAttributes="{title:'E-Mail an {person.name}'}">{person.firstname} {person.lastname->f:format.crop(maxCharacters:1,append:'.')}</f:link.email></mark><f:if condition="{append}">{append}</f:if><f:if condition="{it.isLast}==0">, </f:if>
+					</f:then>
+					<f:else>
+						<f:link.email email="{person.email}" additionalAttributes="{title:'E-Mail an {person.name}'}">{person.firstname} {person.lastname->f:format.crop(maxCharacters:1,append:'.')}</f:link.email><f:if condition="{append}">{append}</f:if><f:if condition="{it.isLast}==0">, </f:if>
+					</f:else>
+				</f:if>
+			</f:then>
+			<f:else>
+				<f:if condition="{person.uid}=={me}">
+					<f:then>
+						<mark>{person.firstname} {person.lastname->f:format.crop(maxCharacters:1,append:'.')}></mark><f:if condition="{append}">{append}</f:if><f:if condition="{it.isLast}==0">, </f:if>
+					</f:then>
+					<f:else>
+						<f:if condition="{person.firstname}">
+							<f:then>
+								{person.firstname} {person.lastname->f:format.crop(maxCharacters:1,append:'.')}<f:if condition="{append}">{append}</f:if><f:if condition="{it.isLast}==0">, </f:if>
+							</f:then>
+							<f:else>
+								{person.name}<f:if condition="{append}">{append}</f:if><f:if condition="{it.isLast}==0">, </f:if>
+							</f:else>
+						</f:if>
+					</f:else>
+				</f:if>
+			</f:else>
+		</f:if>
+	</f:for>
+</f:spaceless>

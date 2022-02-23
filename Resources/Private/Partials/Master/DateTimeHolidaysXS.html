@@ -1,0 +1,88 @@
+{namespace p=FKU\FkuPlanning\ViewHelpers}
+
+<f:spaceless>
+	<h3 id="master{master.uid}">
+		<b><f:link.action action="show" pluginName="Serviceplan" pageUid="{settings.PidPlanning}" arguments="{master:master}" additionalAttributes="{title:'Alle Informationen anzeigen'}">{master.date->f:format.date(format:'%e. %b')}<f:if condition="{master.date->f:format.date(format:'n')}!=5">.</f:if></f:link.action></b>
+        <f:if condition="{master.date->f:format.date(format:'H.i')}!={settings.defaultStartTime}">
+            {master.date->f:format.date(format:'G.i')} Uhr
+        </f:if>
+        <f:if condition="{master.notes} || {master.holidays}">
+        	<small>
+                <f:if condition="{master.notes} && {master.holidays}">
+                    <f:then>({master.notes}, Schulferien)</f:then>
+                    <f:else if="{master.notes}">({master.notes})</f:else>
+                    <f:else>(Schulferien)</f:else>
+                </f:if>
+            </small>
+        </f:if>
+		
+        <f:switch expression="{section}">
+            <f:case value="service">
+                <f:security.ifHasRole role="{settings.usergroupService}">
+                    <span class="float-right">
+                    	<small>
+                        	<f:link.action action="edit" arguments="{master:master,section:section,back:'list'}" additionalAttributes="{title:'Gottesdienst-Angaben ändern'}">
+                            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                            </f:link.action>
+                        </small>
+                    </span>
+                </f:security.ifHasRole>
+            </f:case>
+            <f:case value="kids">
+                <f:security.ifHasRole role="{settings.usergroupKids}">
+                    <span class="float-right">
+                    	<small>
+                        	<f:link.action action="edit" arguments="{master:master,section:section,back:'list'}" additionalAttributes="{title:'Kids-Treff-Angaben ändern'}">
+                            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                            </f:link.action>
+                        </small>
+                    </span>
+                </f:security.ifHasRole>
+            </f:case>
+            <f:case value="children">
+                <f:security.ifHasRole role="{settings.usergroupChildren}">
+                    <span class="float-right">
+                    	<small>
+                        	<f:link.action action="edit" arguments="{master:master,section:section,back:'list'}" additionalAttributes="{title:'Kinderhüeti-Angaben ändern'}">
+                            <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                            </f:link.action>
+                        </small>
+                    </span>
+                </f:security.ifHasRole>
+            </f:case>
+            <f:case value="teens">
+                <f:security.ifHasRole role="{settings.usergroupTeens}">
+                    <span class="float-right">
+                    	<small>
+                        	<f:link.action action="edit" arguments="{master:master,section:section,back:'list'}" additionalAttributes="{title:'Teens-Treff-Angaben ändern'}">
+                            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                            </f:link.action>
+                        </small>
+                    </span>
+                </f:security.ifHasRole>
+            </f:case>
+            <f:case value="others">
+                <f:security.ifHasRole role="{settings.usergroupOthers}">
+                    <span class="float-right">
+                    	<small>
+                        	<f:link.action action="edit" arguments="{master:master,section:section,back:'list'}" additionalAttributes="{title:'Vorher/Nachher-Angaben ändern'}">
+                            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                            </f:link.action>
+                        </small>
+                    </span>
+                </f:security.ifHasRole>
+            </f:case>
+            <f:case value="mission">
+                <f:security.ifHasRole role="{settings.usergroupMission}">
+                    <span class="float-right">
+                    	<small>
+                        	<f:link.action action="edit" arguments="{master:master,section:section,back:'missionary'}" additionalAttributes="{title:'Missionsfenster-Angaben ändern'}">
+                            	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
+                            </f:link.action>
+                        </small>
+                    </span>
+                </f:security.ifHasRole>
+            </f:case>
+        </f:switch>
+	</h3>
+</f:spaceless>

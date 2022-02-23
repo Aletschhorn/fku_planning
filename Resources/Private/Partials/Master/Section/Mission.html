@@ -1,0 +1,79 @@
+<div class="d-none d-md-block">
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th width="5%">Datum</th>
+                <th width="15%">Verantwortlich</th>
+                <th width="20%">Inhalt</th>
+                <th width="25%">Bemerkungen</th>
+                <th width="35%">Weitere Personen</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <f:for each="{masters}" as="master" iteration="it">
+            	<f:if condition="{master.serviceMission}">
+                    <tr>
+                        <td><f:render partial="Master/DateTimeHolidays" arguments="{master:master,section:'mission',settings:settings,back:missionBack}" /></td>
+                        <td><f:render partial="Master/Personlist" arguments="{list:master.serviceMissionary,me:me}" /></td>
+                        <td>
+                            <f:if condition="{master.serviceMissionContent">
+                                <ol style="padding-left: 15px;">
+                                <f:for each="{master.serviceMissionContent}" as="missionContent">
+                                    <li>{missionContent.title}</li>
+                                </f:for>
+                                </ol>
+                            </f:if> 
+                        </td>
+                        <td>{master.serviceMissionNotes}</td>
+                        <td>
+                            GD-Leitung: <f:render partial="Master/Personlist" arguments="{list:master.serviceModerator,me:me}" /><br />
+                            Prediger: <f:render partial="Master/Personlist" arguments="{list:master.servicePreacher,me:me}" /><br />
+                            Beamer: <f:render partial="Master/Personlist" arguments="{list:master.serviceBeamer,me:me}" /><br />
+                        </td>
+                    </tr>
+                </f:if>
+            </f:for>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-block d-md-none">
+	<f:for each="{masters}" as="master">
+        <hr />
+        <f:render partial="Master/DateTimeHolidaysXS" arguments="{master:master,section:'mission',settings:settings}" />
+        <f:if condition="{master.serviceMissionary}">
+            <f:then>
+                <p>Verantwortlich: <f:render partial="Master/Personlist" arguments="{list:master.serviceMissionary,me:me}" /></p>
+            </f:then>
+            <f:else>
+                <p>Verantwortlich: offen</p>
+            </f:else>
+        </f:if>
+
+        <f:if condition="{master.serviceMissionContent}">
+            <f:then>
+                <p>
+                	Inhalt:<br />
+                    <ol style="padding-left:15px;">
+                    <f:for each="{master.serviceMissionContent}" as="missionContent">
+                        <li>{missionContent.title}</li>
+                    </f:for>
+                    </ol>
+                </p>
+            </f:then>
+            <f:else>
+                <p>Inhalt noch nicht festgelegt</p>
+            </f:else>
+        </f:if>
+
+         <f:if condition="{master.serviceMissionNotes}">
+            <f:then>
+                <p>Bemerkungen:<br />{master.serviceMissionNotes}</p>
+            </f:then>
+            <f:else>
+                <p>Bemerkungen: keine</p>
+            </f:else>
+        </f:if>
+   </f:for>
+</div>

@@ -1,0 +1,69 @@
+
+<f:layout name="Default" />
+
+<f:section name="main">
+<f:if condition="{section}=='general'">
+	<f:then>
+		<h2>Generelle Gottesdienst-Angaben ändern</h2>
+	</f:then>
+	<f:else>
+		<h2>{sectionInfo.title}-Angaben vom {master.date->f:format.date(format:'%e. %B %Y')} ändern</h2>
+	</f:else>
+</f:if>
+<br />
+
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<f:render partial="FormErrors" arguments="{object:Master}" />
+
+<f:form action="update" name="master" object="{master}">
+	<f:form.hidden name="back" value="{back}" />
+	<f:form.hidden name="section" value="{section}" />
+	<f:switch expression="{section}">
+		<f:case value="general">
+			<f:render partial="Master/FormFields/General" arguments="{master:master,visibilities:visibilities}" />
+		</f:case>
+		<f:case value="service">
+			<f:render partial="Master/FormFields/Service" arguments="{master:master,allPeople:allPeople,serials:serials}" />
+		</f:case>
+		<f:case value="kids">
+			<f:render partial="Master/FormFields/Kids" arguments="{master:master,allPeople:allPeople,kidsProgramOptions:kidsProgramOptions}" />
+		</f:case>
+		<f:case value="children">
+			<f:render partial="Master/FormFields/Children" arguments="{master:master,allPeople:allPeople}" />
+		</f:case>
+		<f:case value="teens">
+			<f:render partial="Master/FormFields/Teens" arguments="{master:master,allPeople:allPeople,teensProgram1Options:teensProgram1Options,teensProgram2Options:teensProgram2Options}" />
+		</f:case>
+		<f:case value="others">
+			<f:render partial="Master/FormFields/Others" arguments="{master:master,allPeople:allPeople}" />
+		</f:case>
+		<f:case value="mission">
+			<f:render partial="Master/FormFields/Mission" arguments="{master:master,allPeople:allPeople,missionaryOptions:missionaryOptions}" />
+		</f:case>
+	</f:switch>	
+	<br />
+	<f:if condition="{section}=='general'">
+		<f:link.action action="delete" arguments="{master:master}" class="btn btn-danger" additionalAttributes="{onclick: 
+'return confirm(\'Soll dieser Gottesdienst wirklich gelöscht werden?\')'}">Gottesdienst löschen</f:link.action>&nbsp;
+	</f:if>
+	<f:if condition="{back}=='show'">
+		<f:then>
+			<f:link.action action="show" pluginName="Serviceplan" arguments="{master:master}" class="btn btn-outline-dark">Abbrechen</f:link.action>&nbsp;
+		</f:then>
+		<f:else>
+			<f:link.action action="{back}" class="btn btn-outline-dark">Abbrechen</f:link.action>&nbsp;
+		</f:else>
+	</f:if>
+	<f:form.submit value="Speichern" class="btn btn-primary" />&nbsp;
+	<f:if condition="{section}!='general' && {section}!='mission'">
+		<f:if condition="{forward}">
+			<f:form.hidden name="forward" id="forward" value="0" />
+			<f:form.button type="button" class="btn btn-outline-dark" additionalAttributes="{onclick: 
+	'this.form.forward.value=1;this.form.submit();'}">Speichern und nächsten GD ändern</f:form.button>
+		</f:if>
+	</f:if>
+</f:form>
+</f:section>

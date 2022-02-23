@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-04T12:15:10Z" product-name="planning">
+		<header/>
+		<body>
+			<trans-unit id="date.description">
+				<source>date</source>
+			</trans-unit>
+			<trans-unit id="holidays.description">
+				<source>holidays</source>
+			</trans-unit>
+			<trans-unit id="notes.description">
+				<source>notes</source>
+			</trans-unit>
+			<trans-unit id="visibility.description">
+				<source>visibility</source>
+			</trans-unit>
+			<trans-unit id="agenda.description">
+				<source>agenda</source>
+			</trans-unit>
+			<trans-unit id="event.description">
+				<source>event</source>
+			</trans-unit>
+			<trans-unit id="service_active.description">
+				<source>serviceActive</source>
+			</trans-unit>
+			<trans-unit id="service_topic.description">
+				<source>serviceTopic</source>
+			</trans-unit>
+			<trans-unit id="service_bible.description">
+				<source>serviceBible</source>
+			</trans-unit>
+			<trans-unit id="service_preacher.description">
+				<source>servicePreacher</source>
+			</trans-unit>
+			<trans-unit id="service_notes.description">
+				<source>serviceNotes</source>
+			</trans-unit>
+			<trans-unit id="service_moderator.description">
+				<source>serviceModerator</source>
+			</trans-unit>
+			<trans-unit id="service_music_select.description">
+				<source>serviceMusicSelect</source>
+			</trans-unit>
+			<trans-unit id="service_music_select_all.description">
+				<source>serviceMusicSelectAll</source>
+			</trans-unit>
+			<trans-unit id="service_music_rehearse.description">
+				<source>serviceMusicRehearse</source>
+			</trans-unit>
+			<trans-unit id="service_music_band.description">
+				<source>serviceMusicBand</source>
+			</trans-unit>
+			<trans-unit id="service_music_organ.description">
+				<source>serviceMusicOrgan</source>
+			</trans-unit>
+			<trans-unit id="service_beamer.description">
+				<source>serviceBeamer</source>
+			</trans-unit>
+			<trans-unit id="service_console.description">
+				<source>serviceConsole</source>
+			</trans-unit>
+			<trans-unit id="service_camera.description">
+				<source>serviceCamera</source>
+			</trans-unit>
+			<trans-unit id="service_filmeditor.description">
+				<source>serviceFilmeditor</source>
+			</trans-unit>
+			<trans-unit id="service_sexton.description">
+				<source>serviceSexton</source>
+			</trans-unit>
+			<trans-unit id="service_welcome.description">
+				<source>serviceWelcome</source>
+			</trans-unit>
+			<trans-unit id="service_winter.description">
+				<source>serviceWinter</source>
+			</trans-unit>
+			<trans-unit id="service_mission.description">
+				<source>serviceMission</source>
+			</trans-unit>
+			<trans-unit id="service_mission_notes.description">
+				<source>serviceMissionNotes</source>
+			</trans-unit>
+			<trans-unit id="service_mission_content.description">
+				<source>serviceMissionContent</source>
+			</trans-unit>
+			<trans-unit id="service_missionary.description">
+				<source>serviceMissionary</source>
+			</trans-unit>
+			<trans-unit id="service_supper.description">
+				<source>serviceSupper</source>
+			</trans-unit>
+			<trans-unit id="service_supper_people.description">
+				<source>serviceSupperPeople</source>
+			</trans-unit>
+			<trans-unit id="service_collection.description">
+				<source>serviceCollection</source>
+			</trans-unit>
+			<trans-unit id="service_livestreamlink.description">
+				<source>serviceLivestreamlink</source>
+			</trans-unit>
+			<trans-unit id="children_active.description">
+				<source>childrenActive</source>
+			</trans-unit>
+			<trans-unit id="children_people.description">
+				<source>childrenPeople</source>
+			</trans-unit>
+			<trans-unit id="kids_program.description">
+				<source>kidsProgram</source>
+			</trans-unit>
+			<trans-unit id="kids_topic.description">
+				<source>kidsTopic</source>
+			</trans-unit>
+			<trans-unit id="kids_topic_link.description">
+				<source>kidsTopicLink</source>
+			</trans-unit>
+			<trans-unit id="kids_notes.description">
+				<source>kidsNotes</source>
+			</trans-unit>
+			<trans-unit id="kids_playing.description">
+				<source>kidsPlaying</source>
+			</trans-unit>
+			<trans-unit id="kids_singing.description">
+				<source>kidsSinging</source>
+			</trans-unit>
+			<trans-unit id="kids_plenum.description">
+				<source>kidsPlenum</source>
+			</trans-unit>
+			<trans-unit id="kids_group1.description">
+				<source>kidsGroup1</source>
+			</trans-unit>
+			<trans-unit id="kids_group2.description">
+				<source>kidsGroup2</source>
+			</trans-unit>
+			<trans-unit id="kids_group3.description">
+				<source>kidsGroup3</source>
+			</trans-unit>
+			<trans-unit id="kids_group3_program.description">
+				<source>kidsGroup3Program</source>
+			</trans-unit>
+			<trans-unit id="kids_young_active.description">
+				<source>kidsYoungActive</source>
+			</trans-unit>
+			<trans-unit id="kids_young.description">
+				<source>kidsYoung</source>
+			</trans-unit>
+			<trans-unit id="teens_program1.description">
+				<source>teensProgram1</source>
+			</trans-unit>
+			<trans-unit id="teens_topic1.description">
+				<source>teensTopic1</source>
+			</trans-unit>
+			<trans-unit id="teens_notes1.description">
+				<source>teensNotes1</source>
+			</trans-unit>
+			<trans-unit id="teens_people1.description">
+				<source>teensPeople1</source>
+			</trans-unit>
+			<trans-unit id="teens_program2.description">
+				<source>teensProgram2</source>
+			</trans-unit>
+			<trans-unit id="teens_topic2.description">
+				<source>teensTopic2</source>
+			</trans-unit>
+			<trans-unit id="teens_notes2.description">
+				<source>teensNotes2</source>
+			</trans-unit>
+			<trans-unit id="teens_people2.description">
+				<source>teensPeople2</source>
+			</trans-unit>
+			<trans-unit id="coffee_active.description">
+				<source>coffeeActive</source>
+			</trans-unit>
+			<trans-unit id="coffee_notes.description">
+				<source>coffeeNotes</source>
+			</trans-unit>
+			<trans-unit id="coffee_people.description">
+				<source>coffeePeople</source>
+			</trans-unit>
+			<trans-unit id="coffee_special.description">
+				<source>coffeeSpecial</source>
+			</trans-unit>
+			<trans-unit id="prayer_active.description">
+				<source>prayerActive</source>
+			</trans-unit>
+			<trans-unit id="prayer_people.description">
+				<source>prayerPeople</source>
+			</trans-unit>
+			<trans-unit id="driving_active.description">
+				<source>drivingActive</source>
+			</trans-unit>
+			<trans-unit id="driving_people.description">
+				<source>drivingPeople</source>
+			</trans-unit>
+			<trans-unit id="sermon_bibletext.description">
+				<source>sermonBibletext</source>
+			</trans-unit>
+			<trans-unit id="sermon_concept.description">
+				<source>sermonConcept</source>
+			</trans-unit>
+			<trans-unit id="sermon_related_files.description">
+				<source>sermonRelatedFiles</source>
+			</trans-unit>
+			<trans-unit id="sermon_public.description">
+				<source>sermonPublic</source>
+			</trans-unit>
+			<trans-unit id="sermon_exist.description">
+				<source>sermonExist</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
