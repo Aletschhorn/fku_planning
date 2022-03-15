@@ -42,7 +42,7 @@ use FKU\FkuPlanning\Domain\Repository\VisibilityRepository;
 use FKU\FkuPlanning\Domain\Repository\SerialRepository;
 use FKU\FkuPlanning\Domain\Repository\TrackingRepository;
 use FKU\FkuPlanning\Domain\Repository\MissionaryRepository;
-use FKU\FkuPlanning\Controller\IcalCommand;
+use FKU\FkuPlanning\Command\IcalCommand;
 use FKU\FkuPeople\Domain\Repository\PersonRepository;
 use FKU\FkuPeople\Domain\Repository\UserRepository;
 use FKU\FkuPeople\Domain\Repository\NotificationRepository;
@@ -1155,8 +1155,15 @@ class MasterController extends ActionController {
 		$code = str_replace(' ','_',$user->getName()).'_'.substr(uniqid(''),5,6);
 		$user->setTxFkupeoplePlanningcal($code);
 		$userRepository->update($user);
+		
+		// write to database
+		$persistenceManager = $objectManager->get(PersistenceManager::class);
+		$persistenceManager->persistAll();
+		
+		// create .ics file
 		$icsFile = GeneralUtility::makeInstance(IcalCommand::class);
 		$icsFile->createFiles($this->settings['IcalFilePathAndName'], explode(',',$this->settings['IcalVisible']), $user);
+
         $this->redirect('calendar');
 	}
 	
@@ -1172,8 +1179,15 @@ class MasterController extends ActionController {
 		$user = $userRepository->findByUid($me);
 		$user->setTxFkupeoplePlanningAlarm(intval($this->request->getArgument('alarm')));
 		$userRepository->update($user);
+		
+		// write to database
+		$persistenceManager = $objectManager->get(PersistenceManager::class);
+		$persistenceManager->persistAll();
+		
+		// re-create .ics file with new reminder settings
 		$icsFile = GeneralUtility::makeInstance(IcalCommand::class);
 		$icsFile->createFiles($this->settings['IcalFilePathAndName'], explode(',',$this->settings['IcalVisible']), $user);
+
         $this->redirect('calendar');
 	}
 	

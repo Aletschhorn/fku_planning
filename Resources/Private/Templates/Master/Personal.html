@@ -47,13 +47,21 @@
                 GD-Übersicht
             </f:link.page>
 
-			<f:security.ifHasRole role="{settings.usergroupGeneral}">
-				&nbsp; &nbsp;
-				<f:link.action action="new" additionalAttributes="{title:'Neuen Gottesdienst hinzufügen'}">
-                    <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-371-plus.svg#glyphicons-basic"/></svg>
-                    GD
-                </f:link.action>
-			</f:security.ifHasRole>
+			&nbsp; &nbsp;
+			<f:link.action action="calendar" additionalAttributes="{title:'Kalender mit eigenen Einsätzen'}">
+                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-46-calendar.svg#glyphicons-basic"/></svg>
+                Kalender
+            </f:link.action>
+            
+            <f:if condition="{settings.PidNotifications}">
+				&nbsp; &nbsp;<nobr>
+                	<f:link.page pageUid="{settings.PidNotifications}">
+		                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-441-bell.svg#glyphicons-basic"/></svg>
+                        Benachrichtigungen
+                    </f:link.page>
+                </nobr>
+            </f:if>
+	
 		</div>
 	</div>
 </div>

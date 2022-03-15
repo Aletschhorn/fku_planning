@@ -68,16 +68,22 @@ class IcalCommand extends Command {
 	 *
 	 * @return bool|int Number of written .ics files
 	 */
-	protected function createFiles (string $filePathAndName, array $visible, \FKU\FkuPeople\Domain\Model\User $singleUser = NULL) {
+	public function createFiles (string $filePathAndName, array $visible, \FKU\FkuPeople\Domain\Model\User $singleUser = NULL) {
 		
 		$filesystem = new Filesystem();
 		$counter = 0;
+		
+		if ($this->masterRepository === NULL or $this->userRepository === NULL) {
+			$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+			$this->masterRepository = $objectManager->get(MasterRepository::class);
+			$this->userRepository = $objectManager->get(UserRepository::class);
+		}
 
 		// find masters in the right date range
 		$start = new \DateTime;
 		$start->setTime(0,0,0)->setDate(date('Y')-1,1,1);
 		$end = clone $start;
-		$end->modify('+3 years');
+		$end->modify('+2 years');
 		$masters = $this->masterRepository->findInDateRange($start, $end, $visible);
 		if ($masters->count() == 0) { return 0; }
 		
@@ -99,7 +105,7 @@ class IcalCommand extends Command {
 			if ($me > 0) {
 
 				// intialize
-				$absoluteFilePathAndName = Environment::getPublicPath() . '/' . $this->filePathAndName.'_'.$user->getTxFkupeoplePlanningcal().'.ics';
+				$absoluteFilePathAndName = Environment::getPublicPath() . '/' . $filePathAndName.'_'.$user->getTxFkupeoplePlanningcal().'.ics';
 				$fileContent = "";
 		
 				// filter the masters with logged-in person involved

@@ -15,10 +15,10 @@
 		<f:form class="form-inline" action="updateCalendar">
 			<div class="form-group">
 				<label for="alarm">Erinnerungsfunktion: </label>
-				<f:form.select name="alarm" value="{me.tx_fkupeople_planning_alarm}" options="{0:'Aus',1:'1 Tag vorher',2:'2 Tage vorher',3:'3 Tage vorher',4:'4 Tage vorher',5:'5 Tage vorher',6:'6 Tage vorher',7:'7 Tage vorher',8:'8 Tage vorher',9:'9 Tage vorher',10:'10 Tage vorher',14:'14 Tage vorher'}" class="form-control" additionalAttributes="{onChange:'document.getElementById(\'spinner\').className=\'show\';form.submit()'}" />
+				<f:form.select name="alarm" value="{me.tx_fkupeople_planning_alarm}" options="{0:'Aus',1:'1 Tag vorher',2:'2 Tage vorher',3:'3 Tage vorher',4:'4 Tage vorher',5:'5 Tage vorher',6:'6 Tage vorher',7:'7 Tage vorher',8:'8 Tage vorher',9:'9 Tage vorher',10:'10 Tage vorher',14:'14 Tage vorher'}" class="form-control ml-3" additionalAttributes="{onChange:'document.getElementById(\'spinner\').className=\'d-inline\';form.submit()'}" />
 			</div>
 			<div class="form-group">
-				<div class="hidden" id="spinner">&nbsp; <f:image src="EXT:fku_planning/Resources/Public/Icons/spinner.gif" /></div>
+				<div class="d-none" id="spinner">&nbsp; <f:image src="EXT:fku_planning/Resources/Public/Icons/spinner.gif" /></div>
 			</div>
 		</f:form>
 		<br  />
@@ -27,7 +27,7 @@
 		<p>Je nach Geräteart, Betriebssystem und Software läuft das Einrichten anders ab. Manchmal reicht es, den Link oben anzuklicken und die Verwendung als Internetkalender zu bestätigen. Bitte beachten Sie, dass es einen Unterschied macht, ob Sie den Kalender nur herunterladen (Snapshot) oder als Internetkalender abonnieren. Nur im zweiten Fall werden Änderungen auf der Homepage auch in Ihrem Kalender-Programm aktualisiert.</p>
 	</f:then>
 	<f:else>
-		<f:link.action action="createCalendar" class="btn btn-default">Kalender aktivieren</f:link.action>
+		<f:link.action action="createCalendar" class="btn btn-outline-dark">Kalender aktivieren</f:link.action>
 	</f:else>
 </f:if>
 
