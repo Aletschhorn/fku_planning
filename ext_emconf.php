@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.1.0',
+	'version' => '5.2.0',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -448,5 +448,9 @@ $EM_CONF[$_EXTKEY] = [
  * -------------
  * Redefined actions of plugin Mission
  * New constants / setup variable: PidPlanning
+ *
+ * Version 5.2.0
+ * -------------
+ * Personal calendar configuration accessible again (issue #2 fixed)
  *
  */
