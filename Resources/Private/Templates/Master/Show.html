@@ -27,7 +27,7 @@
 				Agenda-Eintrag vom {master.event.EventStart->f:format.date(format:'d.m.y G.i')} Uhr: 
                 <f:security.ifHasRole role="{settings.usergroupAgenda}">
                 	&nbsp;
-                	<f:link.action action="edit" arguments="{event:master.event}" controller="Event" extensionName="fkuagenda" pluginName="view" pageUid="{settings.PidAgendaEdit}" additionalAttributes="{title:'Agenda-Eintrag ändern'}">
+                	<f:link.action action="edit" arguments="{event:master.event}" controller="Event" extensionName="fkuagenda" pluginName="Month" pageUid="{settings.PidAgendaEdit}" additionalAttributes="{title:'Agenda-Eintrag ändern'}">
                     <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
                 	</f:link.action>
                 </f:security.ifHasRole><br />
