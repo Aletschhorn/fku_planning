@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.2.1',
+	'version' => '5.2.2',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -456,5 +456,9 @@ $EM_CONF[$_EXTKEY] = [
  * Version 5.2.1
  * -------------
  * Correction of plugin name of fku_agenda in Show.html
+ *
+ * Version 5.2.2
+ * -------------
+ * Correction of partial template KidsTopicLink.html
  *
  */
