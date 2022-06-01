@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.2.2',
+	'version' => '5.2.3',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -460,5 +460,9 @@ $EM_CONF[$_EXTKEY] = [
  * Version 5.2.2
  * -------------
  * Correction of partial template KidsTopicLink.html
+ *
+ * Version 5.2.3
+ * -------------
+ * Added PPT template for livestream servies in Beamer.html
  *
  */
