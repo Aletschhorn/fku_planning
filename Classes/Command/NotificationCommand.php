@@ -8,6 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use FKU\FkuPlanning\Utilities\Utilities;
 use FKU\FkuPlanning\Domain\Repository\MasterRepository;
@@ -140,6 +141,8 @@ class NotificationCommand extends Command {
 				}
 			}
 		}
+		$persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
+		$persistenceManager->persistAll();
 		return Command::SUCCESS;
 	}
 
