@@ -33,8 +33,6 @@ plugin.tx_fkuplanning {
 		PidServiceDownloads = {$plugin.tx_fkuplanning.settings.PidServiceDownloads}
 		PidNotifications = {$plugin.tx_fkuplanning.settings.PidNotifications}
 		PidSermon = {$plugin.tx_fkuplanning.settings.PidSermon}
-		PidLivestream = {$plugin.tx_fkuplanning.settings.PidLivestream}
-		PidMissionary = {$plugin.tx_fkuplanning.settings.PidMissionary}
 		IcalFilePathAndName = {$plugin.tx_fkuplanning.settings.IcalFilePathAndName}
 		IcalVisible = {$plugin.tx_fkuplanning.settings.IcalVisible}
 		IcalUpdateIntervalHours = {$plugin.tx_fkuplanning.settings.IcalUpdateIntervalHours}

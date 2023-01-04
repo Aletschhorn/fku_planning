@@ -790,16 +790,6 @@ class MasterController extends ActionController {
 			}
 			$this->addFlashMessage($title.'-Angaben vom '.$master->getDate()->format('j.m.Y').' aktualisiert', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
 
-			if ($this->settings['PidPlanning']) {
-				$this->clearSpecificCache($this->settings['PidPlanning']);
-			}
-			if ($this->settings['PidLivestream']) {
-				$this->clearSpecificCache($this->settings['PidLivestream']);
-			}
-			if ($this->settings['PidMissionary']) {
-				$this->clearSpecificCache($this->settings['PidMissionary']);
-			}
-			
 			// Notification if all changes are of interest (independent of involved person)
 			$listAllNotification = [];
 			$notifications = $objectManager->get(NotificationRepository::class)->findAllPerRule([26],'fku_planning');
@@ -1761,9 +1751,6 @@ class MasterController extends ActionController {
 		// write to database
 		$master->setSermonExist(true);
 		$this->masterRepository->update($master);
-		if ($this->settings['PidSermon']) {
-			$this->clearSpecificCache($this->settings['PidSermon']);
-		}
 		
 		$this->addFlashMessage('Die Predigt-Angaben wurden gespeichert.','',\TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
 		
@@ -1797,9 +1784,6 @@ class MasterController extends ActionController {
 		$master->setSermonExist(false);
 		$this->masterRepository->update($master);
 		
-		if ($this->settings['PidSermon']) {
-			$this->clearSpecificCache($this->settings['PidSermon']);
-		}
 		$this->addFlashMessage('Die Predigt wurde gelöscht.','',\TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
 		$this->redirect('sermonList');
 	}
@@ -1819,17 +1803,5 @@ class MasterController extends ActionController {
 			'settings' => $this->settings,
 		));		
 	}
-
-
-	/**
-	* clearSpecificCache
-	*
-	* @param string $pid Comma-separated list of PIDs
-	* @return void
-	*/
-    protected function clearSpecificCache($pid) {
-		$pageIds = explode(',',$pid);
-		$this->cacheService->clearPageCache($pageIds);
-    }
 
 }
