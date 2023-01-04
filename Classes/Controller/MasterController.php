@@ -256,11 +256,13 @@ class MasterController extends ActionController {
 		// filter the masters with logged-in person involved
 		$myMasters = [];
 		foreach ($masters as $key => $master) {
-			$myMasters[$key] = Utilities::identifyUser($master, $me);
-			if ($master->getEvent() instanceof Event) {
-				$event = $master->getEvent();
-				$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-				$myMasters[$key]['reporting'] = $objectManager->get(ReportingRepository::class)->findByEvent($event);		
+			if ($myMaster = Utilities::identifyUser($master, $me)) {
+				$myMasters[$key] = $myMaster;
+				if ($master->getEvent() instanceof Event) {
+					$event = $master->getEvent();
+					$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+					$myMasters[$key]['reporting'] = $objectManager->get(ReportingRepository::class)->findByEvent($event);		
+				}
 			}
 		}
 		
