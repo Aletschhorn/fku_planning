@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.2.4',
+	'version' => '5.3.0',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -468,5 +468,11 @@ $EM_CONF[$_EXTKEY] = [
  * Version 5.2.4
  * -------------
  * Correction in class NotificationCommand
+ *
+ * Version 5.3.0
+ * -------------
+ * Renamed typoscript files from .txt to .typoscript
+ * Removed cache clearing by the extension
+ * Fixed issue of showing empty table intead of text in Personal.html
  *
  */
