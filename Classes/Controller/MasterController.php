@@ -213,7 +213,11 @@ class MasterController extends ActionController {
 		$daterange['visible'] = $this->settings['showVisibility'];
 
 		// read data from database
-        $masters = $this->masterRepository->findInDateRange($filter['low'], $filter['high'], $visible);
+		if ($section == 'mission') {
+	        $masters = $this->masterRepository->findInDateRange($filter['low'], $filter['high'], $visible, ['serviceMission' => 1]);
+		} else {
+	        $masters = $this->masterRepository->findInDateRange($filter['low'], $filter['high'], $visible);
+		}
 		
 		$me = $GLOBALS['TSFE']->fe_user->user['tx_fkupeople_fkudbid'];
 		
@@ -1353,10 +1357,7 @@ class MasterController extends ActionController {
 		$daterange['visible'] = $this->settings['showVisibility'];
 
 		// read data from database
-		$query = $this->masterRepository->createQuery();
-		$contraints = [];
-		$contraints[] = $query->equals('serviceMission',1);
-        $masters = $this->masterRepository->findInDateRange($filter['low'], $filter['high'], $visible, $contraints);
+        $masters = $this->masterRepository->findInDateRange($filter['low'], $filter['high'], $visible, ['serviceMission' => 1]);
 		
 		$me = $GLOBALS['TSFE']->fe_user->user['tx_fkupeople_fkudbid'];
 		

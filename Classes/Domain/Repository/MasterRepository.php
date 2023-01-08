@@ -117,7 +117,12 @@ class MasterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		}
 		$query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
-		$constraints = $extraContraints;
+		$constraints = [];
+		if (count($extraContraints) > 0) {
+			foreach ($extraContraints as $field => $value) {
+				$constraints[] = $query->equals($field, $value);
+			}
+		}
 		$constraints[] = $query->greaterThanOrEqual('date',$lowLimit->format('Y-m-d H:i:s'));
 		$constraints[] = $query->lessThan('date',$highLimit->format('Y-m-d H:i:s'));
 		if (count($visibility) > 0) {
