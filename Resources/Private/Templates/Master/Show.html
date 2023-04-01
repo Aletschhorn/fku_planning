@@ -50,7 +50,7 @@
             <f:then>
                 <f:link.action action="show" pluginName="Serviceplan" arguments="{master:previousMaster}" class="btn btn-outline-primary">
                     <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-223-chevron-left.svg#glyphicons-basic"/></svg>
-                    Früher<span class="d-none d-sm-inline">: <f:format.htmlentities encoding="ISO-8859-1">{previousMaster.date->f:format.date(format:'%e. %B')}</f:format.htmlentities></span>
+                    Früher<span class="d-none d-sm-inline">: {previousMaster.date->f:format.date(format:'%e. %B')}</span>
                 </f:link.action>
             </f:then>
             <f:else>
@@ -889,7 +889,7 @@
 			<div class="card-header">
             	<b>Vorher, nachher</b>
                 <f:security.ifHasRole role="{settings.usergroupOthers}">
-                	<span class="pull-right">
+                    <span class="float-right">
                     	<f:link.action action="edit" arguments="{master:master,section:'others',back:'show'}" additionalAttributes="{title:'Vorher/Nachher-Angaben ändern'}">
                         	<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg>
                         </f:link.action>

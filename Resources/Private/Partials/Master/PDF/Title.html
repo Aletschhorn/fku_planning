@@ -3,9 +3,9 @@
 
 <fpdf:setY y="33" />
 <fpdf:setFont family="Calibri" size="16" style="B" />
-<f:if condition="{filter.low}<{filter.high}"><f:then><fpdf:multiCell width="200" text="{docTitle} {f:if(condition:'{filter.low->p:date(format:\'j\')}>1',then:'{filter.low->p:date(format:\'j\')}. ')}{filter.low->p:date(format:'%B')}{f:if(condition:'{filter.low->p:date(format:\'Y\')}<{filter.high->p:date(format:\'Y\')}',then:' {filter.low->p:date(format:\'Y\')}')} bis {f:if(condition:'{filter.low->p:date(format:\'j\')}>1',then:'Ende ')}{filter.high->p:date(format:'%B %Y')}" /></f:then><f:else><fpdf:cell width="200" text="{docTitle} {filter.low->p:date(format:'%B %Y')}" /></f:else></f:if>
+<f:if condition="{filter.low}<{filter.high}"><f:then><fpdf:multiCell width="200" text="{docTitle} {f:if(condition:'{filter.low->f:format.date(format:\'j\')}>1',then:'{filter.low->f:format.date(format:\'j\')}. ')}{filter.low->f:format.date(format:'%B')}{f:if(condition:'{filter.low->f:format.date(format:\'Y\')}<{filter.high->f:format.date(format:\'Y\')}',then:' {filter.low->f:format.date(format:\'Y\')}')} bis {f:if(condition:'{filter.low->f:format.date(format:\'j\')}>1',then:'Ende ')}{filter.high->f:format.date(format:'%B %Y')}" /></f:then><f:else><fpdf:cell width="200" text="{docTitle} {filter.low->f:format.date(format:'%B %Y')}" /></f:else></f:if>
 <f:variable name="pageWidth" value="{fpdf:getPageWidth()}" />
 <fpdf:setXY x="{pageWidth - 96}" y="34" />
 <fpdf:setFont family="Calibri" size="{fontSize}" style="" />
-<fpdf:cell width="84" align="R" ln="1" text="Stand: {now->p:date(format:'%e. %B %Y')}" />
+<fpdf:cell width="84" align="R" ln="1" text="Stand: {now->f:format.date(format:'%e. %B %Y')}" />
 <fpdf:setY y="40" />
