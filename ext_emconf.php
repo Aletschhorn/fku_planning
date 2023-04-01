@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.3.1',
+	'version' => '5.3.2',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -475,8 +475,12 @@ $EM_CONF[$_EXTKEY] = [
  * Removed cache clearing by the extension
  * Fixed issue of showing empty table intead of text in Personal.html
  *
- * Version 5.3.0
+ * Version 5.3.1
  * -------------
  * Only show relevant services in missionary view
+ *
+ * Version 5.3.2
+ * -------------
+ * Correct Umlaute in month names
  *
  */
