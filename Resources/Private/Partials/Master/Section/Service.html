@@ -15,7 +15,7 @@
                 <th width="12%">Leitung</th>
                 <th width="22%" title="L = Liederauswahl, M = Musikteam, O = Organist/in, P = Probe-Verantwortung">Musik</th>
                 <th width="13%" title="B = Beamer, M = Mischpult">Technik</th>
-                <th width="13%" title="S = Sigrist, T = Türbegrüssung">Weitere</th>
+                <th width="13%">Sigrist</th>
             </tr>
         </thead>
         <tbody>
@@ -161,12 +161,7 @@
                             </td>
                             <td>
                                 <p>
-                                    <span title="Sigrist">S: </span>
                                     <f:render partial="Master/Personlist" arguments="{list:master.serviceSexton,me:me}" />
-                                </p>
-                                <p>
-                                    <span title="Türbegrüssung">T: </span>
-                                    <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
                                 </p>
                             </td>
                         </f:then>
@@ -287,7 +282,6 @@
                 </p>
                 <p>
                     Sigrist: <f:render partial="Master/Personlist" arguments="{list:master.serviceSexton,me:me}" /><br />
-                    Türbegrüssung: <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
                 </p>
             </f:then>
             <f:else>

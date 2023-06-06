@@ -476,13 +476,6 @@ class MasterController extends ActionController {
 					$namelistAll[] = $person->getName();
 				}
 			}
-			foreach ($master->getServiceWelcome() as $person) {
-				if ($person->getEmail()) {
-					$maillistAll[] = $person->getEmail();
-				} else {
-					$namelistAll[] = $person->getName();
-				}
-			}
 			if ($master->isServiceMission()) {
 				foreach ($master->getServiceMissionary() as $person) {
 					if ($person->getEmail()) {
@@ -710,7 +703,7 @@ class MasterController extends ActionController {
 					}
 					break;
 				case 'service':
-					$fieldsWithPeople = ['servicePreacher','serviceModerator','serviceMusicSelect','serviceMusicRehearse','serviceMusicBand','serviceMusicOrgan','serviceBeamer','serviceConsole','serviceFilmeditor','serviceCamera','serviceSexton','serviceWelcome','serviceMissionary', 'serviceSupperPeople'];
+					$fieldsWithPeople = ['servicePreacher','serviceModerator','serviceMusicSelect','serviceMusicRehearse','serviceMusicBand','serviceMusicOrgan','serviceBeamer','serviceConsole','serviceFilmeditor','serviceCamera','serviceSexton','serviceMissionary', 'serviceSupperPeople'];
 					$notificationRule = 21;
 					break;
 				case 'children':
@@ -726,7 +719,7 @@ class MasterController extends ActionController {
 					$notificationRule = 22;
 					break;
 				case 'others':
-					$fieldsWithPeople = ['drivingPeople','prayerPeople','coffeePeople','coffeeSpecial','serviceWinter'];
+					$fieldsWithPeople = ['drivingPeople','serviceWelcome','prayerPeople','coffeePeople','coffeeSpecial','serviceWinter'];
 					$notificationRule = 25;
 					break;
 				case 'mission':

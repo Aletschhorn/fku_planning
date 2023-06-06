@@ -16,6 +16,12 @@
             <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.drivingPeople,name:'drivingPeople',allPeople:allPeople}" />
         </div>
 
+	    <h3 class="mt-4">Türbegrüssung</h3>
+        <div class="row form-group">
+            <label for="serviceWelcome" class="col-sm-3 col-4 col-form-label">Eingeteilt</label>
+            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceWelcome,name:'serviceWelcome',allPeople:allPeople}" />
+        </div>
+
 	    <h3 class="mt-4">Gebet</h3>
         <div class="row form-group">
             <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Grundsätzlich</legend>
@@ -31,11 +37,13 @@
             <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.prayerPeople,name:'prayerPeople',allPeople:allPeople}" />
         </div>
 
+		<f:comment> ----- HIDDEN, BECAUSE IT WAS NOT USED IN THE PAST YEARS -----
 	    <h3 class="mt-4">Winterdienst</h3>
         <div class="row form-group">
             <label for="serviceWinter" class="col-sm-3 col-4 col-form-label">Eingeteilt</label>
             <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceWinter,name:'serviceWinter',allPeople:allPeople}" />
         </div>
+        </f:comment>
 
 	</div>
 	<div class="col-sm-6 col-12">
@@ -46,7 +54,7 @@
             <div class="col-8">
                 <div class="form-check">
                     <f:form.checkbox property="coffeeActive" value="1" checked="{master.coffeeActive}==1" class="form-check-input" />
-                    <label for="coffeeActive" class="form-check-label">Gebet wird angeboten</label>
+                    <label for="coffeeActive" class="form-check-label">Chilekafi wird angeboten</label>
                 </div>
             </div>
         </div>

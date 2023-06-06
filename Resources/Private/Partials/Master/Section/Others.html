@@ -9,10 +9,10 @@
             <tr>
                 <th width="5%">Datum</th>
                 <th width="16%">Fahrdienst</th>
+                <th width="16%">Türbegrüssung</th>
                 <th width="16%">Gebet</th>
                 <th width="31%">Chilekafi</th>
                 <th width="16%">Kaffeemaschine</th>
-                <th width="16%">Winterdienst</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +33,10 @@
                             <td>Kein Fahrdienst</td>
                         </f:else>
                     </f:if>
+                    
+                    <td>
+                        <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
+                    </td>
         
                     <f:if condition="{master.prayerActive}">
                         <f:then>
@@ -59,10 +63,6 @@
                     <td>
                         <f:render partial="Master/Personlist" arguments="{list:master.coffeeSpecial,me:me}" />
                     </td>
-                    
-                    <td>
-                        <f:render partial="Master/Personlist" arguments="{list:master.serviceWinter,me:me}" />
-                    </td>
                 </tr>
             </f:for>
         </tbody>
@@ -81,6 +81,8 @@
                 <p>Kein Fahrdienst</p>
             </f:else>
         </f:if>
+
+        <p>Türbegrüssung: <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" /></p>
 
         <f:if condition="{master.prayerActive}">
             <f:then>
@@ -109,9 +111,6 @@
                     </f:if>
                 </p>
             </f:else>
-        </f:if>
-        <f:if condition="{master.serviceWinter}">
-            <p>Winterdienst: <f:render partial="Master/Personlist" arguments="{list:master.serviceWinter,me:me}" /></p>
         </f:if>
     </f:for>
 </div>

@@ -219,17 +219,10 @@
         <f:variable name="height5" value="{fpdf:getY()}" />
         <f:variable name="xPositionIndent" value="{xPosition8 + 5}" />
 
-        <f:comment> Weitere </f:comment>
+        <f:comment> Sigrist </f:comment>
         <f:if condition="{master.serviceActive}">
             <fpdf:setXY x="{xPosition8}" y="{yPosition}" />
-            <fpdf:cell width="5" height="{lineHeight}" text="S:" />
-            <fpdf:setXY x="{xPositionIndent}" y="{yPosition}" />
-            <fpdf:multiCell width="{columnWidth.9 - 5}" height="{lineHeight}" text="{p:peopleList(list:master.serviceSexton)}" />
-            <f:variable name="yCurrentPosition" value="{fpdf:getY()}" />
-            <fpdf:setXY x="{xPosition8}" y="{yCurrentPosition + paragraph}" />
-            <fpdf:cell width="5" height="{lineHeight}" text="T:" />
-            <fpdf:setXY x="{xPositionIndent}" y="{fpdf:getY()}" />
-            <fpdf:multiCell width="{columnWidth.9 - 5}" height="{lineHeight}" text="{p:peopleList(list:master.serviceWelcome)}" />
+            <fpdf:multiCell width="{columnWidth.9}" height="{lineHeight}" text="{p:peopleList(list:master.serviceSexton)}" />
         </f:if>
 								
         <f:comment> Rahmen zeichnen </f:comment>
@@ -365,16 +358,6 @@
     <fpdf:multiCell width="6" height="{lineHeightSmall}" text="S:" />
     <fpdf:setXY x="{xPositionIndent}" y="{yStart + lineHeightSmall + paragraph + lineHeightSmall + paragraph + lineHeightSmall + paragraph}" />
     <fpdf:multiCell width="{columnWidth.8 - 5}" height="{lineHeightSmall}" text="Livestream-Schnitt" />
-
-	<f:variable name="xPositionIndent" value="{xPosition8 + 5}" />
-    <fpdf:setXY x="{xPosition8}" y="{yStart}" />
-    <fpdf:multiCell width="6" height="{lineHeightSmall}" text="S:" />
-    <fpdf:setXY x="{xPositionIndent}" y="{yStart}" />
-    <fpdf:multiCell width="{columnWidth.9 - 5}" height="{lineHeightSmall}" text="Sigrist" />
-    <fpdf:setXY x="{xPosition8}" y="{yStart + lineHeightSmall + paragraph}" />
-    <fpdf:multiCell width="6" height="{lineHeightSmall}" text="T:" />
-    <fpdf:setXY x="{xPositionIndent}" y="{yStart + lineHeightSmall + paragraph}" />
-    <fpdf:multiCell width="{columnWidth.9 - 5}" height="{lineHeightSmall}" text="Türbegrüssung" />
 
 	<fpdf:setFont family="Calibri" size="{fontSize}" style="N" />
 
@@ -841,7 +824,7 @@
 <f:section name="others">
 
 	<f:variable name="docTitle" value="Dienste vor/nach Gottesdienst" />
-    <f:variable name="columnWidth" value="{1:20, 2:28, 3:28, 4:55, 5:28, 6:28}" />
+    <f:variable name="columnWidth" value="{1:20, 2:28, 3:28, 4:28, 5:55, 6:28}" />
 
     <f:variable name="xPosition1" value="{xStart + columnWidth.1}" />
     <f:variable name="xPosition2" value="{xPosition1 + columnWidth.2}" />
@@ -886,58 +869,58 @@
 
         <f:variable name="height2" value="{fpdf:getY()}" />
 							
-        <f:comment> Gebet </f:comment>
-        <fpdf:setXY x="{xPosition2}" y="{yPosition}" />
-        <f:if condition="{master.prayerActive}">
-            <f:then>
-                <fpdf:multiCell width="{columnWidth.3}" height="{lineHeight}" text="{p:peopleList(list:master.prayerPeople)}" />
-            </f:then>
-            <f:else>
-                <fpdf:multiCell width="{columnWidth.3}" height="{lineHeight}" text="Kein Gebet" />
-            </f:else>
+        <f:comment> Türbegrüssung </f:comment>
+        <f:if condition="{master.serviceWelcome}">
+            <fpdf:setXY x="{xPosition2}" y="{yPosition}" />
+            <fpdf:multiCell width="{columnWidth.3}" height="{lineHeight}" text="{p:peopleList(list:master.serviceWelcome)}" />
         </f:if>
 
         <f:variable name="height3" value="{fpdf:getY()}" />
                 
-        <f:comment> Chilfekafi </f:comment>
+        <f:comment> Gebet </f:comment>
         <fpdf:setXY x="{xPosition3}" y="{yPosition}" />
+        <f:if condition="{master.prayerActive}">
+            <f:then>
+                <fpdf:multiCell width="{columnWidth.4}" height="{lineHeight}" text="{p:peopleList(list:master.prayerPeople)}" />
+            </f:then>
+            <f:else>
+                <fpdf:multiCell width="{columnWidth.4}" height="{lineHeight}" text="Kein Gebet" />
+            </f:else>
+        </f:if>
+
+        <f:variable name="height4" value="{fpdf:getY()}" />
+        
+        <f:comment> Chilfekafi </f:comment>
+        <fpdf:setXY x="{xPosition4}" y="{yPosition}" />
         <f:if condition="{master.coffeeActive}">
             <f:then>
-                <fpdf:multiCell width="{columnWidth.4}" height="{lineHeight}" text="{p:peopleList(list:master.coffeePeople)}" />
+                <fpdf:multiCell width="{columnWidth.5}" height="{lineHeight}" text="{p:peopleList(list:master.coffeePeople)}" />
                 <f:if condition="{master.coffeeNotes}">
                     <fpdf:setFont family="Calibri" size="{fontSizeSmall}" style="N" />
                     <f:variable name="yCurrentPosition" value="{fpdf:getY()}" />
-                    <fpdf:setXY x="{xPosition3}" y="{yCurrentPosition + paragraph}" />
-                    <fpdf:multiCell width="{columnWidth.4}" height="{lineHeightSmall}" text="{master.coffeeNotes}" />
+                    <fpdf:setXY x="{xPosition4}" y="{yCurrentPosition + paragraph}" />
+                    <fpdf:multiCell width="{columnWidth.5}" height="{lineHeightSmall}" text="{master.coffeeNotes}" />
                     <fpdf:setFont family="Calibri" size="{fontSize}" style="N" />
                 </f:if>
             </f:then>
             <f:else>
                 <f:if condition="{master.coffeeNotes}">
                     <f:then>
-                        <fpdf:multiCell width="{columnWidth.4}" height="{lineHeight}" text="Kein Chilekafi: {master.coffeeNotes}" />
+                        <fpdf:multiCell width="{columnWidth.5}" height="{lineHeight}" text="Kein Chilekafi: {master.coffeeNotes}" />
                     </f:then>
                     <f:else>
-                        <fpdf:multiCell width="{columnWidth.4}" height="{lineHeight}" text="Kein Chilekafi" />
+                        <fpdf:multiCell width="{columnWidth.5}" height="{lineHeight}" text="Kein Chilekafi" />
                     </f:else>
                 </f:if>
             </f:else>
         </f:if>
 
-        <f:variable name="height4" value="{fpdf:getY()}" />
-        
-        <f:comment> Kaffeemaschine </f:comment>
-        <f:if condition="{master.coffeeActive}">
-            <fpdf:setXY x="{xPosition4}" y="{yPosition}" />
-            <fpdf:multiCell width="{columnWidth.5}" height="{lineHeight}" text="{p:peopleList(list:master.coffeeSpecial)}" />
-        </f:if>
-
         <f:variable name="height5" value="{fpdf:getY()}" />
 								
-        <f:comment> Winterdienst </f:comment>
-        <f:if condition="{master.serviceWinter}">
+        <f:comment> Kaffeemaschine </f:comment>
+        <f:if condition="{master.coffeeActive}">
             <fpdf:setXY x="{xPosition5}" y="{yPosition}" />
-            <fpdf:multiCell width="{columnWidth.6}" height="{lineHeight}" text="{p:peopleList(list:master.serviceWinter)}" />
+            <fpdf:multiCell width="{columnWidth.6}" height="{lineHeight}" text="{p:peopleList(list:master.coffeeSpecial)}" />
         </f:if>
 
         <f:variable name="height6" value="{fpdf:getY()}" />
