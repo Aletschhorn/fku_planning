@@ -312,9 +312,8 @@
                             </dd>
                             <br />
                         
-                            <dt>Weitere</dt>
+                            <dt>Sigrist</dt>
                             <dd>
-                                Sigrist:
                                 <f:if condition="{master.serviceSexton}">
                                     <f:then>
                                         <f:render partial="Master/Personlist" arguments="{list:master.serviceSexton,me:me}" />
@@ -323,18 +322,8 @@
                                         (offen)
                                     </f:else>
                                 </f:if>
-                                <br />
-                                Türbegrüssung:
-                                <f:if condition="{master.serviceWelcome}">
-                                    <f:then>
-                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
-                                    </f:then>
-                                    <f:else>
-                                        (offen)
-                                    </f:else>
-                                </f:if>
-                                <br />
                             </dd>
+                            <br />
                         </dl>
                         
                         <f:if condition="{master.serviceMusicBand}">
@@ -919,6 +908,19 @@
 					</dd>
 					<br />
 		
+					<dt>Türbegrüssung</dt>
+                    <dd>
+                        <f:if condition="{master.serviceWelcome}">
+                            <f:then>
+                                <f:render partial="Master/Personlist" arguments="{list:master.serviceWelcome,me:me}" />
+                            </f:then>
+                            <f:else>
+                                (offen)
+                            </f:else>
+                        </f:if>
+                    </dd>
+                    <br />
+
 					<dt>Gebet</dt>
 					<dd>
 						<f:if condition="{master.prayerActive}==0">
@@ -970,6 +972,7 @@
 						</f:if>
 					</dd>
 					
+                    <f:comment>
 					<f:if condition="{master.serviceWinter}">
 						<br />
 						<dt>Winterdienst</dt>
@@ -977,6 +980,7 @@
 							<f:render partial="Master/Personlist" arguments="{list:master.serviceWinter,me:me}" />
 						</dd>
 					</f:if>
+                    </f:comment>
 					
 				</dl>
 			</div>
