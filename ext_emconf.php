@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.3.2',
+	'version' => '5.4.0',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -482,5 +482,10 @@ $EM_CONF[$_EXTKEY] = [
  * Version 5.3.2
  * -------------
  * Correct Umlaute in month names
+ *
+ * Version 5.4.0
+ * -------------
+ * Moving "Türbegrüssung" from section service to section others
+ * Introduction of flag serviceLivestream to use as a condition for some displayed information
  *
  */
