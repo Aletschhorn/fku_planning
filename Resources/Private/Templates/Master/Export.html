@@ -204,15 +204,12 @@
             <fpdf:cell width="5" height="{lineHeight}" text="M:" />
             <fpdf:setXY x="{xPositionIndent}" y="{fpdf:getY()}" />
             <fpdf:multiCell width="{columnWidth.8 - 5}" height="{lineHeight}" text="{p:peopleList(list:master.serviceConsole)}" />
-            <f:variable name="yCurrentPosition" value="{fpdf:getY()}" />
-            <fpdf:setXY x="{xPosition7}" y="{yCurrentPosition + paragraph}" />
-            <fpdf:cell width="5" height="{lineHeight}" text="K:" />
-            <fpdf:setXY x="{xPositionIndent}" y="{fpdf:getY()}" />
-            <fpdf:multiCell width="{columnWidth.8 - 5}" height="{lineHeight}" text="{p:peopleList(list:master.serviceCamera)}" />
-            <f:variable name="yCurrentPosition" value="{fpdf:getY()}" />
-            <fpdf:setXY x="{xPosition7}" y="{yCurrentPosition + paragraph}" />
-            <fpdf:cell width="5" height="{lineHeight}" text="S:" />
-            <fpdf:setXY x="{xPositionIndent}" y="{fpdf:getY()}" />
+			<f:if condition="{master.serviceLivestream}">
+	            <f:variable name="yCurrentPosition" value="{fpdf:getY()}" />
+    	        <fpdf:setXY x="{xPosition7}" y="{yCurrentPosition + paragraph}" />
+        	    <fpdf:cell width="5" height="{lineHeight}" text="S:" />
+            	<fpdf:setXY x="{xPositionIndent}" y="{fpdf:getY()}" />
+            </f:if>
             <fpdf:multiCell width="{columnWidth.8 - 5}" height="{lineHeight}" text="{p:peopleList(list:master.serviceFilmeditor)}" />
         </f:if>
 								
@@ -351,12 +348,8 @@
     <fpdf:setXY x="{xPositionIndent}" y="{yStart + lineHeightSmall + paragraph}" />
     <fpdf:multiCell width="{columnWidth.8 - 5}" height="{lineHeightSmall}" text="Bedienung Mischpult" />
     <fpdf:setXY x="{xPosition7}" y="{yStart + lineHeightSmall + paragraph + lineHeightSmall + paragraph}" />
-    <fpdf:multiCell width="6" height="{lineHeightSmall}" text="K:" />
-    <fpdf:setXY x="{xPositionIndent}" y="{yStart + lineHeightSmall + paragraph + lineHeightSmall + paragraph}" />
-    <fpdf:multiCell width="{columnWidth.8 - 5}" height="{lineHeightSmall}" text="Bedienung Kamera" />
-    <fpdf:setXY x="{xPosition7}" y="{yStart + lineHeightSmall + paragraph + lineHeightSmall + paragraph + lineHeightSmall + paragraph}" />
     <fpdf:multiCell width="6" height="{lineHeightSmall}" text="S:" />
-    <fpdf:setXY x="{xPositionIndent}" y="{yStart + lineHeightSmall + paragraph + lineHeightSmall + paragraph + lineHeightSmall + paragraph}" />
+    <fpdf:setXY x="{xPositionIndent}" y="{yStart + lineHeightSmall + paragraph + lineHeightSmall + paragraph}" />
     <fpdf:multiCell width="{columnWidth.8 - 5}" height="{lineHeightSmall}" text="Livestream-Schnitt" />
 
 	<fpdf:setFont family="Calibri" size="{fontSize}" style="N" />
