@@ -99,6 +99,9 @@
 			<trans-unit id="service_livestreamlink.description">
 				<source>serviceLivestreamlink</source>
 			</trans-unit>
+			<trans-unit id="service_livestream.description">
+				<source>serviceLivestream</source>
+			</trans-unit>
 			<trans-unit id="children_active.description">
 				<source>childrenActive</source>
 			</trans-unit>

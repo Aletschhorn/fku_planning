@@ -20,13 +20,13 @@ return array(
 		'iconfile' => 'EXT:fku_planning/Resources/Public/Icons/tx_fkuplanning_domain_model_master.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'hidden, date, holidays, notes, visibility, agenda, event, service_active, service_topic, service_serial, service_bible, service_preacher, service_notes, service_moderator, service_music_select, service_music_select_all, service_music_rehearse, service_music_band, service_music_organ, service_beamer, service_console, service_camera, service_filmeditor, service_sexton, service_welcome, service_winter, service_mission, service_mission_notes, service_mission_content, service_missionary, service_supper, service_supper_people, service_collection, service_livestreamlink, children_active, children_people, kids_program, kids_topic, kids_topic_link, kids_notes, kids_playing, kids_singing, kids_plenum, kids_group1, kids_group2, kids_group3, kids_group3_program, kids_young_active, kids_young, teens_program1, teens_topic1, teens_notes1, teens_people1, teens_program2, teens_topic2, teens_notes2, teens_people2, coffee_active, coffee_notes, coffee_people, coffee_special, prayer_active, prayer_people, driving_active, driving_people, sermon_bibletext, sermon_concept, sermon_related_files, sermon_public, sermon_exist',
+		'showRecordFieldList' => 'hidden, date, holidays, notes, visibility, agenda, event, service_active, service_topic, service_serial, service_bible, service_preacher, service_notes, service_moderator, service_music_select, service_music_select_all, service_music_rehearse, service_music_band, service_music_organ, service_beamer, service_console, service_camera, service_filmeditor, service_sexton, service_welcome, service_winter, service_mission, service_mission_notes, service_mission_content, service_missionary, service_supper, service_supper_people, service_collection, service_livestreamlink, service_livestream, children_active, children_people, kids_program, kids_topic, kids_topic_link, kids_notes, kids_playing, kids_singing, kids_plenum, kids_group1, kids_group2, kids_group3, kids_group3_program, kids_young_active, kids_young, teens_program1, teens_topic1, teens_notes1, teens_people1, teens_program2, teens_topic2, teens_notes2, teens_people2, coffee_active, coffee_notes, coffee_people, coffee_special, prayer_active, prayer_people, driving_active, driving_people, sermon_bibletext, sermon_concept, sermon_related_files, sermon_public, sermon_exist',
 	],
 	'types' => [
 		'1' => ['showitem' => '
 				--palette--;;DateTime, notes, --palette--;;Visible,  event, 
 			--div--;LLL:EXT:fku_planning/Resources/Private/Language/locallang_db.xlf:tx_fkuplanning_domain_model_master.tabs.service, 
-				service_active, --palette--;;TopicBible, service_serial, --palette--;;NotesSupper, service_livestreamlink, service_collection, service_preacher, service_moderator, service_music_select, service_music_rehearse, service_music_band, service_music_organ, service_beamer, service_console, service_camera, service_filmeditor, service_sexton, service_welcome, service_winter, --palette--;;MissionNotes, service_missionary, service_mission_content, service_supper_people, 
+				service_active, --palette--;;TopicBible, service_serial, --palette--;;NotesSupper, --palette--;;Livestream, service_collection, service_preacher, service_moderator, service_music_select, service_music_rehearse, service_music_band, service_music_organ, service_beamer, service_console, service_camera, service_filmeditor, service_sexton, service_welcome, service_winter, --palette--;;MissionNotes, service_missionary, service_mission_content, service_supper_people, 
 			--div--;LLL:EXT:fku_planning/Resources/Private/Language/locallang_db.xlf:tx_fkuplanning_domain_model_master.tabs.children, 
 				children_active, children_people, --div--;LLL:EXT:fku_planning/Resources/Private/Language/locallang_db.xlf:tx_fkuplanning_domain_model_master.tabs.kids, kids_program, --palette--;;KidsTopic, kids_notes, kids_playing, kids_singing, kids_plenum, kids_group1, kids_group2, kids_group3, kids_group3_program, kids_young_active, kids_young, 
 			--div--;LLL:EXT:fku_planning/Resources/Private/Language/locallang_db.xlf:tx_fkuplanning_domain_model_master.tabs.teens, 
@@ -47,6 +47,7 @@ return array(
 		'DateTime' => ['showitem' => 'date, holidays'],
 		'Visible' => ['showitem' => 'visibility, agenda'],
 		'TopicBible' => ['showitem' => 'service_topic, service_bible'],
+		'Livestream' => ['showitem' => 'service_livestream, service_livestreamlink'],
 		'NotesSupper'  => ['showitem' => 'service_notes, service_supper'],
 		'MissionNotes' => ['showitem' => 'service_mission, service_mission_notes'],
 		'KidsTopic'  => ['showitem' => 'kids_topic, kids_topic_link'],
@@ -491,6 +492,15 @@ return array(
 				'type' => 'input',
 				'eval' => 'domainname,trim',
 			),
+		),
+		'service_livestream' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:fku_planning/Resources/Private/Language/locallang_db.xlf:tx_fkuplanning_domain_model_master.service_livestream',
+			'config' => array(
+				'type' => 'check',
+				'renderType' => 'checkboxToggle',
+				'default' => 0
+			)
 		),
 		'children_active' => array(
 			'exclude' => 1,

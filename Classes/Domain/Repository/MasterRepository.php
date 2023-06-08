@@ -103,6 +103,34 @@ class MasterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}	
 
 	/**
+	* findNext
+	*
+	* @param \DateTime $start Next (or previous) master from this date on
+	* @param \boolean $previous If true: find previous instead of next master
+	* @param \array $visibility Visibility uids that shall be displayed
+	* @return
+	*/
+	public function findNextLivestream ($start, $previous = false, $visibility = array()) {
+		$startUTC = (clone $start)->setTimezone(new \DateTimeZone('UTC'));
+		if (! is_array($visibility)) {
+			$visibility = [];
+		}
+		$query = $this->createQuery();
+		$constraints = [$query->equals('serviceLivestream',1)];
+		if ($previous) {
+			$constraints[] = $query->lessThan('date',$startUTC->format('Y-m-d H:i:s'));
+			$orderings = ['date' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING];
+		} else {
+			$constraints[] = $query->greaterThan('date',$startUTC->format('Y-m-d H:i:s'));
+			$orderings = ['date' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING];
+		}
+		if (count($visibility) > 0) {
+			$constraints[] = $query->in('visibility',$visibility);
+		}
+		return $query->matching($query->logicalAnd($constraints))->setOrderings($orderings)->execute()->getFirst();
+	}	
+
+	/**
 	* findInDateRange
 	*
 	* @param \DateTime $lowLimit

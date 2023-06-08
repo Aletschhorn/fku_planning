@@ -140,24 +140,12 @@
                                     <span title="Mischpult">M: </span>
                                     <f:render partial="Master/Personlist" arguments="{list:master.serviceConsole,me:me}" />
                                 </p>
-                                <p>
-                                    <span title="Kamera">K: </span>
-                                    <f:if condition="{master.serviceCamera}">
-                                        <f:then>
-                                            <f:render partial="Master/Personlist" arguments="{list:master.serviceCamera,me:me}" />
-                                        </f:then>
-                                        <f:else>--</f:else>
-                                    </f:if>
-                                </p>
-                                <p>
-                                    <span title="Livestream-Schnitt">S: </span>
-                                    <f:if condition="{master.serviceFilmeditor}">
-                                        <f:then>
-                                            <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
-                                        </f:then>
-                                        <f:else>--</f:else>
-                                    </f:if>
-                                </p>
+                                <f:if condition="{master.serviceLivestream}">
+                                    <p>
+                                        <span title="Livestream-Schnitt">S: </span>
+                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
+                                    </p>
+                                </f:if>
                             </td>
                             <td>
                                 <p>
@@ -276,9 +264,10 @@
                 </p>
                 <p>
                     Beamer: <f:render partial="Master/Personlist" arguments="{list:master.serviceBeamer,me:me}" /><br />
-                    Mischpult: <f:render partial="Master/Personlist" arguments="{list:master.serviceConsole,me:me}" /><br />
-                    Kamera: <f:render partial="Master/Personlist" arguments="{list:master.serviceCamera,me:me}" /><br />
-                    Livestream-Schnitt: <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
+                    Mischpult: <f:render partial="Master/Personlist" arguments="{list:master.serviceConsole,me:me}" />
+                    <f:if condition="{master.serviceLivestream}">
+	                    <br />Livestream-Schnitt: <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
+                    </f:if>
                 </p>
                 <p>
                     Sigrist: <f:render partial="Master/Personlist" arguments="{list:master.serviceSexton,me:me}" /><br />

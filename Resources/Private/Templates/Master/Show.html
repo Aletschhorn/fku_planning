@@ -279,35 +279,27 @@
                                         (offen)
                                     </f:else>
                                 </f:if>
-                                <br />
-                                Kamera:
-                                <f:if condition="{master.serviceCamera}">
-                                    <f:then>
-                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceCamera,me:me}" />
-                                    </f:then>
-                                    <f:else>
-                                        (offen)
-                                    </f:else>
-                                </f:if>
-                                <br />
-                                Livestream-Schnitt:
-                                <f:if condition="{master.serviceFilmeditor}">
-                                    <f:then>
-                                        <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
-                                    </f:then>
-                                    <f:else>
-                                        (offen)
-                                    </f:else>
-                                </f:if>
-                                <br />
-                                Livestream-Link:
-                                <f:if condition="{master.serviceLivestreamlink}">
-                                    <f:then>
-                                        <f:link.external uri="https://youtu.be/{master.serviceLivestreamlink}" target="_blank">https://youtu.be/{master.serviceLivestreamlink}</f:link.external>
-                                    </f:then>
-                                    <f:else>
-                                        --
-                                    </f:else>
+                                <f:if condition="{master.serviceLivestream}">
+                                    <br />
+                                    Livestream-Schnitt:
+                                    <f:if condition="{master.serviceFilmeditor}">
+                                        <f:then>
+                                            <f:render partial="Master/Personlist" arguments="{list:master.serviceFilmeditor,me:me}" />
+                                        </f:then>
+                                        <f:else>
+                                            (offen)
+                                        </f:else>
+                                    </f:if>
+                                    <br />
+                                    Livestream-Link:
+                                    <f:if condition="{master.serviceLivestreamlink}">
+                                        <f:then>
+                                            <f:link.external uri="https://youtu.be/{master.serviceLivestreamlink}" target="_blank">https://youtu.be/{master.serviceLivestreamlink}</f:link.external>
+                                        </f:then>
+                                        <f:else>
+                                            --
+                                        </f:else>
+                                    </f:if>
                                 </f:if>
                             </dd>
                             <br />

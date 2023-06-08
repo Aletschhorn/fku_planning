@@ -277,6 +277,13 @@ class Master extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $serviceCollection = 0;
     
     /**
+     * serviceLivestream
+     *
+     * @var bool
+     */
+    protected $serviceLivestream = false;
+    
+    /**
      * serviceLivestreamlink
      *
      * @var string
@@ -1588,6 +1595,34 @@ class Master extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function setServiceCollection($serviceCollection) {
         $this->serviceCollection = $serviceCollection;
+    }
+    
+    /**
+     * Returns the serviceLivestream
+     *
+     * @return bool $serviceLivestream
+     */
+    public function getServiceLivestream() {
+        return $this->serviceLivestream;
+    }
+    
+    /**
+     * Sets the serviceLivestream
+     *
+     * @param bool $serviceLivestream
+     * @return void
+     */
+    public function setServiceLivestream($serviceLivestream) {
+        $this->serviceLivestream = $serviceLivestream;
+    }
+    
+    /**
+     * Returns the boolean state of serviceLivestream
+     *
+     * @return bool
+     */
+    public function isServiceLivestream() {
+        return $this->serviceLivestream;
     }
     
     /**

@@ -39,6 +39,7 @@ CREATE TABLE tx_fkuplanning_domain_model_master (
 	service_supper_people varchar(255) DEFAULT '' NOT NULL,
 	service_collection tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	service_livestreamlink varchar(255) DEFAULT '' NOT NULL,
+	service_livestream tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	children_active tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	children_people varchar(255) DEFAULT '' NOT NULL,
 	kids_program int(11) DEFAULT '0' NOT NULL,

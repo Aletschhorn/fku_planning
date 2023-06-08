@@ -135,6 +135,10 @@
 				<source>YouTube ID</source>
 				<target>YouTube-ID</target>
 			</trans-unit>
+			<trans-unit id="serviceLivestream">
+				<source>Livestream</source>
+				<target>Livestream</target>
+			</trans-unit>
 			<trans-unit id="childrenActive">
 				<source>Babysitting active</source>
 				<target>Kinderhüeti</target>

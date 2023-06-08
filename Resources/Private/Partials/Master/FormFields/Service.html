@@ -120,19 +120,26 @@
             <label for="serviceConsole" class="col-sm-3 col-4 col-form-label">Mischpult</label>
             <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceConsole,name:'serviceConsole',allPeople:allPeople}" />
         </div>
-        <div class="row form-group">
-            <label for="serviceCamera" class="col-sm-3 col-4 col-form-label">Kamera</label>
-            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceCamera,name:'serviceCamera',allPeople:allPeople}" />
-        </div>
-        <div class="row form-group">
-            <label for="serviceFilmeditor" class="col-sm-3 col-4 col-form-label">Livestream-Schnitt</label>
-            <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceFilmeditor,name:'serviceFilmeditor',allPeople:allPeople}" />
-        </div>
-        <div class="row form-group">
-            <label for="serviceLivestreamlink" class="col-sm-3 col-4 col-form-label">YouTube-ID Livestream</label>
+		<div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Livestream</legend>
             <div class="col-8">
-                <f:form.textfield property="serviceLivestreamlink" class="form-control" />
-            </div>            
+                <div class="form-check">
+                	<f:form.checkbox property="serviceLivestream" value="1" checked="{master.serviceLivestream}==1" class="form-check-input" onclick="if(this.checked==1){document.getElementById('section_livestream').className='d-block'}else{document.getElementById('section_livestream').className='d-none'}" />
+                    <label for="serviceLivestream" class="form-check-label">Livestream wird angeboten</label>
+                </div>
+            </div>
+        </div>
+        <div id="section_livestream" class="{f:if(condition:'{master.serviceLivestream}==1',then:'d-block',else:'d-none')}">
+            <div class="row form-group">
+                <label for="serviceFilmeditor" class="col-sm-3 col-4 col-form-label">Livestream-Schnitt</label>
+                <f:render partial="Master/PeopleSelectionField" arguments="{master:master,property:master.serviceFilmeditor,name:'serviceFilmeditor',allPeople:allPeople}" />
+            </div>
+            <div class="row form-group">
+                <label for="serviceLivestreamlink" class="col-sm-3 col-4 col-form-label">YouTube-ID Livestream</label>
+                <div class="col-8">
+                    <f:form.textfield property="serviceLivestreamlink" class="form-control" />
+                </div>            
+            </div>
         </div>
 
 	</div>

@@ -102,6 +102,9 @@
 			<trans-unit id="tx_fkuplanning_domain_model_master.service_livestreamlink">
 				<source>YouTube ID</source>
 			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_master.service_livestream">
+				<source>Livestream</source>
+			</trans-unit>
 			<trans-unit id="tx_fkuplanning_domain_model_master.children_active">
 				<source>Children Active</source>
 			</trans-unit>

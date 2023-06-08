@@ -1791,7 +1791,7 @@ class MasterController extends ActionController {
 		$now = new \DateTime('-4 hours');
 		$masterVisibility = explode(',',$this->settings['showVisibility']);
 		// $this->settings['livestreamSelection']: 0 = next livestream, 1 = previous livestream
-		$master = $this->masterRepository->findNext($now, intval($this->settings['livestreamSelection']), $masterVisibility);
+		$master = $this->masterRepository->findNextLivestream($now, intval($this->settings['livestreamSelection']), $masterVisibility);
 		$this->view->assignMultiple(array(
 			'master' => $master,
 			'settings' => $this->settings,
