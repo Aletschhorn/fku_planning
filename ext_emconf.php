@@ -26,7 +26,7 @@ $EM_CONF[$_EXTKEY] = [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
 			'fluid_fpdf' => '1.0.0-2.99.99',
-			'fku_people' => '6.0.0-6.99.99',
+			'fku_people' => '6.0.0-7.99.99',
 		],
 		'conflicts' => [],
 		'suggests' => [],
