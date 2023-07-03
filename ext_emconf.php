@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.4.0',
+	'version' => '5.4.1',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -487,5 +487,9 @@ $EM_CONF[$_EXTKEY] = [
  * -------------
  * Moving "Türbegrüssung" from section service to section others
  * Introduction of flag serviceLivestream to use as a condition for some displayed information
+ *
+ * Version 5.4.1
+ * -------------
+ * Link to new ppt templates in Beamer.html template
  *
  */
