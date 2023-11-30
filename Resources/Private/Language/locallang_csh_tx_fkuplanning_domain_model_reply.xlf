@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-04T12:15:10Z" product-name="planning">
+		<header/>
+		<body>
+			<trans-unit id="survey.description">
+				<source>survey</source>
+			</trans-unit>
+			<trans-unit id="user.description">
+				<source>user</source>
+			</trans-unit>
+			<trans-unit id="availability.description">
+				<source>availability</source>
+			</trans-unit>
+			<trans-unit id="comment.description">
+				<source>comment</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

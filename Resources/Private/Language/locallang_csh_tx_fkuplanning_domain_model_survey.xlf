@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-04T12:15:10Z" product-name="planning">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="owner.description">
+				<source>owner</source>
+			</trans-unit>
+			<trans-unit id="slug.description">
+				<source>slug</source>
+			</trans-unit>
+			<trans-unit id="services.description">
+				<source>services</source>
+			</trans-unit>
+			<trans-unit id="expirydate.description">
+				<source>expirydate</source>
+			</trans-unit>
+			<trans-unit id="lessoptions.description">
+				<source>lessoptions</source>
+			</trans-unit>
+			<trans-unit id="blocked.description">
+				<source>blocked</source>
+			</trans-unit>
+			<trans-unit id="blind.description">
+				<source>blind</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

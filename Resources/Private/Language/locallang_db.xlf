@@ -287,6 +287,50 @@
 			<trans-unit id="tx_fkuplanning_domain_model_missionary.title">
 				<source>Title</source>
 			</trans-unit>
+
+			<trans-unit id="tx_fkuplanning_domain_model_survey">
+				<source>Survey</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.owner">
+				<source>Owner</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.slug">
+				<source>Slug</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.services">
+				<source>Services</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.expirydate">
+				<source>Expiry date</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.lessoptions">
+				<source>Less reply options</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.blocked">
+				<source>Survey blocked</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.blind">
+				<source>Blind survey</source>
+			</trans-unit>
+
+			<trans-unit id="tx_fkuplanning_domain_model_reply">
+				<source>Reply</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_reply.survey">
+				<source>Related survey</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_reply.user">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_reply.availability">
+				<source>Availability</source>
+			</trans-unit>
+			<trans-unit id="tx_fkuplanning_domain_model_reply.comment">
+				<source>Comment</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
