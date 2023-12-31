@@ -228,11 +228,11 @@
                                 <td>Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}<br /></f:if><f:if condition="{master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" /></f:if><br />Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /></td>
                             </f:case>
                             <f:case value="kidsSinging">
-                                <td>Singen im Kids Treff</td>
+                                <td>Singen im Kidstreff</td>
                                 <td>Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" /></f:if><br />Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /></td>
                             </f:case>
                             <f:case value="kidsPlenum">
-                                <td>Plenum im Kids Treff</td>
+                                <td>Plenum im Kidstreff</td>
                                 <td>Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{myMaster.master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{link:master.kidsTopicLink,pid:settings.PidKidsDownloads,linkText:'Dokumente zum Thema'}" /></f:if><br />Ganzes Plenum-Team: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /><br />Kleingruppen-Leiter: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup1}" /><f:if condition="{myMaster.master.kidsGroup1}">, </f:if><f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup2}" /></td>
                             </f:case>
                             <f:case value="kidsGroup1">
@@ -253,14 +253,14 @@
                             </f:case>
                             <f:case value="kidsYoung">
                                 <td>Summervögeli</td>
-                                <td>Singen im Kids Treff: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsSinging}" /></td>
+                                <td>Singen im Kidstreff: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsSinging}" /></td>
                             </f:case>
                             <f:case value="teensPeople1">
-                                <td>Teens Treff 1./2. Jahr</td>
+                                <td>Teenstreff 1./2. Jahr</td>
                                 <td>Thema: {myMaster.master.teensTopic1}<f:if condition="{myMaster.master.teensNotes1}"><br />{myMaster.master.teensNotes1->f:format.nl2br()}</f:if></td>
                             </f:case>
                             <f:case value="teensPeople2">
-                                <td>Teens Treff 3. Jahr</td>
+                                <td>Teenstreff 3. Jahr</td>
                                 <td>Thema: {myMaster.master.teensTopic2}<f:if condition="{myMaster.master.teensNotes2}"><br />{myMaster.master.teensNotes2->f:format.nl2br()}</f:if></td>
                             </f:case>
                             <f:case value="coffeePeople">
@@ -393,12 +393,12 @@
                         Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" />
                     </f:case>
                     <f:case value="kidsSinging">
-                        <b>Singen im Kids Treff</b><br />
+                        <b>Singen im Kidstreff</b><br />
                         Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{folder:master.kidsTopicLink,pid:settings.PidKidsDownloads}" /></f:if><br />
                         Plenum: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" />
                     </f:case>
                     <f:case value="kidsPlenum">
-                        <b>Plenum im Kids Treff</b><br />
+                        <b>Plenum im Kidstreff</b><br />
                         Thema: {myMaster.master.kidsTopic}<f:if condition="{myMaster.master.kidsNotes}"><br />{myMaster.master.kidsNotes}</f:if><f:if condition="{myMaster.master.kidsTopicLink}"><br /><f:render partial="Master/KidsTopicLink" arguments="{folder:myMaster.master.kidsTopicLink,pid:settings.PidKidsDownloads}" /></f:if>
                         <br />Ganzes Plenum-Team: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsPlenum}" /><br />Kleingruppen-Leiter: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup1}" /><f:if condition="{myMaster.master.kidsGroup1}">, </f:if><f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsGroup2}" />
                     </f:case>
@@ -422,15 +422,15 @@
                     </f:case>
                     <f:case value="kidsYoung">
                         <b>Summervögeli</b><br />
-                        Singen im Kids Treff: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsSinging}" />
+                        Singen im Kidstreff: <f:render partial="Master/Personlist" arguments="{list:myMaster.master.kidsSinging}" />
                     </f:case>
                     <f:case value="teensPeople1">
-                        <b>Teens Treff 1./2. Jahr</b><br />
+                        <b>Teenstreff 1./2. Jahr</b><br />
                         Thema: {myMaster.master.teensTopic1}
                         <f:if condition="{myMaster.master.teensNotes1}"><br />{myMaster.master.teensNotes1->f:format.nl2br()}</f:if>
                     </f:case>
                     <f:case value="teensPeople2">
-                        <b>Teens Treff 3. Jahr</b><br />
+                        <b>Teenstreff 3. Jahr</b><br />
                         Thema: {myMaster.master.teensTopic2}
                         <f:if condition="{myMaster.master.teensNotes2}"><br />{myMaster.master.teensNotes2->f:format.nl2br()}</f:if>
                     </f:case>

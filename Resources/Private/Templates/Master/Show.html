@@ -351,7 +351,7 @@
 		
 		<div class="card">
 			<div class="card-header">
-            	<b>Kids Treff</b>
+            	<b>Kidstreff</b>
                 <f:security.ifHasRole role="{settings.usergroupKids}">
                 	<span class="float-right">
                     	<f:link.action action="edit" arguments="{master:master,section:'kids',back:'show'}" additionalAttributes="{title:'Kids-Treff-Angaben ändern'}">
@@ -364,7 +364,7 @@
 			
 				<f:switch expression="{master.kidsProgram}">
 					<f:case value="0">
-						Kein Kids Treff
+						Kein Kidstreff
 						<f:if condition="{master.kidsNotes}">
 							<br />{master.kidsNotes->f:format.nl2br()}
 						</f:if>
@@ -710,7 +710,7 @@
 		
 		<div class="card">
 			<div class="card-header">
-            	<b>Teens Treff</b>
+            	<b>Teenstreff</b>
                 <f:security.ifHasRole role="{settings.usergroupTeens}">
                 	<span class="float-right">
                     	<f:link.action action="edit" arguments="{master:master,section:'teens',back:'show'}" additionalAttributes="{title:'Teens-Treff-Angaben ändern'}">
@@ -726,7 +726,7 @@
 						<dl>
 							<dt>1./2. Jahr</dt>
 							<dd>
-								Kein Teens Treff
+								Kein Teenstreff
 								<f:if condition="{master.teensNotes1}">
 									<br />{master.teensNotes1->f:format.nl2br()}
 								</f:if>
@@ -790,7 +790,7 @@
 						<dl>
 							<dt>3. Jahr</dt>
 							<dd>
-								Kein Teens Treff
+								Kein Teenstreff
 								<f:if condition="{master.teensNotes2}">
 									<br />{master.teensNotes2->f:format.nl2br()}
 								</f:if>

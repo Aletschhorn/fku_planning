@@ -532,7 +532,7 @@ return array(
 				'type' => 'select',
 				'renderType' => 'selectSingle',
 				'items' => array(
-					array('Kein Kids Treff', 0),
+					array('Kein Kidstreff', 0),
 					array('Thema', 1),
 					array('Thema, Kinder anfangs im GD', 2),
 					array('Kinder ganze Zeit im GD', 3),
@@ -700,7 +700,7 @@ return array(
 				'type' => 'select',
 				'renderType' => 'selectSingle',
 				'items' => array(
-					array('Kein Teens Treff', 0),
+					array('Kein Teenstreff', 0),
 					array('Thema', 1),
 					array('Gottesdienstbesuch', 2),
 				),
@@ -749,7 +749,7 @@ return array(
 				'type' => 'select',
 				'renderType' => 'selectSingle',
 				'items' => array(
-					array('Kein Teens Treff', 0),
+					array('Kein Teenstreff', 0),
 					array('Thema', 1),
 					array('Gottesdienstbesuch', 2),
 					array('Schnuppereinsatz', 3),

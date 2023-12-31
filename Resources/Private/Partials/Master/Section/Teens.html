@@ -39,7 +39,7 @@
                             </td>
                         </f:then>
                         <f:else>
-                            <td colspan="2" class="text-muted">Kein Teens Treff<f:if condition="{master.teensNotes1}">: {master.teensNotes1}</f:if></td>
+                            <td colspan="2" class="text-muted">Kein Teenstreff<f:if condition="{master.teensNotes1}">: {master.teensNotes1}</f:if></td>
                         </f:else>
                     </f:if>
                     <f:if condition="{master.teensProgram2}>0">
@@ -63,7 +63,7 @@
                             </td>
                         </f:then>
                         <f:else>
-                            <td colspan="2" class="text-muted">Kein Teens Treff<f:if condition="{master.teensNotes2}">: {master.teensNotes2}</f:if></td>
+                            <td colspan="2" class="text-muted">Kein Teenstreff<f:if condition="{master.teensNotes2}">: {master.teensNotes2}</f:if></td>
                         </f:else>
                     </f:if>
                 </tr>
@@ -79,7 +79,7 @@
         <f:if condition="{master.teensProgram1}>0">
             <f:then>
             	<p>
-                	Teens Treff 1./2. Jahr
+                	Teenstreff 1./2. Jahr
                     <f:switch expression="{master.teensProgram1}">
                         <f:case value="1">
                         	<f:if condition="{master.teensTopic1}"><br />{master.teensTopic1}</f:if>
@@ -97,13 +97,13 @@
                 </p>									
             </f:then>
             <f:else>
-                <p>Kein Teens Treff 1./2. Jahr<f:if condition="{master.teensNotes1}">: {master.teensNotes1}</f:if></p>
+                <p>Kein Teenstreff 1./2. Jahr<f:if condition="{master.teensNotes1}">: {master.teensNotes1}</f:if></p>
             </f:else>
         </f:if>
         <f:if condition="{master.teensProgram2}>0">
             <f:then>
             	<p>
-                	Teens Treff 3. Jahr
+                	Teenstreff 3. Jahr
                     <f:switch expression="{master.teensProgram2}">
                         <f:case value="1">
                         	<f:if condition="{master.teensTopic2}"><br />{master.teensTopic2}</f:if>
@@ -124,7 +124,7 @@
                 </p>									
             </f:then>
             <f:else>
-                <p>Kein Teens Treff 3. Jahr<f:if condition="{master.teensNotes2}">: {master.teensNotes2}</f:if></p>
+                <p>Kein Teenstreff 3. Jahr<f:if condition="{master.teensNotes2}">: {master.teensNotes2}</f:if></p>
             </f:else>
         </f:if>
     </f:for>

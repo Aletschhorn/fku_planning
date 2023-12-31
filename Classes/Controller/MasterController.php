@@ -66,16 +66,16 @@ class MasterController extends ActionController {
 		),
 		'teens' => array(
 			'key' => 'teens',
-			'name' => 'Teens Treff',
-			'title' => 'Teens-Treff',
-			'pdf' => 'TeensTreff',
+			'name' => 'Teenstreff',
+			'title' => 'Teenstreff',
+			'pdf' => 'Teenstreff',
 			'role' => false
 		),
 		'kids' => array(
 			'key' => 'kids',
-			'name' => 'Kids Treff',
-			'title' => 'Kids-Treff',
-			'pdf' => 'KidsTreff',
+			'name' => 'Kidstreff',
+			'title' => 'Kidstreff',
+			'pdf' => 'Kidstreff',
 			'role' => false
 		),
 		'children' => array(
@@ -102,7 +102,7 @@ class MasterController extends ActionController {
 	);
 	
 	protected $kidsProgramOptions = array (
-		0 => 'Kein Kids Treff',
+		0 => 'Kein Kidstreff',
 		1 => 'Thema',
 		2 => 'Thema, Kinder anfangs im GD',
 		3 => 'Kinder ganze Zeit im GD',
@@ -112,13 +112,13 @@ class MasterController extends ActionController {
 	);
 	
 	protected $teensProgram1Options = array (
-		0 => 'Kein Teens Treff',
+		0 => 'Kein Teenstreff',
 		1 => 'Thema',
 		2 => 'Gottesdienstbesuch',
 	);
 	
 	protected $teensProgram2Options = array (
-		0 => 'Kein Teens Treff',
+		0 => 'Kein Teenstreff',
 		1 => 'Thema',
 		2 => 'Gottesdienstbesuch',
 		3 => 'Schnuppereinsatz im GD',

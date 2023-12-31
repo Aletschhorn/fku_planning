@@ -127,14 +127,14 @@ class Utilities {
 		foreach ($master->getKidsSinging() as $person) {
 			if ($person->getUid() == $me) {
 				$myMaster['roles'][] = 'kidsSinging';
-				$myMaster['rolesText'][] = 'Singen Kids Treff';
+				$myMaster['rolesText'][] = 'Singen Kidstreff';
 				$myMaster['notifications'][] = 13;
 			}
 		}
 		foreach ($master->getKidsPlenum() as $person) {
 			if ($person->getUid() == $me) {
 				$myMaster['roles'][] = 'kidsPlenum';
-				$myMaster['rolesText'][] = 'Plenum Kids Treff';
+				$myMaster['rolesText'][] = 'Plenum Kidstreff';
 				$myMaster['notifications'][] = 13;
 			}
 		}
@@ -176,7 +176,7 @@ class Utilities {
 		foreach ($master->getTeensPeople1() as $person) {
 			if ($person->getUid() == $me) {
 				$myMaster['roles'][] = 'teensPeople1';
-				$myMaster['rolesText'][] = 'Teens Treff 1./2. Jahr';
+				$myMaster['rolesText'][] = 'Teenstreff 1./2. Jahr';
 				$myMaster['notifications'][] = 12;
 			}
 		}
@@ -184,7 +184,7 @@ class Utilities {
 			if ($person->getUid() == $me) {
 				$myMaster['roles'][] = 'teensPeople2';
 				$myMaster['notifications'][] = 12;
-				$myMaster['rolesText'][] = 'Teens Treff 3. Jahr';
+				$myMaster['rolesText'][] = 'Teenstreff 3. Jahr';
 			}
 		}
 		foreach ($master->getCoffeePeople() as $person) {

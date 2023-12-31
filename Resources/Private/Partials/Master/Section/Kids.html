@@ -27,7 +27,7 @@
                     </td>
                     <f:if condition="{master.kidsProgram}==0">
                         <f:then>
-                            <td colspan="8" class="text-muted">Kein Kids Treff<f:if condition="{master.kidsNotes}">: {master.kidsNotes}</f:if></td>
+                            <td colspan="8" class="text-muted">Kein Kidstreff<f:if condition="{master.kidsNotes}">: {master.kidsNotes}</f:if></td>
                         </f:then>
                         <f:else>
                             <td>
@@ -115,7 +115,7 @@
         <f:render partial="Master/DateTimeHolidaysXS" arguments="{master:master,section:'kids',settings:settings}" />
 		<f:if condition="{master.kidsProgram}==0">
 			<f:then>
-				<p>Kein Kids Treff<f:if condition="{master.kidsNotes}">: {master.kidsNotes}</f:if></p>
+				<p>Kein Kidstreff<f:if condition="{master.kidsNotes}">: {master.kidsNotes}</f:if></p>
 			</f:then>
 			<f:else>
                 <f:switch expression="{master.kidsProgram}">
