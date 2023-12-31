@@ -164,16 +164,18 @@ class MasterController extends ActionController {
 
 		// read data from database
         $masters = $this->masterRepository->findInDateRange($now, $later, $visible);
-		$me = $GLOBALS['TSFE']->fe_user->user['tx_fkupeople_fkudbid'];
+		$me = intval($GLOBALS['TSFE']->fe_user->user['tx_fkupeople_fkudbid']);
 		
 		// filter the masters with logged-in person involved
 		$myMasters = [];
-		foreach ($masters as $key => $master) {
-			if ($activeInMaster = Utilities::identifyUser($master, $me)) {
-				$myMasters[$key] = $activeInMaster;
+		if ($me > 0) {
+			foreach ($masters as $key => $master) {
+				if ($activeInMaster = Utilities::identifyUser($master, $me)) {
+					$myMasters[$key] = $activeInMaster;
+				}
 			}
+			$myMaster = array_shift($myMasters);
 		}
-		$myMaster = array_shift($myMasters);
 
 		$this->view->assignMultiple(array(
 			'myMaster' => $myMaster,
