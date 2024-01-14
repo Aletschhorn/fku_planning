@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.4.1',
+	'version' => '5.5.0',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -491,5 +491,10 @@ $EM_CONF[$_EXTKEY] = [
  * Version 5.4.1
  * -------------
  * Link to new ppt templates in Beamer.html template
+ *
+ * Version 5.5.0
+ * -------------
+ * Basic functionality for surveys added
+ * Renaming "Kids Treff" and "Teens Treff" to "Kidstreff" and "Teenstreff"
  *
  */
