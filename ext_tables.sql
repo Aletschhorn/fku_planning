@@ -244,7 +244,7 @@ CREATE TABLE tx_fkuplanning_domain_model_survey (
 	slug varchar(2048),
 	services varchar(255) DEFAULT '' NOT NULL,
 	expirydate int(11) unsigned DEFAULT '0' NOT NULL,
-	lessoptions tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	alloptions tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	blocked tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	blind tinyint(4) unsigned DEFAULT '0' NOT NULL,
 

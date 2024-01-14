@@ -55,6 +55,11 @@ defined('TYPO3_MODE') or die();
 	'GD Registration'
 );
 
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'fku_planning',
+	'Survey',
+	'GD Planning Survey'
+);
 
 
 // register flexforms

@@ -1,0 +1,25 @@
+{namespace p=FKU\FkuPlanning\ViewHelpers}
+
+<f:spaceless>
+    <b>{master.date->f:format.date(format:'%e.')}</b>
+    <f:if condition="{master.notes} || {master.holidays} || {master.date->f:format.date(format:'H.i')}!={settings.defaultStartTime}">
+    	<br />
+        <small>
+            <f:if condition="{{master.date->f:format.date(format:'H.i')}!={settings.defaultStartTime}}">
+            	<span data-toggle="tooltip" data-placement="bottom" title="Gottesdienst beginnt um {master.date->f:format.date(format:'G.i')} Uhr">
+                   	<svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-55-clock.svg#glyphicons-basic"/></svg>
+                </span>
+            </f:if>
+            <f:if condition="{master.holidays}">
+            	<span data-toggle="tooltip" data-placement="bottom" title="Schulferien">
+                   	<svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-232-sun.svg#glyphicons-basic"/></svg>
+                </span>
+            </f:if>
+            <f:if condition="{master.notes}">
+            	<span data-toggle="tooltip" data-placement="bottom" title="{master.notes}">
+                   	<svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-636-circle-info.svg#glyphicons-basic"/></svg>
+                </span>
+            </f:if>
+        </small>
+    </f:if>
+</f:spaceless>

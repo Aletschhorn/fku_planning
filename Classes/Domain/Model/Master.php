@@ -46,6 +46,13 @@ class Master extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $dateDate = null;
     
     /**
+     * dateMonth (only month)
+     *
+     * @var int
+     */
+    protected $dateMonth = 0;
+    
+    /**
      * dateTime (only time without date)
      *
      * @var \DateTime
@@ -586,6 +593,15 @@ class Master extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function getDate() {
 		return $this->date;
+    }
+    
+    /**
+     * Returns the month of the date
+     *
+     * @return int $dateMonth
+     */
+    public function getDateMonth() {
+		return intval(date_format($this->date,'n'));
     }
     
     /**

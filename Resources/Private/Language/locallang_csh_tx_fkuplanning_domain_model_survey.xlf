@@ -18,8 +18,8 @@
 			<trans-unit id="expirydate.description">
 				<source>expirydate</source>
 			</trans-unit>
-			<trans-unit id="lessoptions.description">
-				<source>lessoptions</source>
+			<trans-unit id="alloptions.description">
+				<source>alloptions</source>
 			</trans-unit>
 			<trans-unit id="blocked.description">
 				<source>blocked</source>

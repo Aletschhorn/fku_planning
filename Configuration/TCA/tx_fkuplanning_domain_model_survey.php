@@ -10,7 +10,7 @@ return array(
 		'versioningWS' => TRUE,
 
 		'delete' => 'deleted',
-		'default_sortby' => 'tstamp',
+		'default_sortby' => 'crdate',
 		'enablecolumns' => [
 			'disabled' => 'hidden'
 		],
@@ -18,10 +18,10 @@ return array(
 		'iconfile' => 'EXT:fku_planning/Resources/Public/Icons/tx_fkuplanning_domain_model_survey.gif'
 	),
 	'interface' => [
-		'showRecordFieldList' => 'hidden, title, owner, slug, services, expirydate, lessoptions, blocked, blind',
+		'showRecordFieldList' => 'hidden, title, owner, slug, services, expirydate, alloptions, blind, blocked',
 	],
 	'types' => [
-		'1' => ['showitem' => 'hidden, title, owner, slug, services, expirydate, lessoptions, blocked, blind'],
+		'1' => ['showitem' => 'hidden, title, owner, slug, services, expirydate, alloptions, blind, blocked'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -52,7 +52,7 @@ return array(
 				'type' => 'select',
 				'renderType' => 'selectSingle',
 				'foreign_table' => 'tx_fkupeople_domain_model_person',
-				'foreign_table_where' => 'ORDER BY tx_fkupeople_domain_model_person.name',
+				'foreign_default_sortby' => 'name',
 			],
 		],
 		'slug' => [
@@ -71,7 +71,7 @@ return array(
 				'type' => 'select',
 				'renderType' => 'selectMultipleSideBySide',
 				'foreign_table' => 'tx_fkuplanning_domain_model_master',
-				'foreign_table_where' => 'ORDER BY tx_fkuplanning_domain_model_master.date',
+				'foreign_default_sortby' => 'date',
 				'size' => 12,
 				'minitems' => 0,
 				'maxitems' => 25,
@@ -88,9 +88,9 @@ return array(
 				'default' => 0,
 			],
 		],
-		'lessoptions' => [
+		'alloptions' => [
 			'exclude' => 0,
-			'label' => 'LLL:EXT:fku_planning/Resources/Private/Language/locallang_db.xlf:tx_fkuplanning_domain_model_survey.lessoptions',
+			'label' => 'LLL:EXT:fku_planning/Resources/Private/Language/locallang_db.xlf:tx_fkuplanning_domain_model_survey.alloptions',
 			'config' => [
 				'type' => 'check',
 				'renderType' => 'checkboxToggle',

@@ -26,6 +26,13 @@ class Reply extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $availability = '';
 
     /**
+     * availabilityArray
+     *
+	 * @var array
+     */
+    protected $availabilityArray = [];
+
+    /**
      * comment
      *
 	 * @var string
@@ -82,6 +89,27 @@ class Reply extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getAvailability()
     {
         return $this->availability;
+    }
+    
+    /**
+     * Sets the availability as an array
+     *
+     * @param array $availabilityArray
+     * @return void
+     */
+    public function setAvailabilityArray()
+    {
+		$this->availability = implode(',',$availabilityArray);
+    }
+    
+    /**
+     * Returns the availability as an array
+     *
+     * @return array $availabilityArray
+     */
+    public function getAvailabilityArray()
+    {
+        return explode(',',$this->availability);
     }
     
     /**

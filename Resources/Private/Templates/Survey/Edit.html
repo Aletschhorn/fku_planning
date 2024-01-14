@@ -1,0 +1,21 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<h1>GD-Planungs-Umfrage ändern</h1>
+<br />
+
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<f:render partial="FormErrors" arguments="{object:Master}" />
+
+<f:form action="update" name="survey" object="{survey}" class="form-horizontal">
+	<f:form.hidden name="oldServices" value="{oldServices}" />
+	<f:render partial="Survey/FormFields" arguments="{survey:survey,masterColumn:masterColumn,serviceList:serviceList}" />
+	<br />
+	<f:link.action action="list" pluginName="Survey" class="btn btn-outline-dark">Abbrechen</f:link.action>&nbsp;
+	<f:form.submit value="Speichern" class="btn btn-primary" />
+</f:form>
+
+</f:section>

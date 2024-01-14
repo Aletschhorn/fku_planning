@@ -33,18 +33,25 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $services = null;
 
     /**
+     * servicesSorted
+     *
+	 * @var array
+     */
+    protected $servicesSorted = array();
+
+    /**
      * expirydate
      *
-     * @var itn
+     * @var int
      */
     protected $expirydate = 0;
     
     /**
-     * lessoptions
+     * alloptions
      *
      * @var bool
      */
-    protected $lessoptions = false;
+    protected $alloptions = false;
     
     /**
      * blocked
@@ -60,6 +67,27 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $blind = false;
     
+	/**
+	 * __construct
+	 *
+	 * @return void
+	 */
+	public function __construct() 
+	{
+		$this->initStorageObjects();
+	}
+
+	/**
+	 * Initializes all ObjectStorage properties.
+	 *
+	 * @return void
+	 */
+	protected function initStorageObjects() 
+	{
+		$this->services = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
+
     /**
      * Returns the title
      *
@@ -151,6 +179,20 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 	}
 	
 	/**
+	 * Returns the servicesSorted
+	 *
+	 * @return array $servicesSorted
+	 */
+	public function getServicesSorted() {
+		$serviceArray = array();
+		foreach ($this->services as $service) {
+			$serviceArray[$service->getDate()->format('U')] = $service;
+		}
+		ksort($serviceArray);
+		return $serviceArray;
+	}
+	
+	/**
 	 * Sets the services
 	 *
 	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FKU\FkuPlanning\Domain\Model\Master> $services
@@ -180,22 +222,22 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
     
     /**
-     * Returns the lessoptions
+     * Returns the alloptions
      *
-     * @return bool $lessoptions
+     * @return bool $alloptions
      */
-    public function getLessoptions() {
-        return $this->lessoptions;
+    public function getAlloptions() {
+        return $this->alloptions;
     }
     
     /**
-     * Sets the lessoptions
+     * Sets the alloptions
      *
-     * @param bool $lessoptions
+     * @param bool $alloptions
      * @return void
      */
-    public function setLessoptions($lessoptions) {
-        $this->lessoptions = $lessoptions;
+    public function setAlloptions($alloptions) {
+        $this->alloptions = $alloptions;
     }
     
     /**

@@ -2,6 +2,7 @@
 use FKU\FkuPlanning\Controller\MasterController;
 use FKU\FkuPlanning\Controller\RegistrationController;
 use FKU\FkuPlanning\Controller\YoutubeController;
+use FKU\FkuPlanning\Controller\SurveyController;
 
 defined('TYPO3_MODE') || die();
 
@@ -67,6 +68,13 @@ defined('TYPO3_MODE') || die();
 		'Registration',
 		[RegistrationController::class => 'show'],
 		[]
+	);
+
+	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+		'fku_planning',
+		'Survey',
+		[SurveyController::class => 'list, show, new, create, edit, update, delete, reply, participate'],
+		[SurveyController::class => 'create, update, delete, participate']
 	);
 })();
 

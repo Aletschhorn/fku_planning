@@ -1,0 +1,99 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<h1>{survey.title}</h1>
+<p><f:link.action action="list"><svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-223-chevron-left.svg#glyphicons-basic"/></svg> Zurück zur Übersicht</f:link.action></p>
+<f:if condition="{survey.block}">
+	<f:then>
+    	<p>Die Umfrage ist für die Teilnahme gesperrt.</p>
+    </f:then>
+    <f:else>
+		<p>
+        	Adresse zum Ausfüllen: 
+            <f:link.external uri="https://www.fku.ch/gottesdienst/planung/umfrage/{survey.slug}" target="_blank">https://www.fku.ch/gottesdienst/planung/umfrage/{survey.slug}</f:link.external>
+        </p>
+    </f:else>
+</f:if>
+<f:if condition="{survey.expirydate}">
+	<p>Die Umfrage wird am {survey.expirydate->f:format.date(format:'d.m.Y')} gelöscht.</p>
+</f:if>
+<div class="my-3">
+	<f:link.action action="edit" arguments="{survey:survey}" class="btn btn-primary mr-3">
+		<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg> Umfrage ändern
+    </f:link.action>
+    <f:link.action action="delete" arguments="{survey:survey}" class="btn btn-danger" additionalAttributes="{onclick: 
+'return confirm(\'Soll diese Umfrage wirklich gelöscht werden?\')'}">
+		<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-17-bin.svg#glyphicons-basic"/></svg> Umfrage löschen
+    </f:link.action>
+</div>
+
+<f:if condition="{survey.servicesSorted->f:count()}>0)">
+	<f:then>
+        <table class="table table-sm table-bordered">
+            <tr>
+                <th rowspan="2">&nbsp;</th>
+                <f:groupedFor each="{survey.servicesSorted}" as="services" groupBy="dateMonth" groupKey="month">
+                    <f:for each="{services}" as="service" iteration="i">
+                        <f:if condition="{i.isFirst}">
+                            <f:if condition="{services->f:count()}>2">
+                                <f:then>
+                                    <th colspan="{services->f:count()}">{service.date->f:format.date(format:'%B %Y')}</th>
+                                </f:then>
+                                <f:else if="{services->f:count()}==2">
+                                    <th colspan="2">{service.date->f:format.date(format:'%B')}</th>
+                                </f:else>
+                                <f:else>
+                                    <th>{service.date->f:format.date(format:'%b')}<f:if condition="{service.date->f:format.date(format:'n')}!=5">.</f:if></th>
+                                </f:else>
+                            </f:if>
+                        </f:if>
+                    </f:for>
+                </f:groupedFor>
+            </tr>
+            <tr>
+                <f:for each="{survey.servicesSorted}" as="master"><th><f:render partial="Master/DateTimeHolidaysSimple" arguments="{master:master,settings:settings}" /></th></f:for>
+            </tr>
+            <f:if condition="{replies->f:count()}>0">
+                <f:then>
+                    <f:for each="{replies}" as="replySingle">
+                        <tr>
+                            <td>{replySingle.user.name}</td>
+                            <f:for each="{replySingle.availabilityArray}" as="reply">
+                                <f:switch expression="{reply}">
+                                    <f:case value="1">
+                                        <td class="table-success">
+                                            <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-739-check.svg#glyphicons-basic"/></svg>
+                                        </td>
+                                    </f:case>
+                                    <f:case value="2">
+                                        <td class="table-warning">
+                                            <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-298-circle-empty.svg#glyphicons-basic"/></svg>
+                                        </td>
+                                    </f:case>
+                                    <f:case value="3">
+                                        <td class="table-danger">
+                                            <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-373-times.svg#glyphicons-basic"/></svg>
+                                        </td>
+                                    </f:case>
+                                    <f:defaultCase>
+                                        <td>...</td>
+                                    </f:defaultCase>
+                                </f:switch>
+                            </f:for>
+                        </tr>
+                    </f:for>
+                </f:then>
+                <f:else>
+                    <f:variable name="cols" value="{survey.servicesSorted->f:count()}" />
+                    <f:variable name="colspan" value="{1 + cols}" />
+                    <tr><td colspan="{colspan}">Bisher keine Rückmeldungen</td></tr>
+                </f:else>
+            </f:if>
+        </table>
+    </f:then>
+    <f:else>
+    	<p>Keine Gottesdienste für diese Umfrage ausgewählt.</p>
+    </f:else>
+</f:if>
+
+</f:section>

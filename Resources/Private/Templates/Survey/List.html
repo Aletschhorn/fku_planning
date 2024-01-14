@@ -1,0 +1,62 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<h1>GD-Planungs-Umfragen</h1>
+
+<f:flashMessages as="flashMessages">
+	<f:render partial="Alert" arguments="{flashMessages:flashMessages}" />
+</f:flashMessages>
+
+<div class="row">
+	<div class="col-12 col-md-6">
+    
+        <h2>Eigene Umfragen</h2>
+        <f:if condition="{mySurveys}">
+            <f:then>
+                <f:for each="{mySurveys}" as="survey">
+                    <p>
+                        <f:link.action action="show" arguments="{survey:survey}">{survey.title}</f:link.action>,
+                        <f:if condition="{numberOfReplies.{survey.uid}}>1">
+                        	<f:then>
+		                        <span class="badge badge-secondary">{numberOfReplies.{survey.uid}}</span> Antworten
+                            </f:then>
+                            <f:else if="{numberOfReplies.{survey.uid}}>0">
+		                        <span class="badge badge-secondary">1</span> Antwort
+                            </f:else>
+                            <f:else>
+		                        <span class="text-muted">keine Antworten</span>
+                            </f:else>
+                        </f:if>
+                    </p>
+                </f:for>
+            </f:then>
+            <f:else>
+                <p>(Keine Umfragen vorhanden.)</p>
+            </f:else>
+        </f:if>
+
+        <p>
+            <f:link.action action="new">
+                <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-371-plus.svg#glyphicons-basic"/></svg> Neue Umfrage erstellen
+            </f:link.action>
+        </p>
+        
+    </div>
+	<div class="col-12 col-md-6">
+
+        <h2>Antworten auf Umfragen</h2>
+        <f:if condition="{myReplies}">
+            <f:then>
+                <f:for each="{myReplies}" as="reply">
+                    <p><f:link.action action="reply" arguments="{survey:reply.survey}">{reply.survey.title}</f:link.action> von {reply.survey.owner.name}</p>
+                </f:for>
+            </f:then>
+            <f:else>
+                <p>(Keine Antworten vorhanden.)</p>
+            </f:else>
+        </f:if>
+        
+    </div>
+</div>
+
+</f:section>

@@ -1,0 +1,70 @@
+<div class="row">
+	<div class="col-md-6 col-12">
+    
+        <div class="row form-group">
+            <label for="title" class="col-sm-3 col-4 col-form-label">Titel:</label>
+            <div class="col-8">
+                <f:form.textfield property="title" class="form-control" />
+            </div>
+        </div>
+
+	</div>    
+	<div class="col-md-6 col-12">
+
+        <div class="row form-group">
+            <legend class="col-sm-3 col-4 col-form-label float-sm-left pt-0">Optionen:</legend>
+            <div class="col-8">
+                <div class="form-check">
+                	<f:form.checkbox property="alloptions" value="1" checked="{survey.alloptions}==1" class="form-check-input" />
+                    <label for="alloptions" class="form-check-label">Antwort-Möglichkeit "Eventuell" anbieten</label>
+                </div>
+                <div class="form-check">
+                	<f:form.checkbox property="blind" value="1" checked="{survey.blind}==1" class="form-check-input" />
+                    <label for="blind" class="form-check-label">Nur ich als Ersteller sehe die Antworten</label>
+                </div>
+                <div class="form-check">
+                	<f:form.checkbox property="blocked" value="1" checked="{survey.blocked}==1" class="form-check-input" />
+                    <label for="blocked" class="form-check-label">Umfrage ist für Teilnahme gesperrt</label>
+                </div>
+            </div>
+        </div>
+    
+	</div>
+	<div class="col-12">
+    
+        <p>Gottesdienste:</p>
+        <div class="row form-group">
+            <f:for each="{masterColumn}" as="masters">
+                <div class="col-3">
+                    <f:for each="{masters}" as="master">
+                        <div class="form-check">
+                            <f:form.checkbox name="service[{master.uid}]" value="1" checked="{serviceList.{master.uid}}==1" class="form-check-input" />
+                            <label for="tx_fkuplanning_survey[service][{master.uid}]" class="form-check-label">
+                                {master.date->f:format.date(format:'%d. %b')}<f:if condition="{master.date->f:format.date(format:'n')}!=5">.</f:if> {master.date->f:format.date(format:'Y')} &nbsp;
+                                <small>
+                                    <f:if condition="{{master.date->f:format.date(format:'H.i')}!={settings.defaultStartTime}}">
+                                        <span data-toggle="tooltip" data-placement="bottom" title="Gottesdienst beginnt um {master.date->f:format.date(format:'G.i')} Uhr">
+                                            <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-55-clock.svg#glyphicons-basic"/></svg>
+                                        </span>
+                                    </f:if>
+                                    <f:if condition="{master.holidays}">
+                                        <span data-toggle="tooltip" data-placement="bottom" title="Schulferien">
+                                            <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-232-sun.svg#glyphicons-basic"/></svg>
+                                        </span>
+                                    </f:if>
+                                    <f:if condition="{master.notes}">
+                                        <span data-toggle="tooltip" data-placement="bottom" title="{master.notes}">
+                                            <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-636-circle-info.svg#glyphicons-basic"/></svg>
+                                        </span>
+                                    </f:if>
+                                </small>
+                            </label>
+                        </div>
+                    </f:for>
+                </div>
+            </f:for>
+        </div>
+    
+    
+    </div>
+</div>

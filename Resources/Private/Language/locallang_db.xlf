@@ -306,8 +306,8 @@
 			<trans-unit id="tx_fkuplanning_domain_model_survey.expirydate">
 				<source>Expiry date</source>
 			</trans-unit>
-			<trans-unit id="tx_fkuplanning_domain_model_survey.lessoptions">
-				<source>Less reply options</source>
+			<trans-unit id="tx_fkuplanning_domain_model_survey.alloptions">
+				<source>All reply options</source>
 			</trans-unit>
 			<trans-unit id="tx_fkuplanning_domain_model_survey.blocked">
 				<source>Survey blocked</source>
