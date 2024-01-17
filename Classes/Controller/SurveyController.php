@@ -9,6 +9,7 @@ use FKU\FkuPlanning\Domain\Repository\ReplyRepository;
 use FKU\FkuPlanning\Domain\Repository\MasterRepository;
 use FKU\FkuPeople\Domain\Repository\PersonRepository;
 use FKU\FkuPeople\Domain\Repository\UserRepository;
+use FKU\FkuPlanning\Utilities\SimpleXLSXGen;
 
 class SurveyController extends ActionController {
     
@@ -306,9 +307,59 @@ class SurveyController extends ActionController {
 		$availability = $this->request->getArgument('availability');
 		ksort($availability);
 		$reply->setAvailability(implode(',',$availability));
-		$this->replyRepository->update($reply);
+		if ($reply->getUid() > 0) {
+			// update existiing reply
+			$this->replyRepository->update($reply);
+		} else {
+			// create new reply
+			$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+			$me = $GLOBALS['TSFE']->fe_user->user['tx_fkupeople_fkudbid'];
+			$reply->setUser($objectManager->get(PersonRepository::class)->findByUid($me));
+			$this->replyRepository->add($reply);
+		}
 
 		$this->redirect('reply','Survey','fkuplanning',['survey' => $reply->getSurvey()]);
 	}
 
+
+    /**
+     * action download
+     *
+     * @param \FKU\FkuPlanning\Domain\Model\Survey $survey
+     * @return void
+     */
+    public function downloadAction(\FKU\FkuPlanning\Domain\Model\Survey $survey) 
+	{
+		$row = [''];
+		foreach ($survey->getServicesSorted() as $service) {
+			$row[] = $service->getDate()->format('Y-m-d');
+		}
+		$data = array($row);
+		$replies = $this->replyRepository->findBySurvey($survey);
+		foreach ($replies as $reply) {
+			$row = [$reply->getUser()->getName()];
+			$availabilities = explode(',', $reply->getAvailability());
+			foreach ($availabilities as $availability) {
+				switch ($availability) {
+					case 0:
+						$row[] = '<style bgcolor="#FFFFFF"></style>';
+						break;
+					case 1:
+						$row[] = '<style bgcolor="#D5E6CE"></style>';
+						break;
+					case 2:
+						$row[] = '<style bgcolor="#FBE8CD"></style>';
+						break;
+					case 3:
+						$row[] = '<style bgcolor="#F4CFCE"></style>';
+						break;
+				}
+			}
+			$data[] = $row;
+		}
+		SimpleXLSXGen::fromArray($data)->downloadAs('table.xlsx');
+
+        $this->redirect('show','Survey','fkuplanning',['survey' => $survey]);
+	}
+	
 }

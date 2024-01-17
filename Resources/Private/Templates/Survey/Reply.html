@@ -13,7 +13,7 @@
         	<f:comment> *** Header with dates *** </f:comment>
             <tr>
                 <th rowspan="2" class="border-secondary border-left-0 border-top-0">&nbsp;</th>
-                <f:groupedFor each="{survey.services}" as="services" groupBy="dateMonth" groupKey="month">
+                <f:groupedFor each="{survey.servicesSorted}" as="services" groupBy="dateMonth" groupKey="month">
                     <f:for each="{services}" as="service" iteration="i">
                         <f:if condition="{i.isFirst}">
                             <f:if condition="{services->f:count()}>2">
@@ -32,7 +32,7 @@
                 </f:groupedFor>
             </tr>
             <tr>
-                <f:for each="{survey.services}" as="master"><th class="border-secondary border-top-0"><f:render partial="Master/DateTimeHolidaysSimple" arguments="{master:master,settings:settings}" /></th></f:for>
+                <f:for each="{survey.servicesSorted}" as="master"><th class="border-secondary border-top-0"><f:render partial="Master/DateTimeHolidaysSimple" arguments="{master:master,settings:settings}" /></th></f:for>
             </tr>
 
         	<f:comment> *** Options to reply *** </f:comment>

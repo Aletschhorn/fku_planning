@@ -73,8 +73,8 @@ defined('TYPO3_MODE') || die();
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 		'fku_planning',
 		'Survey',
-		[SurveyController::class => 'list, show, new, create, edit, update, delete, reply, participate'],
-		[SurveyController::class => 'create, update, delete, participate']
+		[SurveyController::class => 'list, show, new, create, edit, update, delete, reply, participate, download'],
+		[SurveyController::class => 'create, update, delete, participate, download']
 	);
 })();
 
