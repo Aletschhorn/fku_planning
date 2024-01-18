@@ -19,3 +19,9 @@ services:
       - name: 'console.command'
         command: 'fku_planning:notification'
         description: 'Creates notification texts for FE users based on reminder settings'
+
+  FKU\FkuPlanning\Command\SurveySweepCommand:
+    tags:
+      - name: 'console.command'
+        command: 'fku_planning:surveysweep'
+        description: 'Deletes expired surveys'

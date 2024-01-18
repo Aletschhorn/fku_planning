@@ -24,4 +24,17 @@ class SurveyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query->execute();
 	}	
 
+	/**
+	* findExpired
+	*
+	* @return
+	*/
+	public function findExpired () {
+		$date = strtotime('-1 day');
+		$query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+		$query->matching($query->logicalAnd($query->lessThan('expirydate',$date),$query->greaterThan('expirydate',0)));
+		return $query->execute();
+	}	
+
 }
