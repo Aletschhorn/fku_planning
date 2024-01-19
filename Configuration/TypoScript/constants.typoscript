@@ -61,6 +61,8 @@ plugin.tx_fkuplanning {
 		PidNotifications = 
 		# cat=plugin.tx_fkuplanning/others/q2; type=int+; label=Page ID for sermons
 		PidSermon = 
+		# cat=plugin.tx_fkuplanning/others/q3; type=int+; label=Page ID planning surveys
+		PidSurvey = 
 		# cat=plugin.tx_fkuplanning/others/v; type=string; label=Complete path and file name of .ics file without extension, e.g. fileadmin/calendar/personal
 		IcalFilePathAndName = 
 		# cat=plugin.tx_fkuplanning/others/w; type=string; label=Comma-separated list of visibility table uids used in .ics files

@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.6.0',
+	'version' => '5.6.1',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -500,5 +500,10 @@ $EM_CONF[$_EXTKEY] = [
  * Version 5.6.0
  * -------------
  * Complete functionality for surveys implemented
+ *
+ * Version 5.6.1
+ * -------------
+ * Constant for survey PID
+ * Enhancement of Dashbaord view: include link to survey page
  *
  */

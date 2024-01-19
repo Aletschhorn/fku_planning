@@ -129,4 +129,12 @@
 	</f:else>
 </f:if>
 
+<f:if condition="{settings.PidSurvey}">
+	<p>
+        <f:link.action pageUid="{settings.PidSurvey}" action="list" pluginName="Survey" controller="Survey">
+            <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-224-chevron-right.svg#glyphicons-basic"/></svg>
+            Gottesdienst-Planungs-Umfrage
+        </f:link.action>
+    </p>
+
 </f:section>
