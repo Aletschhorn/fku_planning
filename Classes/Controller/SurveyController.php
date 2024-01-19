@@ -4,11 +4,13 @@ namespace FKU\FkuPlanning\Controller;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Symfony\Component\Mime\Address;
 use FKU\FkuPlanning\Domain\Repository\SurveyRepository;
 use FKU\FkuPlanning\Domain\Repository\ReplyRepository;
 use FKU\FkuPlanning\Domain\Repository\MasterRepository;
 use FKU\FkuPeople\Domain\Repository\PersonRepository;
 use FKU\FkuPeople\Domain\Repository\UserRepository;
+use FKU\FkuPeople\Command\NotificationCommand;
 use FKU\FkuPlanning\Utilities\SimpleXLSXGen;
 
 class SurveyController extends ActionController {
@@ -304,21 +306,33 @@ class SurveyController extends ActionController {
      */
     public function participateAction(\FKU\FkuPlanning\Domain\Model\Reply $reply) 
 	{
+		$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+		$survey = $reply->getSurvey();
 		$availability = $this->request->getArgument('availability');
 		ksort($availability);
 		$reply->setAvailability(implode(',',$availability));
 		if ($reply->getUid() > 0) {
 			// update existiing reply
 			$this->replyRepository->update($reply);
+			$mailText = $reply->getUser()->getName().' hat die gegebene Antwort auf deine Gottesdienst-Planung-Umfrage "'.$survey->getTitle().'" geändert.';
 		} else {
 			// create new reply
-			$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 			$me = $GLOBALS['TSFE']->fe_user->user['tx_fkupeople_fkudbid'];
-			$reply->setUser($objectManager->get(PersonRepository::class)->findByUid($me));
+			$person = $objectManager->get(PersonRepository::class)->findByUid($me);
+			$reply->setUser($person);
 			$this->replyRepository->add($reply);
+			$mailText = $person->getName().' hat eine Antwort auf deine Gottesdienst-Planung-Umfrage "'.$survey->getTitle().'" erstellt.';
 		}
 
-		$this->redirect('reply','Survey','fkuplanning',['survey' => $reply->getSurvey()]);
+		$person = $survey->getOwner();
+		if ($mail = $person->getEmail()) {
+			$footer = 'Dies ist eine automatische Nachricht von der Homepage www.fku.ch. Bitte nicht darauf antworten.';
+			$message = $objectManager->get(NotificationCommand::class)->prepareMail($mailText, $footer);
+			$message->to(new Address($mail, $person->getFirstname().' '.$person->getLastname()));
+			$message->send();
+		}
+
+		$this->redirect('reply','Survey','fkuplanning',['survey' => $survey]);
 	}
 
 
@@ -357,7 +371,7 @@ class SurveyController extends ActionController {
 			}
 			$data[] = $row;
 		}
-		SimpleXLSXGen::fromArray($data)->downloadAs('table.xlsx');
+		SimpleXLSXGen::fromArray($data)->downloadAs('Umfrage.xlsx');
 
         $this->redirect('show','Survey','fkuplanning',['survey' => $survey]);
 	}
