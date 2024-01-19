@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.5.0',
+	'version' => '5.6.0',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -496,5 +496,9 @@ $EM_CONF[$_EXTKEY] = [
  * -------------
  * Basic functionality for surveys added
  * Renaming "Kids Treff" and "Teens Treff" to "Kidstreff" and "Teenstreff"
+ *
+ * Version 5.6.0
+ * -------------
+ * Complete functionality for surveys implemented
  *
  */
