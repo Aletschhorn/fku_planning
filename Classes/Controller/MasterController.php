@@ -687,22 +687,22 @@ class MasterController extends ActionController {
 		$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 		$modifyAgenda = false;
 		$relevantForAgenda = ['serviceTopic','serviceBible','serviceSupper','servicePreacher','teensProgram1','teensProgram2','kidsProgram','childrenActive'];
-		
+
+		// Try to find service in agenda
+		if (! $master->getEvent()) {
+			$date = clone $master->getDate();
+			$event = $objectManager->get(EventRepository::class)->findByInterval($date->setTime(0,0)->format('U'), 0, 24, [1], 0, [24])->getFirst();
+			if ($event instanceof \FKU\FkuAgenda\Domain\Model\Event) {
+				$master->setEvent($event);
+			}
+		}
+
 		if ($this->request->hasArgument('section')) {
 			$section = $this->request->getArgument('section');
 			switch ($section) {
 				case 'general':
 					$fieldsWithPeople = [];
 					$notificationRule = NULL;
-
-					// Try to find service in agenda
-					if (! $master->getEvent()) {
-						$date = clone $master->getDate();
-						$event = $objectManager->get(EventRepository::class)->findByInterval($date->setTime(0,0)->format('U'), 0, 24, [1], 0, [24])->getFirst();
-						if ($event instanceof \FKU\FkuAgenda\Domain\Model\Event) {
-							$master->setEvent($event);
-						}
-					}
 					break;
 				case 'service':
 					$fieldsWithPeople = ['servicePreacher','serviceModerator','serviceMusicSelect','serviceMusicRehearse','serviceMusicBand','serviceMusicOrgan','serviceBeamer','serviceConsole','serviceFilmeditor','serviceCamera','serviceSexton','serviceMissionary', 'serviceSupperPeople'];
