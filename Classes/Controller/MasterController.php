@@ -864,6 +864,11 @@ class MasterController extends ActionController {
 			if (count($listNotification) > 0 and count($notifText) > 0) {
 				$notificationCommand->storeNotifications($listNotification, $notifText);
 			}
+			
+			// Additional message if serice time was modified
+			if ($tempValues['dateTime'] !== $oldValues['dateTime']){
+				$this->addFlashMessage('Die Gottesdienst-Zeit hat geändert. Möglicherweise muss der Agenda-Eintrag entsprechend angepasst werden. Bitte prüfen.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+			}
 
 			// Read navigation variables
 			$back = $this->request->getArgument('back');
