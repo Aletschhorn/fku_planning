@@ -4,6 +4,7 @@ namespace FKU\FkuPlanning\Controller;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use Symfony\Component\Mime\Address;
 use FKU\FkuPlanning\Domain\Repository\SurveyRepository;
 use FKU\FkuPlanning\Domain\Repository\ReplyRepository;
@@ -137,6 +138,8 @@ class SurveyController extends ActionController {
 		
 		// store in database
         $this->surveyRepository->add($survey);
+		$persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
+		$persistenceManager->persistAll();
 
         $this->addFlashMessage('Neue Umfrage "'.$survey->getTitle().'" erstellt.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
         $this->redirect('show','Survey','fkuplanning',['survey' => $survey]);
