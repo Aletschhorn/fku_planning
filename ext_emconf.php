@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.6.1',
+	'version' => '5.7.0',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -505,5 +505,12 @@ $EM_CONF[$_EXTKEY] = [
  * -------------
  * Constant for survey PID
  * Enhancement of Dashbaord view: include link to survey page
+ * Complete functionality for surveys implemented
+ *
+ * Version 5.7.0
+ * -------------
+ * Responsive layout for surveys
+ * Try to link calendar event to service with every change
+ * Warn to update calendar event if service time is modified
  *
  */
