@@ -3,7 +3,7 @@
 <f:spaceless>
     <b>{master.date->f:format.date(format:'%e.')}</b>
     <f:if condition="{master.notes} || {master.holidays} || {master.date->f:format.date(format:'H.i')}!={settings.defaultStartTime}">
-    	<br />
+    	<f:if condition="{oneLine}"><f:then>&nbsp;</f:then><f:else><br /></f:else></f:if>
         <small>
             <f:if condition="{{master.date->f:format.date(format:'H.i')}!={settings.defaultStartTime}}">
             	<span data-toggle="tooltip" data-placement="bottom" title="Gottesdienst beginnt um {master.date->f:format.date(format:'G.i')} Uhr">

@@ -28,14 +28,31 @@
 
             <f:form name="reply" action="participate" object="{myReply}">
                 <f:form.hidden property="survey" value="{survey.uid}" />
-                <div class="table-responsive">
-                    <table class="table table-sm table-bordered mt-3">
-                        <f:render section="tableHeader" arguments="{_all}" />
-                        <f:render section="replyOptions" arguments="{_all}" />
-                        <f:if condition="{replies->f:count()}>0 && {survey.blind}==0">
-                            <f:render section="existingReplies" arguments="{_all}" />
+                <f:form.hidden name="XSreply" id="XSreply" value="0" />
+                <div class="d-none d-md-block">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered mt-3">
+                            <f:render section="tableHeader" arguments="{_all}" />
+                            <f:render section="replyOptions" arguments="{_all}" />
+                            <f:if condition="{replies->f:count()}>0 && {survey.blind}==0">
+                                <f:render section="existingReplies" arguments="{_all}" />
+                            </f:if>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-block d-md-none">
+                    <p>
+                    	<svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-739-check.svg#glyphicons-basic"/></svg> = Verfügbar<br />
+                        <f:if condition="{survey.alloptions}==1">
+	                        <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-298-circle-empty.svg#glyphicons-basic"/></svg> = Eventuell<br />
                         </f:if>
-                    </table>
+                        <svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-373-times.svg#glyphicons-basic"/></svg> = Nicht verfügbar
+                    </p>
+                    <div class="table-responsive">
+	                    <table class="table table-sm table-bordered mt-3">
+    	                    <f:render section="tableXS" arguments="{_all}" />
+        	            </table>
+                    </div>
                 </div>
             </f:form>
 
@@ -131,4 +148,44 @@
             </f:for>
         </tr>
     </f:for>
+</f:section>
+
+<f:section name="tableXS">
+    <tr>
+        <th colspan="2" class="border-secondary border-left-0 border-top-0">&nbsp;</th>
+        <th class="table-success border-secondary border-right-0 text-center"><svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-739-check.svg#glyphicons-basic"/></svg></th>
+        <f:if condition="{survey.alloptions}==1">
+            <th class="table-warning border-secondary border-left-0 border-right-0 text-center"><svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-298-circle-empty.svg#glyphicons-basic"/></svg></th>
+        </f:if>
+        <th class="table-danger border-secondary border-left-0 text-center"><svg class="icon-sm" width="24" height="24" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-373-times.svg#glyphicons-basic"/></svg></th>
+    </tr>
+    <f:variable name="counter" value="0" />
+    <f:groupedFor each="{survey.servicesSorted}" as="services" groupBy="dateMonth" groupKey="month">
+        <f:for each="{services}" as="service" iteration="i">
+            <tr>
+                <f:if condition="{i.isFirst}">
+                    <td rowspan="{services->f:count()}" class="border-secondary border-right-0">
+                    	{service.date->f:format.date(format:'%b')}<f:if condition="{service.date->f:format.date(format:'n')}!=5">.</f:if> {service.date->f:format.date(format:'Y')}
+                    </td>
+                </f:if>
+        		<td class="border-secondary border-left-0"><f:render partial="Master/DateTimeHolidaysSimple" arguments="{master:service,settings:settings,oneLine:'1'}" /></td>
+                <td class="table-success border-secondary border-right-0 text-center">
+                	<f:form.radio name="availabilityXS[{counter}]" value="1" checked="{myReply.availabilityArray.{counter}}==1" additionalAttributes="{onchange:'document.getElementById(\'XSreply\').value=1'}" />
+                </td>
+                <f:if condition="{survey.alloptions}==1">
+                	<td class="table-warning border-secondary border-right-0 border-left-0 text-center">
+                    	<f:form.radio name="availabilityXS[{counter}]" value="2" checked="{myReply.availabilityArray.{counter}}==2" additionalAttributes="{onchange:'document.getElementById(\'XSreply\').value=1'}" />
+                    </td>
+                </f:if>
+                <td class="table-danger border-secondary border-left-0 text-center">
+                	<f:form.radio name="availabilityXS[{counter}]" value="3" checked="{myReply.availabilityArray.{counter}}==3" additionalAttributes="{onchange:'document.getElementById(\'XSreply\').value=1'}" />
+                </td>
+		    </tr>
+            <f:variable name="counter" value="{counter+1}" />
+        </f:for>
+    </f:groupedFor>
+    <f:variable name="colspan" value="{4 + survey.alloptions}" />
+    <tr><td colspan="{colspan}" class="border-secondary border-right-0 border-left-0 border-bottom-0 text-right">
+    	<f:form.submit value="{f:if(condition:new,then:'Speichern',else:'Änderungen speichern')}" class="btn btn-primary mb-3" />
+    </td></tr>
 </f:section>

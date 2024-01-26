@@ -22,16 +22,16 @@
         Die Umfrage wird nach dem {survey.expirydate->f:format.date(format:'d.m.Y')} gelöscht.
     </f:if>
 </p>
-<div class="my-3">
+<div class="mt-3">
 	<f:if condition="{replies->f:count()}>0">
-		<f:link.action action="download" arguments="{survey:survey}" class="btn btn-primary mr-3">
+		<f:link.action action="download" arguments="{survey:survey}" class="btn btn-primary mr-3 mb-3">
 			<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-200-save-as.svg#glyphicons-basic"/></svg> Antworten herunterladen
     	</f:link.action>
     </f:if>
-	<f:link.action action="edit" arguments="{survey:survey}" class="btn btn-primary mr-3">
+	<f:link.action action="edit" arguments="{survey:survey}" class="btn btn-primary mr-3 mb-3">
 		<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-31-pencil.svg#glyphicons-basic"/></svg> Umfrage ändern
     </f:link.action>
-    <f:link.action action="delete" arguments="{survey:survey}" class="btn btn-danger" additionalAttributes="{onclick: 
+    <f:link.action action="delete" arguments="{survey:survey}" class="btn btn-danger mb-3" additionalAttributes="{onclick: 
 'return confirm(\'Soll diese Umfrage wirklich gelöscht werden?\')'}">
 		<svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-17-bin.svg#glyphicons-basic"/></svg> Umfrage löschen
     </f:link.action>
