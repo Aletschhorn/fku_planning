@@ -114,7 +114,7 @@ class SurveyController extends ActionController {
 		$survey->setOwner($objectManager->get(PersonRepository::class)->findByUid($me));
 		
 		// set slug based on current timestamp and $owner ID
-		$survey->setSlug(time().'-'.$me);
+		$survey->setSlug(time().$me);
 		
 		// calculate expiry date
 		$expiryDate = new \DateTime('+1 month');
@@ -139,8 +139,7 @@ class SurveyController extends ActionController {
         $this->surveyRepository->add($survey);
 
         $this->addFlashMessage('Neue Umfrage "'.$survey->getTitle().'" erstellt.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
-        $this->redirect('list');
-        // $this->redirect('show','Survey','fkuplanning',['survey' => $survey]);
+        $this->redirect('show','Survey','fkuplanning',['survey' => $survey]);
 	}
 
     /**
@@ -308,20 +307,24 @@ class SurveyController extends ActionController {
 	{
 		$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 		$survey = $reply->getSurvey();
-		$availability = $this->request->getArgument('availability');
+		if ($this->request->getArgument('XSreply')) {
+			$availability = $this->request->getArgument('availabilityXS');
+		} else {
+			$availability = $this->request->getArgument('availability');
+		}
 		ksort($availability);
 		$reply->setAvailability(implode(',',$availability));
 		if ($reply->getUid() > 0) {
 			// update existiing reply
 			$this->replyRepository->update($reply);
-			$mailText = $reply->getUser()->getName().' hat die gegebene Antwort auf deine Gottesdienst-Planung-Umfrage "'.$survey->getTitle().'" geändert.';
+			$mailText = $reply->getUser()->getName().' hat die gegebene Antwort auf deine Gottesdienst-Planungs-Umfrage "'.$survey->getTitle().'" geändert.';
 		} else {
 			// create new reply
 			$me = $GLOBALS['TSFE']->fe_user->user['tx_fkupeople_fkudbid'];
 			$person = $objectManager->get(PersonRepository::class)->findByUid($me);
 			$reply->setUser($person);
 			$this->replyRepository->add($reply);
-			$mailText = $person->getName().' hat eine Antwort auf deine Gottesdienst-Planung-Umfrage "'.$survey->getTitle().'" erstellt.';
+			$mailText = $person->getName().' hat eine Antwort auf deine Gottesdienst-Planungs-Umfrage "'.$survey->getTitle().'" erstellt.';
 		}
 
 		$person = $survey->getOwner();
