@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.7.0',
+	'version' => '5.8.0',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -512,5 +512,10 @@ $EM_CONF[$_EXTKEY] = [
  * Responsive layout for surveys
  * Try to link calendar event to service with every change
  * Warn to update calendar event if service time is modified
+ *
+ * Version 5.8.0
+ * -------------
+ * Allow to leave a comment when replying to a survey
+ * Mionr improvements
  *
  */
