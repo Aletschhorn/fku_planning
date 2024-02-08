@@ -114,8 +114,14 @@
     </tr>
     <f:variable name="cols" value="{survey.services->f:count()}" />
     <f:variable name="colspan" value="{1 + cols}" />
-    <tr><td colspan="{colspan}" class="border-secondary border-right-0 border-left-0 border-bottom-0 text-right">
-    	<f:form.submit value="{f:if(condition:new,then:'Speichern',else:'Änderungen speichern')}" class="btn btn-primary mb-3" />
+    <tr><td colspan="{colspan}" class="border-secondary border-right-0 border-left-0 border-bottom-0">
+   	 <div class="row align-items-end no-gutters">
+    	<div class="col-8">
+        	<label for="comment" class="col-form-label">Kommentar</label>
+        	<f:form.textarea name="comment" value="{myReply.comment}" rows="2" class="form-control mb-3" />
+        </div>
+    	<div class="col-4 text-right"><f:form.submit value="{f:if(condition:new,then:'Speichern',else:'Änderungen speichern')}" class="btn btn-primary mb-3" /></div>
+      </div>
     </td></tr>
 </f:section>
 
@@ -185,7 +191,11 @@
         </f:for>
     </f:groupedFor>
     <f:variable name="colspan" value="{4 + survey.alloptions}" />
-    <tr><td colspan="{colspan}" class="border-secondary border-right-0 border-left-0 border-bottom-0 text-right">
+    <tr><td colspan="{colspan}" class="border-secondary border-right-0 border-left-0 border-bottom-0">
+        <label for="commentXS" class="col-form-label">Kommentar</label>
+        <f:form.textarea name="commentXS" value="{myReply.comment}" rows="2" class="form-control mb-3" additionalAttributes="{onchange:'document.getElementById(\'XSreply\').value=1'}" />
+    </td></tr>
+    <tr><td colspan="{colspan}" class="border-secondary border-0 text-right">
     	<f:form.submit value="{f:if(condition:new,then:'Speichern',else:'Änderungen speichern')}" class="btn btn-primary mb-3" />
     </td></tr>
 </f:section>

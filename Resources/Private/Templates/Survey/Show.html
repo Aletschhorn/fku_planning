@@ -108,4 +108,10 @@
     </f:else>
 </f:if>
 
+<f:for each="{replies}" as="reply">
+    <f:if condition="{reply.comment}">
+        <p><b>{reply.user.name}</b><br /><f:format.nl2br>{reply.comment}</f:format.nl2br></p>
+    </f:if>
+</f:for>
+
 </f:section>

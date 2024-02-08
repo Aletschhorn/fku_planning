@@ -312,22 +312,24 @@ class SurveyController extends ActionController {
 		$survey = $reply->getSurvey();
 		if ($this->request->getArgument('XSreply')) {
 			$availability = $this->request->getArgument('availabilityXS');
+			$reply->setComment($this->request->getArgument('commentXS'));
 		} else {
 			$availability = $this->request->getArgument('availability');
+			$reply->setComment($this->request->getArgument('comment'));
 		}
 		ksort($availability);
 		$reply->setAvailability(implode(',',$availability));
 		if ($reply->getUid() > 0) {
 			// update existiing reply
 			$this->replyRepository->update($reply);
-			$mailText = $reply->getUser()->getName().' hat die gegebene Antwort auf deine Gottesdienst-Planungs-Umfrage "'.$survey->getTitle().'" geändert.';
+			$mailText = $reply->getUser()->getName().' hat die gegebene Antwort auf deine Gottesdienst-Planungs-Umfrage "'.$survey->getTitle().'" geändert. Übersicht deiner Umfragen: https://www.fku.ch/gottesdienst/planung/umfrage';
 		} else {
 			// create new reply
 			$me = $GLOBALS['TSFE']->fe_user->user['tx_fkupeople_fkudbid'];
 			$person = $objectManager->get(PersonRepository::class)->findByUid($me);
 			$reply->setUser($person);
 			$this->replyRepository->add($reply);
-			$mailText = $person->getName().' hat eine Antwort auf deine Gottesdienst-Planungs-Umfrage "'.$survey->getTitle().'" erstellt.';
+			$mailText = $person->getName().' hat eine Antwort auf deine Gottesdienst-Planungs-Umfrage "'.$survey->getTitle().'" erstellt. Übersicht deiner Umfragen: https://www.fku.ch/gottesdienst/planung/umfrage';
 		}
 
 		$person = $survey->getOwner();
