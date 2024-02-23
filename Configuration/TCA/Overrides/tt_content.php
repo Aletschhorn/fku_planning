@@ -15,6 +15,12 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	'fku_planning',
+	'Calendar',
+	'GD Plan Calendar'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'fku_planning',
 	'Mission',
 	'GD Mission Plan'
 );

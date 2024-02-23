@@ -23,6 +23,13 @@ defined('TYPO3_MODE') || die();
 	
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 		'fku_planning',
+		'Calendar',
+		[MasterController::class => 'calendar, createCalendar, updateCalendar, removeCalendar'],
+		[MasterController::class => 'calendar']
+	);
+	
+	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+		'fku_planning',
 		'Mission',
 		[MasterController::class => 'missionary, edit, update'],
 		[MasterController::class => 'list, update, export']
