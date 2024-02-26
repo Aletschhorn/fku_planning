@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.8.0',
+	'version' => '5.9.0',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -517,5 +517,9 @@ $EM_CONF[$_EXTKEY] = [
  * -------------
  * Allow to leave a comment when replying to a survey
  * Mionr improvements
+ *
+ * Version 5.9.0
+ * -------------
+ * Separate calendar plugin
  *
  */
