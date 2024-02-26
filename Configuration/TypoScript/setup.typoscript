@@ -32,6 +32,7 @@ plugin.tx_fkuplanning {
 		PidKidsDownloads = {$plugin.tx_fkuplanning.settings.PidKidsDownloads}
 		PidServiceDownloads = {$plugin.tx_fkuplanning.settings.PidServiceDownloads}
 		PidNotifications = {$plugin.tx_fkuplanning.settings.PidNotifications}
+		PidCalendar = {$plugin.tx_fkuplanning.settings.PidCalendar}
 		PidSermon = {$plugin.tx_fkuplanning.settings.PidSermon}
 		PidSurvey = {$plugin.tx_fkuplanning.settings.PidSurvey}
 		IcalFilePathAndName = {$plugin.tx_fkuplanning.settings.IcalFilePathAndName}

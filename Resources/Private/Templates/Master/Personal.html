@@ -47,8 +47,8 @@
                 GD-Übersicht
             </f:link.page>
 
-			&nbsp; &nbsp;
-			<f:link.action action="calendar" additionalAttributes="{title:'Kalender mit eigenen Einsätzen'}">
+			<br />
+			<f:link.action action="calendar"  pluginName="Serviceplan" pageUid="{settings.PidCalendar->f:or(alternative:settings.PidPlanning)}" additionalAttributes="{title:'Kalender mit eigenen Einsätzen'}">
                 <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-46-calendar.svg#glyphicons-basic"/></svg>
                 Kalender
             </f:link.action>

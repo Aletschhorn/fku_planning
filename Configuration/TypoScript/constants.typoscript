@@ -59,9 +59,11 @@ plugin.tx_fkuplanning {
 		PidServiceDownloads = 
 		# cat=plugin.tx_fkuplanning/others/q1; type=int+; label=Page ID for notification settings
 		PidNotifications = 
-		# cat=plugin.tx_fkuplanning/others/q2; type=int+; label=Page ID for sermons
+		# cat=plugin.tx_fkuplanning/others/q2; type=int+; label=Page ID for personal calendar
+		PidCalendar = 
+		# cat=plugin.tx_fkuplanning/others/q3; type=int+; label=Page ID for sermons
 		PidSermon = 
-		# cat=plugin.tx_fkuplanning/others/q3; type=int+; label=Page ID planning surveys
+		# cat=plugin.tx_fkuplanning/others/q4; type=int+; label=Page ID planning surveys
 		PidSurvey = 
 		# cat=plugin.tx_fkuplanning/others/v; type=string; label=Complete path and file name of .ics file without extension, e.g. fileadmin/calendar/personal
 		IcalFilePathAndName = 
