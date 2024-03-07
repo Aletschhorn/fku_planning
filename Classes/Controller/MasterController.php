@@ -687,6 +687,12 @@ class MasterController extends ActionController {
 		$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 		$modifyAgenda = false;
 		$relevantForAgenda = ['serviceTopic','serviceBible','serviceSupper','servicePreacher','teensProgram1','teensProgram2','kidsProgram','childrenActive'];
+		
+		// Remove quotes from service topic field
+		$topic = $master->getServiceTopic();
+		if (substr($topic,0,1) == '"' and substr($topic,-1) == '"') {
+			$master->setServiceTopic(substr($topic,1,strlen($topic)-2));
+		}
 
 		// Try to find service in agenda
 		if (! $master->getEvent()) {
