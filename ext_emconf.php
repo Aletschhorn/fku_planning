@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '5.9.0',
+	'version' => '5.9.1',
 	'constraints' => [
 		'depends' => [
 			'typo3' => '7.6.0-10.4.99',
@@ -521,5 +521,9 @@ $EM_CONF[$_EXTKEY] = [
  * Version 5.9.0
  * -------------
  * Separate calendar plugin
+ *
+ * Version 5.9.1
+ * -------------
+ * Modified List.html and Beamter.html
  *
  */
