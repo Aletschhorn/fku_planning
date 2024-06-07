@@ -253,18 +253,20 @@
     </f:else>
 </f:if>
 
-<h2 class="mt-5">SongBeamer-Folien</h2>
-<h3>Wochenprogramm</h3>
-<f:variable name="linefeed" value="&lt;br&gt;&lt;posx:230&gt;" />
-<textarea name="wochenprogramm" rows="15" class="form-control mb-3">&lt;s:40&gt;&lt;b&gt;Wochenprogramm&#13;&lt;incposy:20&gt;<agenda:groupedByDay each="{events}" as="eventsDay"><f:for each="{eventsDay}" as="event" iteration="iteration">&lt;s:20&gt;<f:if condition="{iteration.isFirst}"><f:then><f:if condition="{event.eventStart->f:format.date(format:'Ymd')}=={master.date->f:format.date(format:'Ymd')}"><f:then>Heute</f:then><f:else><agenda:weekday date="{event.eventStart}" crop="2" />.&lt;posx:50&gt;<f:format.date format="j.n.">{event.eventStart}</f:format.date><f:if condition="{event.severalDays}"> &ndash; <f:format.date format="j.n.">{event.eventEnd}</f:format.date></f:if></f:else></f:if></f:then><f:else></f:else></f:if>&lt;posx:140&gt;<f:if condition="{event.allDay}==0">{f:format.date(date:event.eventStart,format:'H:i')}</f:if>&lt;posx:230&gt;<v:format.replace substring="{chr11}" content="{event.descriptionTextarea}" replacement="{linefeed->f:format.htmlentitiesDecode()}" />&#13;</f:for></agenda:groupedByDay>&#13;&#13;&lt;s:20&gt;<f:switch expression="{master.serviceCollection}"><f:case value="1">Mit der Kollekte unterstützen Sie je zur Hälfte das Missionswerk und unsere Gemeindearbeit.</f:case><f:case value="2">Die Kollekte ist vollumfänglich für das Missionswerk bestimmt.</f:case><f:defaultCase>Mit der Kollekte am Ausgang unterstützen Sie unsere Gemeindearbeit.</f:defaultCase></f:switch></textarea>
-
-<h3>Losung und Geburtstage</h3>
-<textarea name="birthday" rows="12" class="form-control mb-3">&lt;s:24&gt;&lt;b&gt;Heutige Losung&#13;&lt;incposy:10&gt;&lt;s:24&gt;&lt;wordwrap&gt;{losung.text}&#13;&lt;s:24&gt;&lt;i&gt;{losung.vers}&#13;&#13;&lt;s:24&gt;&lt;b&gt;In der kommenden Woche haben folgende Mitglieder&lt;br&gt;bzw. Kinder von Mitgliedern Geburtstag&#13;&lt;incposy:10&gt;<f:groupedFor each="{birthdays}" groupBy="geburtsdatum" groupKey="actualDay" as="names"><f:for each="{names}" as="name" iteration="it"><f:if condition="{it.isFirst}">&lt;s:24&gt;<f:if condition="{actualDay}=={master.date->f:format.date(format:'j.n.')}"><f:then>Heute</f:then><f:else>{name.wtag}&lt;posx:190&gt;{actualDay}</f:else></f:if>&lt;posx:300&gt;</f:if>{name.vorname} {name.nachname}{f:if(condition:it.isLast,else:', ')}</f:for>&#13;</f:groupedFor>&#13;&#13;&lt;s:20&gt;Gebets-Angebot im Anschluss an den Gottesdienst in der ersten Bank rechts</textarea>
-
-
-<f:security.ifHasRole role="Administrator">
-	<h2 class="mt-5">Administration</h2>
-	<f:link.action action="beamer" arguments="{master:master,clearCache:1}" class="btn btn-outline-dark">Seiten-Cache löschen</f:link.action>
-</f:security.ifHasRole>
+<f:comment>
+    <h2 class="mt-5">SongBeamer-Folien</h2>
+    <h3>Wochenprogramm</h3>
+    <f:variable name="linefeed" value="&lt;br&gt;&lt;posx:230&gt;" />
+    <textarea name="wochenprogramm" rows="15" class="form-control mb-3">&lt;s:40&gt;&lt;b&gt;Wochenprogramm&#13;&lt;incposy:20&gt;<agenda:groupedByDay each="{events}" as="eventsDay"><f:for each="{eventsDay}" as="event" iteration="iteration">&lt;s:20&gt;<f:if condition="{iteration.isFirst}"><f:then><f:if condition="{event.eventStart->f:format.date(format:'Ymd')}=={master.date->f:format.date(format:'Ymd')}"><f:then>Heute</f:then><f:else><agenda:weekday date="{event.eventStart}" crop="2" />.&lt;posx:50&gt;<f:format.date format="j.n.">{event.eventStart}</f:format.date><f:if condition="{event.severalDays}"> &ndash; <f:format.date format="j.n.">{event.eventEnd}</f:format.date></f:if></f:else></f:if></f:then><f:else></f:else></f:if>&lt;posx:140&gt;<f:if condition="{event.allDay}==0">{f:format.date(date:event.eventStart,format:'H:i')}</f:if>&lt;posx:230&gt;<v:format.replace substring="{chr11}" content="{event.descriptionTextarea}" replacement="{linefeed->f:format.htmlentitiesDecode()}" />&#13;</f:for></agenda:groupedByDay>&#13;&#13;&lt;s:20&gt;<f:switch expression="{master.serviceCollection}"><f:case value="1">Mit der Kollekte unterstützen Sie je zur Hälfte das Missionswerk und unsere Gemeindearbeit.</f:case><f:case value="2">Die Kollekte ist vollumfänglich für das Missionswerk bestimmt.</f:case><f:defaultCase>Mit der Kollekte am Ausgang unterstützen Sie unsere Gemeindearbeit.</f:defaultCase></f:switch></textarea>
+    
+    <h3>Losung und Geburtstage</h3>
+    <textarea name="birthday" rows="12" class="form-control mb-3">&lt;s:24&gt;&lt;b&gt;Heutige Losung&#13;&lt;incposy:10&gt;&lt;s:24&gt;&lt;wordwrap&gt;{losung.text}&#13;&lt;s:24&gt;&lt;i&gt;{losung.vers}&#13;&#13;&lt;s:24&gt;&lt;b&gt;In der kommenden Woche haben folgende Mitglieder&lt;br&gt;bzw. Kinder von Mitgliedern Geburtstag&#13;&lt;incposy:10&gt;<f:groupedFor each="{birthdays}" groupBy="geburtsdatum" groupKey="actualDay" as="names"><f:for each="{names}" as="name" iteration="it"><f:if condition="{it.isFirst}">&lt;s:24&gt;<f:if condition="{actualDay}=={master.date->f:format.date(format:'j.n.')}"><f:then>Heute</f:then><f:else>{name.wtag}&lt;posx:190&gt;{actualDay}</f:else></f:if>&lt;posx:300&gt;</f:if>{name.vorname} {name.nachname}{f:if(condition:it.isLast,else:', ')}</f:for>&#13;</f:groupedFor>&#13;&#13;&lt;s:20&gt;Gebets-Angebot im Anschluss an den Gottesdienst in der ersten Bank rechts</textarea>
+    
+    
+    <f:security.ifHasRole role="Administrator">
+        <h2 class="mt-5">Administration</h2>
+        <f:link.action action="beamer" arguments="{master:master,clearCache:1}" class="btn btn-outline-dark">Seiten-Cache löschen</f:link.action>
+    </f:security.ifHasRole>
+</f:comment>
 
 </f:section>

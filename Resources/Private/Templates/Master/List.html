@@ -42,10 +42,12 @@
 				</f:security.ifHasRole>
 			</f:if>
 
-			<f:link.page pageUid="{settings.PidDashboardService}">
+			<f:comment>
+            <f:link.page pageUid="{settings.PidDashboardService}">
                 <svg class="icon-md" width="32" height="32" fill="currentColor"><use xlink:href="fileadmin/icon/glyphicons-basic-157-thumbnails.svg#glyphicons-basic"/></svg>
                 GD-Übersicht
             </f:link.page>
+            </f:comment>
 
 			<f:security.ifHasRole role="{settings.usergroupGeneral}">
 				&nbsp; &nbsp;
